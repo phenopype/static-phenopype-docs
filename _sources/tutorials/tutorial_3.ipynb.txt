@@ -1,0 +1,504 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Tutorial 3: The phenopype workflows\n",
+    "\n",
+    "<style>\n",
+    "  table {margin-left: 0 !important;}\n",
+    "</style>\n",
+    "\n",
+    "Analysis of scientific images can be an iterative process that may require users to go back and forth, trying different processing steps and check how to improve results. Later, when the best functions and appropriate settings are found and efficient data collection has priority, image analysis should be efficient and with minimal user input to increase throughput and reproducibility. In phenopype, users can choose between two different workflows that are useful for different stages in the process of scientific image analysis:\n",
+    "\n",
+    "| Workflow | Use case | Operation principle | Code explicitness | Data reproducibility |\n",
+    "|:---|:---|:---|:---|:---|\n",
+    "| **Low throughput** | \"prototyping\" - self education and evaluation on single images and small datasets | image analysis functions are written and stored in Python | high | low |\n",
+    "| **High throughput**  | \"production\" - default workflow for larger image datasets | images analysis functions are written and stored in YAML format | low | high |\n",
+    "\n",
+    "In the **low throughput** workflow, users write a function stack in directly in Python code. This is recommended for users who wish to familiarize themselves with the basic principles of computer vision or when working with only a handful of images. In contrast, the **high throughput** workflow is for production stage, when image analysis should be efficient and data collection reproducible for other users and scientists. In this tutorial you will learn about the differences between the two workflows."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert alert-block alert-info \">\n",
+    "<div class=\"admonition seealso\">\n",
+    "<p class=\"admonition-title\"> See also:</p>\n",
+    "\n",
+    "*   [Tutorial 2: GUI control section](tutorial_2.ipynb#GUI-control)\n",
+    "*   [phenopype docs: Pype-API](https://www.phenopype.org/docs/api/pype/)\n",
+    "*   [phenopype docs: YAML resources](https://www.phenopype.org/docs/resources/yaml/)\n",
+    "    \n",
+    "</div>\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Task: delineate armour plates\n",
+    "    \n",
+    "To demonstrate the two workflows we will attempt to quantify lateral armor plating in threespine stickleback (*Gasterosteus aculeatus*). First we need to draw a mask around posterior region that contains the plates. For that step you should select the boundaries around the area of interest, perform a thresholding operation inside the mask, and retrieve the contours inside. The procedure to extract bone-plate area is the same in all workflows, but workflows differ in the amount of explicit Python code, and in reproducibility. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<center>\n",
+    "    \n",
+    "<div style=\"text-align: center; width: max-width: 100%\" >\n",
+    "<img src=\"_figures/luerig_2021_figure2.jpg\" style=\"height: auto; max-width: 100%;\">\n",
+    "</div>\n",
+    "    \n",
+    "<div style=\"text-align: left; width: 600px;\" >\n",
+    "    \n",
+    "**Fig. 1:** Workflow demonstration using a stained stickleback (*Gasterosteus aculeatus*) stained with alizarin red. Traits to be extracted area and shape of bone-plates, and, within the detected plates, pixel intensities that denote bone-density. Shown are visual feedback (A) from low-throughput (B) and high-throughput workflow (C), which use the same computer functions, but differ in the way these functions are called by the user: while in the low-throughput workflow all functions have to be explicitly coded in Python, the high-throughput routine parses the functions from human readable YAML files to facilitate rapid user interaction and increase reproducibility (Figure from [Lürig 2021 [Fig. 2]](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771)).\n",
+    "    \n",
+    "</div>\n",
+    "    \n",
+    "</center>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Preparation\n",
+    "\n",
+    "To run this tutorials, download the [quickstart materials](https://github.com/phenopype/phenopype-quickstart/archive/refs/heads/main.zip), and change the working-directory to the unzipped folder:  "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import os\n",
+    "os.chdir(r\"C:\\Users\\mluerig\\Downloads\\phenopype-quickstart-main\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Low throughput workflow"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In the low throughput workflow, the output of every function needs to be explicitly passed on to the next step. First we need to use  `load_image`, which imports the file as a three-channel numpy array (*ndarray*)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import phenopype as pp\n",
+    "\n",
+    "filepath = r\"stickle1.jpg\"\n",
+    "\n",
+    "## load image as array, supply image_data (DataFrame containing meta data)\n",
+    "image = pp.load_image(filepath)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Next, run `create_mask` as in the tutorial before:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<br>\n",
+    "\n",
+    "<center>\n",
+    "<div style=\"text-align: center; width: 500px;\" >\n",
+    "<img src=\"_figures/masks2.gif\" style=\"height: auto; max-width: 100%;\">\n",
+    "</div>\n",
+    "\n",
+    "    \n",
+    "<div style=\"text-align: left; width: 600px;\" >\n",
+    "\n",
+    "**Fig. 2** Draw a mask around the armour plates. Finish with `Enter`.\n",
+    "\n",
+    "</div>\n",
+    "</center>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "## draw mask\n",
+    "mask = pp.preprocessing.create_mask(image, tool=\"polygon\", window_max_dim=1200) "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "After drawing a mask around the bone plates, we pass the mask on to the `threshold` function. Thresholding will convert a three dimensional array into a one dimensional binary array of the same width and hight (white denoting foreground, black denoting background). "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "- multichannel image supplied, converting to grayscale\n",
+      "- decompose image: using gray channel\n",
+      "- including pixels from 1 drawn masks \n"
+     ]
+    }
+   ],
+   "source": [
+    "## thresholding converts multichannel to binary image\n",
+    "image_bin = pp.segmentation.threshold(\n",
+    "    image, method=\"adaptive\", blocksize=199, constant=5, annotations=mask\n",
+    ") "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This is what the thresholded image looks like:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "pp.show_image(image_bin)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now we can use `detect_contours` to find boundary contours of the white area - the \"foreground\", which is what we want. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "- found 10 contours that match criteria\n"
+     ]
+    }
+   ],
+   "source": [
+    "contours = pp.segmentation.detect_contour(image_bin, retrieval=\"ext\", min_area=150)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Next we can visualize the contours found by `detect_contour`. Note that we first have to draw them explicitly on a \"canvas\", i.e. a background for visualization. We could draw them on the original image, but then it would be unusable for further work. So we use the function `select_canvas` from phenopype's `visualization` module, which creates a copy of a specific image. The function can also take a specific image channel as canvas, for instance, the \"red\" channel on which the threshwolding was performed. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "- raw image\n"
+     ]
+    }
+   ],
+   "source": [
+    "## create a canvas\n",
+    "canvas = pp.visualization.select_canvas(image)\n",
+    "# canvas = pp.visualization.select_canvas(image, canvas=\"red\")\n",
+    "\n",
+    "## draw detected contours onto canvas\n",
+    "image_drawn = pp.visualization.draw_contour(canvas, contours)  \n",
+    "\n",
+    "## show convas\n",
+    "pp.show_image(image_drawn)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### High throughput worflow\n",
+    "\n",
+    "This is the default workflow to analyse medium and large image datasets in phenopype. Here, instead of writing down our analysis as a sequence of Python code, as we did in the low throughput workflow, we supply the same functions through a configuration file in human readable `YAML` format. This file can then be loaded by phenopype's `Pype` class, which initiates the analysis by triggering three actions: \n",
+    "\n",
+    "1. open the YAML configuration file in the default OS text editor\n",
+    "2. parse the contained functions and execute them in the sequence\n",
+    "3. open a HighGUI window showing the processed image, updates with every step\n",
+    "\n",
+    "After an iteration of all steps, users can evaluate the results and decide to modify the opened configuration file (e.g. either change function parameters or add new functions), and run `Pype` again (by saving the changes), or to terminate the `Pype`-run and save all results to the root folder of the image (using `Ctrl+Enter`). "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<br>\n",
+    "\n",
+    "<center>\n",
+    "<div style=\"text-align: center; width: 450px;\" >\n",
+    "<img src=\"_figures/luerig_2021_figure_3C.jpg\" style=\"height: auto; max-width: 100%;\">\n",
+    "</div>\n",
+    "<div style=\"text-align: left; width: 600px;\" >\n",
+    "    \n",
+    "**Fig 3** The Pype class in a for loop will trigger a series of events for each image directory provided by the loop generator: i) open the contained yaml configuration with the default OS text editor, ii) parse and execute the contained functions from top to bottom, iii) open a GUI window and show the processed image. Once the Pype class has finished executing all functions from the configuration file, users can decide to either modify the opened configuration file (e.g. either change function parameters or add new functions), which will trigger to run the Pype class again, or to close the GUI window, which will terminate the Pype class instance and save all results to the folder (Figure from [Lürig 2021 [Fig. 3C]](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771)).\n",
+    "    \n",
+    "</div>\n",
+    "</center>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert alert-block alert-danger \">\n",
+    "<div class=\"admonition attention\">\n",
+    "<p class=\"admonition-title\" > IMPORTANT - read before continuing: </p>\n",
+    "        \n",
+    "In addition to regular window control functions documented in [Tutorial 2](tutorial_2.ipynb#GUI-control):\n",
+    "\n",
+    "-  Editing and saving the opened configuration file in the text editor will trigger another iteration, i.e. close the image window and run the config file again.\n",
+    "-  Closing the image window manually (with the X button in the upper right), also runs triggers another run.\n",
+    "-  `Esc` will close all windows and interrupt the pype routine (triggers `sys.exit()`, which will also end a Python session if run from the command line), as well as any loops.\n",
+    "-  Each step that requires user interaction (e.g. `create_mask` or `landmarks`) needs to be confirmed with `Enter` until the next function in the sequence is executed.\n",
+    "-  At the end of the analysis, when the final steps (visualization and export functions) have run, use  `Ctrl+Enter` to finish and close the window.\n",
+    "    \n",
+    "</div>  "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "- template saved under stickle1_pype_config_quickstart.yaml\n",
+      "\n",
+      "AUTOLOAD\n",
+      " - nothing to autoload\n",
+      "Stage: add annotation control args\n",
+      "Stage: add annotation control args\n",
+      "Stage: add annotation control args\n",
+      "Updating pype config: applying staged changes\n",
+      "\n",
+      "\n",
+      "------------+++ new pype iteration 2022-05-06 14:50:53 +++--------------\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "PREPROCESSING\n",
+      "create_mask\n",
+      "blur\n",
+      "\n",
+      "\n",
+      "SEGMENTATION\n",
+      "threshold\n",
+      "- multichannel image supplied, converting to grayscale\n",
+      "- decompose image: using gray channel\n",
+      "- including pixels from 1 drawn masks \n",
+      "detect_contour\n",
+      "- found 18 contours that match criteria\n",
+      "\n",
+      "\n",
+      "MEASUREMENT\n",
+      "compute_shape_features\n",
+      "\n",
+      "\n",
+      "VISUALIZATION\n",
+      "select_canvas\n",
+      "- raw image\n",
+      "draw_contour\n",
+      "draw_mask\n",
+      "\n",
+      "\n",
+      "EXPORT\n",
+      "save_canvas\n",
+      "- image saved under C:\\Users\\mluerig\\Downloads\\phenopype-quickstart-main\\stickle1_canvas_quickstart.jpg.\n",
+      "save_annotation\n",
+      "- creating new annotation file\n",
+      "- no annotation_type selected - exporting all annotations\n",
+      "- writing annotations of type \"mask\" with id \"a\" to \"stickle1_annotations_quickstart.json\"\n",
+      "- writing annotations of type \"contour\" with id \"a\" to \"stickle1_annotations_quickstart.json\"\n",
+      "- writing annotations of type \"shape_features\" with id \"a\" to \"stickle1_annotations_quickstart.json\"\n",
+      "\n",
+      "\n",
+      "------------+++ finished pype iteration +++--------------\n",
+      "-------(End with Ctrl+Enter or re-run with Enter)--------\n",
+      "\n",
+      "\n",
+      "AUTOSHOW\n",
+      "\n",
+      "\n",
+      "TERMINATE\n",
+      "\n",
+      "AUTOSAVE\n",
+      "- nothing to autosave\n",
+      "\n",
+      "AUTOLOAD\n",
+      " - nothing to autoload\n",
+      "\n",
+      "\n",
+      "------------+++ new pype iteration 2022-05-06 14:51:01 +++--------------\n",
+      "\n",
+      "\n",
+      "\n",
+      "\n",
+      "PREPROCESSING\n",
+      "create_mask\n",
+      "blur\n",
+      "\n",
+      "\n",
+      "SEGMENTATION\n",
+      "threshold\n",
+      "- multichannel image supplied, converting to grayscale\n",
+      "- decompose image: using gray channel\n",
+      "- including pixels from 1 drawn masks \n",
+      "detect_contour\n",
+      "- found 18 contours that match criteria\n",
+      "\n",
+      "\n",
+      "MEASUREMENT\n",
+      "compute_shape_features\n",
+      "\n",
+      "\n",
+      "VISUALIZATION\n",
+      "select_canvas\n",
+      "- raw image\n",
+      "draw_contour\n",
+      "draw_mask\n",
+      "\n",
+      "\n",
+      "EXPORT\n",
+      "save_canvas\n",
+      "- image saved under C:\\Users\\mluerig\\Downloads\\phenopype-quickstart-main\\stickle1_canvas_quickstart-v1.jpg.\n",
+      "save_annotation\n",
+      "- creating new annotation file\n",
+      "- no annotation_type selected - exporting all annotations\n",
+      "- writing annotations of type \"mask\" with id \"a\" to \"stickle1_annotations_quickstart-v1.json\"\n",
+      "- writing annotations of type \"contour\" with id \"a\" to \"stickle1_annotations_quickstart-v1.json\"\n",
+      "- writing annotations of type \"shape_features\" with id \"a\" to \"stickle1_annotations_quickstart-v1.json\"\n",
+      "\n",
+      "\n",
+      "------------+++ finished pype iteration +++--------------\n",
+      "-------(End with Ctrl+Enter or re-run with Enter)--------\n",
+      "\n",
+      "\n",
+      "AUTOSHOW\n",
+      "\n",
+      "\n",
+      "TERMINATE\n",
+      "\n",
+      "AUTOSAVE\n",
+      "- nothing to autosave\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "<phenopype.main.Pype at 0x160dd7d2288>"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import phenopype as pp\n",
+    "\n",
+    "## create config-file (will be saved as \"stickle1_pype_config_quickstart.yaml\") - needs to be \"loaded\" to be converted \n",
+    "## from a write protected \"template\" file to a \"pype_config\" file.\n",
+    "pp.load_template(template_path=\"quickstart-template.yaml\", tag=\"quickstart\", image_path=\"stickle1.jpg\", overwrite=True)\n",
+    "\n",
+    "## run Pype class using the loaded config file - note that your previously drawn masks is loaded\n",
+    "pp.Pype(image_path=\"stickle1.jpg\", tag=\"quickstart\", config_path=\"stickle1_pype_config_quickstart.yaml\")\n",
+    "\n",
+    "## to redo the annotation procedure, you need to set \"edit: True\" or \"edit: overwrite\" in the \"create_mask\" \n",
+    "## \"ANNOTATION\" sequence OR select a new tag under which the results are saved/loaded:\n",
+    "pp.Pype(image_path=\"stickle1.jpg\", tag=\"quickstart-v1\", config_path=\"stickle1_pype_config_quickstart.yaml\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now all results and intermediate data results are saved in the folder of the image. Of course you can modify the configuration files to change the outcome. For instance, try to change the `blocksize` argument in `threshold` to `49`, or `499`, and see what happens. If you do so while the window is open, phenopype will update the image window and show the updated results."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Learn about loading configuration-templates and YAML syntax in [Tutorial 4](tutorial_4.ipynb). "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
