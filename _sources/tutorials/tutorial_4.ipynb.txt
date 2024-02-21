@@ -1,0 +1,219 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Tutorial 4: The Pype class\n",
+    "\n",
+    "The previous tutorial showed how the `Pype` class operates in comparison to just calling the functions in pure Python. You can make the most of the pype function when using configuration files that are customized to your specific needs or workflow.  \n",
+    "\n",
+    "A selection of templates for configuration files to be used by the `Pype` class can be found in the [template section of the docs](https://www.phenopype.org/docs/templates/). They can be freely modified, but need to adhere YAML specifications (see below). Also check the [phenopype gallery](https://www.phenopype.org/gallery/) for inspiration and additional templates.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert alert-block alert-info \">\n",
+    "<div class=\"admonition seealso\">\n",
+    "<p class=\"admonition-title\" > See also:</p>\n",
+    "<p>\n",
+    "\n",
+    "*   [phenopype docs: Pype-API](https://www.phenopype.org/docs/api/pype/)\n",
+    "*   [phenopype docs: YAML resources](https://www.phenopype.org/docs/resources/yaml/).\n",
+    "    \n",
+    "</p>\n",
+    "</div>\n",
+    "</div"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Modifying configurations"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The text inside the configuration files is parsed by phenopype from top to bottom and converted back to Python code in the background, i.e. to phenopype modules and functions. Indentation hierarchy is as follows:\n",
+    "\n",
+    "1. The first level without any indentation, e.g. `- preprocessing` or `- segmentation`, denote from the module that a function is part of. \n",
+    "2. The second level with two-space indentation before the hyphen, e.g. `- threshold` or `- detect_contours` are functions that are loaded from the `segmentation` module. \n",
+    "3. The third level without hyphens, e.g. `method: otsu` and `blocksize: 99`, are arguments passed on to the function. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "When running the pype routine, `image` is automatically loaded and passed to all following functions. You can add or remove functions as you like. Note in the hyphenated first two levels you can  specify modules and functions as many times as you want  (`- ` is the yaml list notation). When adding or modifying modules and functions, it is important to keep in mind that the **function stack is executed sequentially**. So, if you want to perform a `morphology` operation on a binary images, it should come *after* and not before the main segmentation function (in this case `threshold`). "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Following this notation, the yaml parser in Python interprets \n",
+    "\n",
+    "```python\n",
+    "\n",
+    "    - threshold:\n",
+    "        method: adaptive\n",
+    "        blocksize: 99\n",
+    "        constant: 5\n",
+    "        channel: red\n",
+    "        \n",
+    "```\n",
+    "\n",
+    "as\n",
+    "\n",
+    "```python\n",
+    "\n",
+    "    pp.segmentation.threshold(image, method=\"adaptive\", blocksize = 99, constant=5, channel=\"red\")\n",
+    "\n",
+    "```"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Annotation control\n",
+    "\n",
+    "In phenopype, functons that generate annotations to images, have an annotation control sequence (`ANNOTATION`) that control the behavior of the function when the `Pype` is parsed - for example:\n",
+    "\n",
+    "\n",
+    "```python\n",
+    "\n",
+    "  - create_mask:\n",
+    "      ANNOTATION: {type: mask, id: a, edit: false}\n",
+    "```\n",
+    "\n",
+    "`type` specifies which type of annotation is created and, together with `id` (\"a-z\"), creates a universal identifier for a given configuration. `edit` controls the overwrite behavior: `false` will not overwrite an existing annotation of the same Type and ID when the `Pype` is run again, `true` will \"edit\" the annotation, meaning that the previously created masks, landmarks or polygons can be edited or removed. `edit: overwrite` will simply overwrite the entire annotation. Note that it will be overwritten every time a `Pype` iteration is completed, until removed. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## YAML syntax\n",
+    "\n",
+    "The configuration files needed to run the pype are written in YAML (a recursive acronym for \"YAML Ain't Markup Language\"). In principle, these are just text files that follows a specific set of rules for indentation and separation. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert alert-block alert-success \">\n",
+    "<div class=\"admonition tip\">\n",
+    "<p class=\"admonition-title\" > YAML syntax</p>\n",
+    "    \n",
+    "**Here are the most important rules for YAML syntax (in phenopype and in general):**\n",
+    "\n",
+    "- **indentation rules:**\n",
+    "\t- 0 spaces + hyphen + space for modules\n",
+    "\t- 4 spaces + hyphen + space in front of functions \n",
+    "\t- 8 spaces in front of arguments\n",
+    "    \n",
+    "- **separation rules:**\n",
+    "    - modules and functions with arguments are followed by a colon (`:`) and a new line\n",
+    "    - functions without specified arguments don't need a colon \n",
+    "    - arguments are followed by a colon, a space and then the value\n",
+    "    \n",
+    "- modules and functions can be emtpy (see`- draw_mask` above), but function arguments *cannot* be emtpy (e.g. `overwrite:` needs to be `true` or `false`)\n",
+    "    \n",
+    "- as per Python syntax, optional function arguments can, but don't have to be specified and the functions will just run on default values\n",
+    "    \n",
+    "- functions can be added multiple times, but sometimes their output may be overwtritten (e.g. `- threshold` makes sense only once, but `- blur` may be used in multiple locations)\n",
+    "    \n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Pype operation\n",
+    "\n",
+    "These are the most important things to keep in mind during a ``Pype`` iteration\n",
+    "\n",
+    "\n",
+    "### Enhanced Window control\n",
+    "\n",
+    "In addition to regular GUI window control functions documented in [Tutorial 2](tutorial_2.ipynb#GUI-control):\n",
+    "\n",
+    "-  Editing and saving the opened configuration file in the text editor will trigger another iteration, i.e. close the image window and run the config file again.\n",
+    "-  Closing the image window manually (with the X button in the upper right), also runs triggers another run.\n",
+    "-  `Esc` will close all windows and interrupt the pype routine (triggers `sys.exit()`, which will also end a Python session if run from the command line), as well as any loops.\n",
+    "-  Each step that requires user interaction (e.g. `create_mask` or `landmarks`) needs to be confirmed with `Enter` until the next function in the sequence is executed.\n",
+    "-  At the end of the analysis, when the final steps (visualization and export functions) have run, use  `Ctrl+Enter` to finish and close the window.\n",
+    "\n",
+    "### Function execution\n",
+    "\n",
+    "-  `Pype` will automatically load the image and execute all functions in sequence, but it will not overwrite overwrite data from past iterations on disk unless specified.\n",
+    "-  To overwrite interactive user input, set the argument `edit: true` or `edit: overwrite` in the function's annotation control arguments.\n",
+    "-  If you forget to remove an overwrite argument and are prompted to overwrite previous input, immediately change to  `edit: false` argument, and save the config file.\n",
+    "-  If a `Pype` is initialized on a project directory it will attempt to load input data (e.g. masks) that contain the provided `tag` argument. For example,`pp.Pype(path, tag=\"v1\"` will attempt to load any files in the directory that contain the suffix `\"v1\"` (e.g. `\"annoations_v1.json\"`).\n",
+    "\n",
+    "### Visualizing the results\n",
+    "\n",
+    "Aspects of visual feedback during a `pype` run (can be completely suppressed by setting `visualize=False`:\n",
+    "\n",
+    "-  Visual feedback (i.e. output from `landmarks`, `detect_contours` or `create_mask`) are drawn onto a \"canvas\" (a copy of the original image).\n",
+    "-  Use `select_canvas` to draw the results either on the raw image, a  binary image, or a single colour channel (gray, red, green or blue).\n",
+    "-  If `select_canvas` is not explicitly specified, it is called automatically and defaults to the raw image as canvas.\n",
+    "-  Output from all functions, **needs to be specified manually**. For example, after using `- landmarks`, `- draw_landmarks` should be called in the `visualization` module.\n",
+    "-  Visual parameters of interactive tools (e.g. `point_size` or `line_thickness`) are specified separately in the respective function, *and* in the `visualization` module.\n",
+    "\n",
+    "### Exporting the results\n",
+    "\n",
+    "Saving annotations, canvas and other results:\n",
+    "\n",
+    "-  All results are saved automatically, even if the respective functions in `export` are not specified, with the `tag` argument in `Pype` as suffix.\n",
+    "-  If a file already exist in the directory, and the respective function is *not* listed under `export`, then it *will not* be overwritten.\n",
+    "-  If an export function *is* specified under `export:`, it *will also not overwrite* any existing file, unless specified using `overwrite: true`.\n",
+    "-  The canvas is an exception: it will always be saved and always be overwritten (unless specified with `overwrite: False` to show the output from the last iteration. However, users can modify the canvas name with `file_name` in the arguments to save different output side by side. For example, `file_name: binary` under `- save_canvas:` save the canvas as \t`canvas_binary.jpg`"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To learn how to analyze entire datasets by making a project, move on to [Tutorial 5](tutorial_5.ipynb). "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

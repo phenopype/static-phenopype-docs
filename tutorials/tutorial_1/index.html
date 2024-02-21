@@ -1,0 +1,728 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="Tutorial 2: Interacting with images in phenopype" href="../tutorial_2/" /><link rel="prev" title="Tutorials" href="../" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Tutorial 1: A (very) brief python introduction - phenopype docs</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=dafe9a71" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../"><div class="brand">phenopype docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/phenopype_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">phenopype docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Internal links</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Installation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/python/">1. Installing Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/phenopype/">2. Installing phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/text/">3. Choosing a text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/spyder/">4. Installing Spyder (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/project/">Project class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/pype/">Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utility/">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/core/">Core modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/video/">Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Tutorial 1: A (very) brief python introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_2/">Tutorial 2: Interacting with images in phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_3/">Tutorial 3: The phenopype workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_4/">Tutorial 4: The Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_5/">Tutorial 5: Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_6/">Tutorial 6: Size and colour reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_7/">Tutorial 7: Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../templates/">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Templates</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/detection/">Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/landmarks/">Landmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/gallery/">Gallery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/various/">Various</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../resources/">Resources</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/python/">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/opencv/">OpenCV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/cv/">Computer vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/yaml/">YAML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation/">Citation</a></li>
+</ul>
+
+    <ul class="current">
+		<p class="caption"><span class="caption-text">External links</span></p>		
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org">Homepage</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://github.com/phenopype/phenopype">Github</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org/gallery/">Gallery</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.luerig.net/">Author (luerig.net)</a></li>
+	</ul>
+</div>
+
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Tutorial-1:-A-(very)-brief-python-introduction">
+<h1>Tutorial 1: A (very) brief python introduction<a class="headerlink" href="#Tutorial-1:-A-(very)-brief-python-introduction" title="Link to this heading">#</a></h1>
+<p>This tutorial is meant to provide a very short overview of the basic Python syntax needed for basic phenopype operability, which might be useful if you have never used Python before, but would like to be able to explore phenopype functionality on your own.</p>
+<p>If you are familiar with Python, you may want to skip ahead to <a class="reference internal" href="../tutorial_2/"><span class="doc">Tutorial 2: Interacting with images in phenopype</span></a>.</p>
+<div class="alert alert-block alert-info "><div class="admonition seealso"><p class="admonition-title"><p>See also:</p>
+</p><p><ul class="simple">
+<li><p><a class="reference external" href="https://www.phenopype.org/docs/resources/python/">Python resources in the phenopype docs</a></p></li>
+<li><p><a class="reference external" href="https://www.phenopype.org/docs/resources/cv/">CV resources in the phenopype docs</a></p></li>
+</ul>
+</p></div></div><section id="Python-modules">
+<h2>Python modules<a class="headerlink" href="#Python-modules" title="Link to this heading">#</a></h2>
+<p>At the beginning of our script we import the python modules that we want to work with using <code class="docutils literal notranslate"><span class="pre">import</span></code>. When we import the module, we can call its methods and functions using what comes after <code class="docutils literal notranslate"><span class="pre">import</span></code> - for instance, the <code class="docutils literal notranslate"><span class="pre">os</span></code> module, which provides functions for interacting with the operating system.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+<p>We can inspect all the components of this module (i.e., its “namespace”) by using <code class="docutils literal notranslate"><span class="pre">dir()</span></code>. We can see that <code class="docutils literal notranslate"><span class="pre">os</span></code> is a comprehensive package with a lots of classes and functions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">os</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;DirEntry&#39;, &#39;F_OK&#39;, &#39;MutableMapping&#39;, &#39;O_APPEND&#39;, &#39;O_BINARY&#39;, &#39;O_CREAT&#39;, &#39;O_EXCL&#39;, &#39;O_NOINHERIT&#39;, &#39;O_RANDOM&#39;, &#39;O_RDONLY&#39;, &#39;O_RDWR&#39;, &#39;O_SEQUENTIAL&#39;, &#39;O_SHORT_LIVED&#39;, &#39;O_TEMPORARY&#39;, &#39;O_TEXT&#39;, &#39;O_TRUNC&#39;, &#39;O_WRONLY&#39;, &#39;P_DETACH&#39;, &#39;P_NOWAIT&#39;, &#39;P_NOWAITO&#39;, &#39;P_OVERLAY&#39;, &#39;P_WAIT&#39;, &#39;PathLike&#39;, &#39;R_OK&#39;, &#39;SEEK_CUR&#39;, &#39;SEEK_END&#39;, &#39;SEEK_SET&#39;, &#39;TMP_MAX&#39;, &#39;W_OK&#39;, &#39;X_OK&#39;, &#39;_Environ&#39;, &#39;__all__&#39;, &#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;, &#39;_check_methods&#39;, &#39;_execvpe&#39;, &#39;_exists&#39;, &#39;_exit&#39;, &#39;_fspath&#39;, &#39;_get_exports_list&#39;, &#39;_putenv&#39;, &#39;_unsetenv&#39;, &#39;_wrap_close&#39;, &#39;abc&#39;, &#39;abort&#39;, &#39;access&#39;, &#39;altsep&#39;, &#39;chdir&#39;, &#39;chmod&#39;, &#39;close&#39;, &#39;closerange&#39;, &#39;cpu_count&#39;, &#39;curdir&#39;, &#39;defpath&#39;, &#39;device_encoding&#39;, &#39;devnull&#39;, &#39;dup&#39;, &#39;dup2&#39;, &#39;environ&#39;, &#39;error&#39;, &#39;execl&#39;, &#39;execle&#39;, &#39;execlp&#39;, &#39;execlpe&#39;, &#39;execv&#39;, &#39;execve&#39;, &#39;execvp&#39;, &#39;execvpe&#39;, &#39;extsep&#39;, &#39;fdopen&#39;, &#39;fsdecode&#39;, &#39;fsencode&#39;, &#39;fspath&#39;, &#39;fstat&#39;, &#39;fsync&#39;, &#39;ftruncate&#39;, &#39;get_exec_path&#39;, &#39;get_handle_inheritable&#39;, &#39;get_inheritable&#39;, &#39;get_terminal_size&#39;, &#39;getcwd&#39;, &#39;getcwdb&#39;, &#39;getenv&#39;, &#39;getlogin&#39;, &#39;getpid&#39;, &#39;getppid&#39;, &#39;isatty&#39;, &#39;kill&#39;, &#39;linesep&#39;, &#39;link&#39;, &#39;listdir&#39;, &#39;lseek&#39;, &#39;lstat&#39;, &#39;makedirs&#39;, &#39;mkdir&#39;, &#39;name&#39;, &#39;open&#39;, &#39;pardir&#39;, &#39;path&#39;, &#39;pathsep&#39;, &#39;pipe&#39;, &#39;popen&#39;, &#39;putenv&#39;, &#39;read&#39;, &#39;readlink&#39;, &#39;remove&#39;, &#39;removedirs&#39;, &#39;rename&#39;, &#39;renames&#39;, &#39;replace&#39;, &#39;rmdir&#39;, &#39;scandir&#39;, &#39;sep&#39;, &#39;set_handle_inheritable&#39;, &#39;set_inheritable&#39;, &#39;spawnl&#39;, &#39;spawnle&#39;, &#39;spawnv&#39;, &#39;spawnve&#39;, &#39;st&#39;, &#39;startfile&#39;, &#39;stat&#39;, &#39;stat_result&#39;, &#39;statvfs_result&#39;, &#39;strerror&#39;, &#39;supports_bytes_environ&#39;, &#39;supports_dir_fd&#39;, &#39;supports_effective_ids&#39;, &#39;supports_fd&#39;, &#39;supports_follow_symlinks&#39;, &#39;symlink&#39;, &#39;sys&#39;, &#39;system&#39;, &#39;terminal_size&#39;, &#39;times&#39;, &#39;times_result&#39;, &#39;truncate&#39;, &#39;umask&#39;, &#39;uname_result&#39;, &#39;unlink&#39;, &#39;urandom&#39;, &#39;utime&#39;, &#39;waitpid&#39;, &#39;walk&#39;, &#39;write&#39;]
+</pre></div></div>
+</div>
+<p>The double underscores (“dunders”) before and after the numeric string indicate that these are “special” names reserved for the python namespace (<a class="reference external" href="https://dbader.org/blog/meaning-of-underscores-in-python">https://dbader.org/blog/meaning-of-underscores-in-python</a>). We cannot tell what type of object is behind each name, e.g., whether it’s a function (like <code class="docutils literal notranslate"><span class="pre">open</span></code>) or a submodule, with a set of functions (like <code class="docutils literal notranslate"><span class="pre">path</span></code>). Higher level functions are accessed from the package namespace by joining the module name <code class="docutils literal notranslate"><span class="pre">os</span></code> with the function <code class="docutils literal notranslate"><span class="pre">open</span></code>, connected
+by a dot.</p>
+<p>If you are ever unsure about what a package does, simply call <code class="docutils literal notranslate"><span class="pre">help(os)</span></code> (or any other package) to get some basic information. This also works for its methods and functions, e.g. for the <code class="docutils literal notranslate"><span class="pre">open</span></code> method:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">open</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on built-in function open in module nt:
+
+open(path, flags, mode=511, *, dir_fd=None)
+    Open a file for low level IO.  Returns a file descriptor (integer).
+
+    If dir_fd is not None, it should be a file descriptor open to a directory,
+      and path should be relative; path will then be relative to that directory.
+    dir_fd may not be implemented on your platform.
+      If it is unavailable, using it will raise a NotImplementedError.
+
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">path</span></code> on the other hand is a submodule: here we see some functions we can use (they don’t have dunders), for example <code class="docutils literal notranslate"><span class="pre">join</span></code>, which can join separate character strings to a python-readable path string.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;__all__&#39;, &#39;__builtins__&#39;, &#39;__cached__&#39;, &#39;__doc__&#39;, &#39;__file__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;, &#39;_abspath_fallback&#39;, &#39;_get_bothseps&#39;, &#39;_getfinalpathname&#39;, &#39;_getfullpathname&#39;, &#39;_getvolumepathname&#39;, &#39;abspath&#39;, &#39;altsep&#39;, &#39;basename&#39;, &#39;commonpath&#39;, &#39;commonprefix&#39;, &#39;curdir&#39;, &#39;defpath&#39;, &#39;devnull&#39;, &#39;dirname&#39;, &#39;exists&#39;, &#39;expanduser&#39;, &#39;expandvars&#39;, &#39;extsep&#39;, &#39;genericpath&#39;, &#39;getatime&#39;, &#39;getctime&#39;, &#39;getmtime&#39;, &#39;getsize&#39;, &#39;isabs&#39;, &#39;isdir&#39;, &#39;isfile&#39;, &#39;islink&#39;, &#39;ismount&#39;, &#39;join&#39;, &#39;lexists&#39;, &#39;normcase&#39;, &#39;normpath&#39;, &#39;os&#39;, &#39;pardir&#39;, &#39;pathsep&#39;, &#39;realpath&#39;, &#39;relpath&#39;, &#39;samefile&#39;, &#39;sameopenfile&#39;, &#39;samestat&#39;, &#39;sep&#39;, &#39;split&#39;, &#39;splitdrive&#39;, &#39;splitext&#39;, &#39;stat&#39;, &#39;supports_unicode_filenames&#39;, &#39;sys&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on function join in module ntpath:
+
+join(path, *paths)
+    # Join two (or more) paths.
+
+</pre></div></div>
+</div>
+</section>
+<section id="Paths-and-directories">
+<h2>Paths and directories<a class="headerlink" href="#Paths-and-directories" title="Link to this heading">#</a></h2>
+<p>Time to actually do something with a function. A useful function from the <code class="docutils literal notranslate"><span class="pre">os</span></code> module is <code class="docutils literal notranslate"><span class="pre">getcwd</span></code>, which will return the current working directory as a string (all paths in the <code class="docutils literal notranslate"><span class="pre">os</span></code> module are treated as strings):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;D:\\git-repos\\phenopype\\phenopype-tutorials\\tutorials&#39;
+</pre></div></div>
+</div>
+<p>Another frequently used function is <code class="docutils literal notranslate"><span class="pre">listdir</span></code>, which will list all files in a specified directory. If you don’t specify any directory, it will use the current working directory</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;.ipynb_checkpoints&#39;,
+ &#39;data&#39;,
+ &#39;tutorial_1.ipynb&#39;,
+ &#39;tutorial_2.ipynb&#39;,
+ &#39;tutorial_3.ipynb&#39;,
+ &#39;tutorial_4.ipynb&#39;,
+ &#39;tutorial_5.ipynb&#39;,
+ &#39;tutorial_6.ipynb&#39;,
+ &#39;tutorial_7.ipynb&#39;,
+ &#39;_figures&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;isopods_fish.mp4&#39;,
+ &#39;stickle1.jpg&#39;,
+ &#39;stickle2.jpg&#39;,
+ &#39;stickle3.jpg&#39;,
+ &#39;stickleback_side.jpg&#39;,
+ &#39;stickleback_top.jpg&#39;]
+</pre></div></div>
+</div>
+<p>Note that I used the relative path here - full paths of course are also possible.</p>
+<p><code class="docutils literal notranslate"><span class="pre">listdir</span></code>, as the name suggest, creates a list:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_list</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;isopods_fish.mp4&#39;, &#39;stickle1.jpg&#39;, &#39;stickle2.jpg&#39;, &#39;stickle3.jpg&#39;, &#39;stickleback_side.jpg&#39;, &#39;stickleback_top.jpg&#39;]
+</pre></div></div>
+</div>
+<p>We now can access <code class="docutils literal notranslate"><span class="pre">image_list</span></code> with hard brackets and by giving the position inside you want to have returned:</p>
+<div class="alert alert-block alert-danger"><p><strong>IMPORTANT - read before continuing</strong></p>
+<p>In python, referencing starts with <code class="docutils literal notranslate"><span class="pre">0</span></code> and not with <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">image_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+isopods_fish.mp4
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">image_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+stickle1.jpg
+</pre></div></div>
+</div>
+<p>So far we have only returned name-strings of our files, but unless we will always stay in the current working directory, we need the full or relative path of our files. We can get it using the <code class="docutils literal notranslate"><span class="pre">path</span></code> submodule and the <code class="docutils literal notranslate"><span class="pre">join</span></code> function to paste the directory path and the names of files within it:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">image_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># works</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;data\\stickle1.jpg&#39;
+</pre></div></div>
+</div>
+<p>Although you can join path strings by simply adding them, this sometimes leads to unexpected results, so better try to avoid manipulating strings directly and instead use the <code class="docutils literal notranslate"><span class="pre">join</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;data&quot;</span> <span class="o">+</span> <span class="n">image_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># doesn&#39;t work</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;datastickle1.jpg&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;data&quot;</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">image_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># works</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;data\\stickle1.jpg&#39;
+</pre></div></div>
+</div>
+<p>Putting it all together, let’s try to get the path of all the images in our directory. For this, we need a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, and an empty list we can populate:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_dir</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span> <span class="c1"># save image directory to a string variable</span>
+<span class="n">filepaths</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># square-brakets make an empty list</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">image_dir</span><span class="p">)</span> <span class="c1"># making a list of all the files names inside a directory</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span> <span class="c1"># looping along our list of names</span>
+    <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="c1"># joining name and path strings</span>
+    <span class="n">filepaths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="c1"># appending the joint string to the list</span>
+
+<span class="n">filepaths</span> <span class="c1"># showing the list content</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;data\\isopods_fish.mp4&#39;,
+ &#39;data\\stickle1.jpg&#39;,
+ &#39;data\\stickle2.jpg&#39;,
+ &#39;data\\stickle3.jpg&#39;,
+ &#39;data\\stickleback_side.jpg&#39;,
+ &#39;data\\stickleback_top.jpg&#39;]
+</pre></div></div>
+</div>
+</section>
+<section id="Images-in-OpenCV">
+<h2>Images in OpenCV<a class="headerlink" href="#Images-in-OpenCV" title="Link to this heading">#</a></h2>
+<p>Let’s import another module. In fact <em>the</em> module that phenopype is built around: OpenCV. Note that mopdule bindings in python can be called differently than the package name - e.g., for opencv, we have to call <code class="docutils literal notranslate"><span class="pre">cv2</span></code>. Once imported, we then can use a basic opencv function: importing an image as an array using <code class="docutils literal notranslate"><span class="pre">imread</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;data/stickle1.jpg&quot;</span><span class="p">)</span>
+
+<span class="nb">type</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c1">## check loading the image worked: should return numpy.ndarray</span>
+<span class="c1">## &quot;imread&quot; will silently fail if the path is incorrect, in which case &quot;img&quot; will be &quot;NoneType&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+numpy.ndarray
+</pre></div></div>
+</div>
+<p>Lets examine our image: <code class="docutils literal notranslate"><span class="pre">cv2.imread</span></code> converts a digital image file to an array, a stack of three matrices containing pixel wise information on the red, green and blue channel of an image, which - taken together - creates the colour image. It is neither informative nor possible to look at the whole pixel array inside the console, but sometimes it is useful to look at specific features of your image, which we can acess directly from the image-object. For example, the dimensions, using <code class="docutils literal notranslate"><span class="pre">shape</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(1600, 2400, 3)
+</pre></div></div>
+</div>
+<p>Or the mean pixel intensity:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+220.84537473958332
+</pre></div></div>
+</div>
+<p>We can look at the picture with <code class="docutils literal notranslate"><span class="pre">imshow</span></code>. However, because many <code class="docutils literal notranslate"><span class="pre">opencv</span></code> functions are GUI based, we need to add some more controller functions to open and close a window.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_NORMAL</span><span class="p">)</span> <span class="c1"># open a resizable window</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span><span class="n">img</span><span class="p">)</span> <span class="c1"># show the image in that window</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># do nothing until a keystroke ...</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span> <span class="c1"># ... and then close all open windows</span>
+</pre></div>
+</div>
+</div>
+<p>Four lines of code to display an image - this will clutter your code really fast. Luckily, phenopype has some functions of its own to load and display images. Continue with <a class="reference internal" href="../tutorial_2/"><span class="doc">Tutorial 2</span></a> to find out how phenopype works with images.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../tutorial_2/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Tutorial 2: Interacting with images in phenopype</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tutorials</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; Moritz Lürig
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on 2024-02-21 15:59:43</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial 1: A (very) brief python introduction</a><ul>
+<li><a class="reference internal" href="#Python-modules">Python modules</a></li>
+<li><a class="reference internal" href="#Paths-and-directories">Paths and directories</a></li>
+<li><a class="reference internal" href="#Images-in-OpenCV">Images in OpenCV</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=9a30b7d9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/custom.js?v=07e4e0e4"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mluerig/website-assets/assets/js/enforce_trailing_slash.min.js"></script>
+    </body>
+</html>

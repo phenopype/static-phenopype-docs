@@ -1,0 +1,2953 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="Templates" href="../../templates/" /><link rel="prev" title="Tutorial 6: Size and colour reference" href="../tutorial_6/" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Tutorial 7: Video analysis - phenopype docs</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=dafe9a71" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../"><div class="brand">phenopype docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/phenopype_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">phenopype docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Internal links</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Installation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/python/">1. Installing Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/phenopype/">2. Installing phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/text/">3. Choosing a text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/spyder/">4. Installing Spyder (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/project/">Project class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/pype/">Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utility/">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/core/">Core modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/video/">Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_1/">Tutorial 1: A (very) brief python introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_2/">Tutorial 2: Interacting with images in phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_3/">Tutorial 3: The phenopype workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_4/">Tutorial 4: The Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_5/">Tutorial 5: Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_6/">Tutorial 6: Size and colour reference</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Tutorial 7: Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../templates/">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Templates</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/detection/">Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/landmarks/">Landmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/gallery/">Gallery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/various/">Various</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../resources/">Resources</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/python/">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/opencv/">OpenCV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/cv/">Computer vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/yaml/">YAML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation/">Citation</a></li>
+</ul>
+
+    <ul class="current">
+		<p class="caption"><span class="caption-text">External links</span></p>		
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org">Homepage</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://github.com/phenopype/phenopype">Github</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org/gallery/">Gallery</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.luerig.net/">Author (luerig.net)</a></li>
+	</ul>
+</div>
+
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Tutorial-7:-Video-analysis">
+<h1>Tutorial 7: Video analysis<a class="headerlink" href="#Tutorial-7:-Video-analysis" title="Link to this heading">#</a></h1>
+<p>The principles of video analysis and image analysis are similar: instead of images, single video frames are segmented into foreground and background, and the extracted information is processed after all frames have been analyzed (e.g. frame-wise location is converted into trajectories). However, a big advantage is that differences among consecutive frames can be used to train a background model from which the foreground can segmented. This is called foreground-background subtraction.</p>
+<p>Currently the tracking module works standalone and uses only few routines of the phenopype core modules. Future releases may feature a better integration with the different phenopype workflows.</p>
+<center><div class="row; text-align: left"><div class="col-md-6"><img alt="../../_images/tracking1.gif" src="../../_images/tracking1.gif" />
+</div><div class="col-md-6"><img alt="../../_images/tracking2.png" src="../../_images/tracking2.png" />
+</div><p><strong>Fig. 1:</strong> The motion tracker module enables the tracking of multiple objects that can be distinguished by size. For example, it is possible to record and separate the movement of both fish (red) and all 20 isopods (green) in this predator-prey interaction experiment.</p>
+</div></center><div class="alert alert-block alert-success"><p>Further resources related to this tutorial</p>
+<ul><li><p>foreground-background subtraction</p>
+</li></ul></div><section id="The-motion-tracker-class">
+<h2>The motion tracker class<a class="headerlink" href="#The-motion-tracker-class" title="Link to this heading">#</a></h2>
+<p>First, the <code class="docutils literal notranslate"><span class="pre">motion_tracker</span></code> class needs to be initizalized with a video-path to collect basic information about the input video. Specifying video output is optional: the tracking procedure can be run without saving any record of the tracking-results, but only the results (i.e. just a csv with coordinates and no video). Should the <code class="docutils literal notranslate"><span class="pre">video_ouput</span></code> method be called then it will save an output video with similar properties (codec, dimensions, fps.) of the input file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phenopype</span> <span class="k">as</span> <span class="nn">pp</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;D:\workspace\git-repos\phenopype\phenopype-tutorials&quot;</span><span class="p">)</span>
+
+<span class="n">video_path</span> <span class="o">=</span>  <span class="sa">r</span><span class="s2">&quot;tutorials/data/isopods_fish.mp4&quot;</span>
+<span class="n">out_dir</span> <span class="o">=</span>  <span class="sa">r</span><span class="s2">&quot;_temp/video&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mt</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">motion_tracker</span><span class="p">(</span><span class="n">video_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+--------------------------------------------------------------
+Input video properties - &#34;isopods_fish.mp4&#34;:
+
+Frames per second: 29.97000099996667
+N frames: 450
+Length: 00:15 (mm:ss)
+Dimensions: (960, 540)
+Colour video: True
+FourCC code: avc1
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mt</span><span class="o">.</span><span class="n">video_output</span><span class="p">(</span><span class="n">save_suffix</span><span class="o">=</span><span class="s2">&quot;v1&quot;</span><span class="p">,</span>
+                <span class="n">dirpath</span><span class="o">=</span><span class="n">out_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+--------------------------------------------------------------
+Output video settings - &#34;isopods_fish.mp4&#34;:
+
+Save name: isopods_fish_v1.mp4
+Save dir: D:\workspace\git-repos\phenopype\phenopype-tutorials\_temp\video
+Frames per second: 29.97000099996667
+Dimensions: (960, 540)
+Colour video: True
+Format (FourCC code): avc1
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+</section>
+<section id="Tracking-settings">
+<h2>Tracking settings<a class="headerlink" href="#Tracking-settings" title="Link to this heading">#</a></h2>
+<p>Now the settings for the tracking methods need to be set. Depending on the input video the default settings may work. In that case we don’t have to do everthing and the the <code class="docutils literal notranslate"><span class="pre">run_tracking</span></code>-method conducts motion tracking with default settings. However, typically adjust some setting will provide cleaner results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mt</span><span class="o">.</span><span class="n">detection_settings</span><span class="p">(</span><span class="n">skip</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="c1"># only capture every 5th frame (that&#39;s still a lot given 30 fps!)</span>
+                     <span class="n">start_after</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># skip the first second of the video</span>
+                     <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># lower values = more sensitive fg-bg subtraction</span>
+                     <span class="n">detect_shadows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="c1"># attempt to detect shadows</span>
+                     <span class="n">history</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span> <span class="c1"># how many seconds can a previously moving pixel sit still</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+--------------------------------------------------------------
+Motion detection settings - &#34;isopods_fish.mp4&#34;:
+
+Background-subtractor: MOG
+History: 60 seconds
+Sensitivity: 10
+Read every nth frame: 5
+Detect shadows: True
+Start after n seconds: 1
+Finish after n seconds:  -
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+<p>If no specific <code class="docutils literal notranslate"><span class="pre">tracking_method</span></code> <a class="reference internal" href="#Tracking-methods"><span class="std std-ref">see below</span></a> is selected, the output window will just return the results of the foreground-background subtraction: the foreground mas. Everything that is white will be detected and can be recorded, everything that is gray is identified as shadow (and can be removed), and everything else is background.</p>
+<center><div style="width:600px; text-align: left"><img alt="Foreground mask" src="../../_images/tracking3.jpg" />
+<p><strong>Fig. 2:</strong> The output of foreground-background subtraction is a binary mask. Overlaying that mask back onto the original video can be used to extract phenotypic information.</p>
+</div></center><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">run_tracking</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time: 00:00/00:15 - Frames: 1/450
+Time: 00:00/00:15 - Frames: 2/450
+Time: 00:00/00:15 - Frames: 3/450
+Time: 00:00/00:15 - Frames: 4/450
+Time: 00:00/00:15 - Frames: 5/450
+Time: 00:00/00:15 - Frames: 6/450
+Time: 00:00/00:15 - Frames: 7/450
+Time: 00:00/00:15 - Frames: 8/450
+Time: 00:00/00:15 - Frames: 9/450
+Time: 00:00/00:15 - Frames: 10/450
+Time: 00:00/00:15 - Frames: 11/450
+Time: 00:00/00:15 - Frames: 12/450
+Time: 00:00/00:15 - Frames: 13/450
+Time: 00:00/00:15 - Frames: 14/450
+Time: 00:00/00:15 - Frames: 15/450
+Time: 00:00/00:15 - Frames: 16/450
+Time: 00:00/00:15 - Frames: 17/450
+Time: 00:00/00:15 - Frames: 18/450
+Time: 00:00/00:15 - Frames: 19/450
+Time: 00:00/00:15 - Frames: 20/450
+Time: 00:00/00:15 - Frames: 21/450
+Time: 00:00/00:15 - Frames: 22/450
+Time: 00:00/00:15 - Frames: 23/450
+Time: 00:00/00:15 - Frames: 24/450
+Time: 00:00/00:15 - Frames: 25/450
+Time: 00:00/00:15 - Frames: 26/450
+Time: 00:00/00:15 - Frames: 27/450
+Time: 00:00/00:15 - Frames: 28/450
+Time: 00:00/00:15 - Frames: 29/450
+Time: 00:01/00:15 - Frames: 30/450 - captured
+Time: 00:01/00:15 - Frames: 31/450
+Time: 00:01/00:15 - Frames: 32/450
+Time: 00:01/00:15 - Frames: 33/450
+Time: 00:01/00:15 - Frames: 34/450
+Time: 00:01/00:15 - Frames: 35/450 - captured
+Time: 00:01/00:15 - Frames: 36/450
+Time: 00:01/00:15 - Frames: 37/450
+Time: 00:01/00:15 - Frames: 38/450
+Time: 00:01/00:15 - Frames: 39/450
+Time: 00:01/00:15 - Frames: 40/450 - captured
+Time: 00:01/00:15 - Frames: 41/450
+Time: 00:01/00:15 - Frames: 42/450
+Time: 00:01/00:15 - Frames: 43/450
+Time: 00:01/00:15 - Frames: 44/450
+Time: 00:01/00:15 - Frames: 45/450 - captured
+Time: 00:01/00:15 - Frames: 46/450
+Time: 00:01/00:15 - Frames: 47/450
+Time: 00:01/00:15 - Frames: 48/450
+Time: 00:01/00:15 - Frames: 49/450
+Time: 00:01/00:15 - Frames: 50/450 - captured
+Time: 00:01/00:15 - Frames: 51/450
+Time: 00:01/00:15 - Frames: 52/450
+Time: 00:01/00:15 - Frames: 53/450
+Time: 00:01/00:15 - Frames: 54/450
+Time: 00:01/00:15 - Frames: 55/450 - captured
+Time: 00:01/00:15 - Frames: 56/450
+Time: 00:01/00:15 - Frames: 57/450
+Time: 00:01/00:15 - Frames: 58/450
+Time: 00:01/00:15 - Frames: 59/450
+Time: 00:02/00:15 - Frames: 60/450 - captured
+Time: 00:02/00:15 - Frames: 61/450
+Time: 00:02/00:15 - Frames: 62/450
+Time: 00:02/00:15 - Frames: 63/450
+Time: 00:02/00:15 - Frames: 64/450
+Time: 00:02/00:15 - Frames: 65/450 - captured
+Time: 00:02/00:15 - Frames: 66/450
+Time: 00:02/00:15 - Frames: 67/450
+Time: 00:02/00:15 - Frames: 68/450
+Time: 00:02/00:15 - Frames: 69/450
+Time: 00:02/00:15 - Frames: 70/450 - captured
+Time: 00:02/00:15 - Frames: 71/450
+Time: 00:02/00:15 - Frames: 72/450
+Time: 00:02/00:15 - Frames: 73/450
+Time: 00:02/00:15 - Frames: 74/450
+Time: 00:02/00:15 - Frames: 75/450 - captured
+Time: 00:02/00:15 - Frames: 76/450
+Time: 00:02/00:15 - Frames: 77/450
+Time: 00:02/00:15 - Frames: 78/450
+Time: 00:02/00:15 - Frames: 79/450
+Time: 00:02/00:15 - Frames: 80/450 - captured
+Time: 00:02/00:15 - Frames: 81/450
+Time: 00:02/00:15 - Frames: 82/450
+Time: 00:02/00:15 - Frames: 83/450
+Time: 00:02/00:15 - Frames: 84/450
+Time: 00:02/00:15 - Frames: 85/450 - captured
+Time: 00:02/00:15 - Frames: 86/450
+Time: 00:02/00:15 - Frames: 87/450
+Time: 00:02/00:15 - Frames: 88/450
+Time: 00:02/00:15 - Frames: 89/450
+Time: 00:03/00:15 - Frames: 90/450 - captured
+Time: 00:03/00:15 - Frames: 91/450
+Time: 00:03/00:15 - Frames: 92/450
+Time: 00:03/00:15 - Frames: 93/450
+Time: 00:03/00:15 - Frames: 94/450
+Time: 00:03/00:15 - Frames: 95/450 - captured
+Time: 00:03/00:15 - Frames: 96/450
+Time: 00:03/00:15 - Frames: 97/450
+Time: 00:03/00:15 - Frames: 98/450
+Time: 00:03/00:15 - Frames: 99/450
+Time: 00:03/00:15 - Frames: 100/450 - captured
+Time: 00:03/00:15 - Frames: 101/450
+Time: 00:03/00:15 - Frames: 102/450
+Time: 00:03/00:15 - Frames: 103/450
+Time: 00:03/00:15 - Frames: 104/450
+Time: 00:03/00:15 - Frames: 105/450 - captured
+Time: 00:03/00:15 - Frames: 106/450
+Time: 00:03/00:15 - Frames: 107/450
+Time: 00:03/00:15 - Frames: 108/450
+Time: 00:03/00:15 - Frames: 109/450
+Time: 00:03/00:15 - Frames: 110/450 - captured
+Time: 00:03/00:15 - Frames: 111/450
+Time: 00:03/00:15 - Frames: 112/450
+Time: 00:03/00:15 - Frames: 113/450
+Time: 00:03/00:15 - Frames: 114/450
+Time: 00:03/00:15 - Frames: 115/450 - captured
+Time: 00:03/00:15 - Frames: 116/450
+Time: 00:03/00:15 - Frames: 117/450
+Time: 00:03/00:15 - Frames: 118/450
+Time: 00:03/00:15 - Frames: 119/450
+Time: 00:04/00:15 - Frames: 120/450 - captured
+Time: 00:04/00:15 - Frames: 121/450
+Time: 00:04/00:15 - Frames: 122/450
+Time: 00:04/00:15 - Frames: 123/450
+Time: 00:04/00:15 - Frames: 124/450
+Time: 00:04/00:15 - Frames: 125/450 - captured
+Time: 00:04/00:15 - Frames: 126/450
+Time: 00:04/00:15 - Frames: 127/450
+Time: 00:04/00:15 - Frames: 128/450
+Time: 00:04/00:15 - Frames: 129/450
+Time: 00:04/00:15 - Frames: 130/450 - captured
+Time: 00:04/00:15 - Frames: 131/450
+Time: 00:04/00:15 - Frames: 132/450
+Time: 00:04/00:15 - Frames: 133/450
+Time: 00:04/00:15 - Frames: 134/450
+Time: 00:04/00:15 - Frames: 135/450 - captured
+Time: 00:04/00:15 - Frames: 136/450
+Time: 00:04/00:15 - Frames: 137/450
+Time: 00:04/00:15 - Frames: 138/450
+Time: 00:04/00:15 - Frames: 139/450
+Time: 00:04/00:15 - Frames: 140/450 - captured
+Time: 00:04/00:15 - Frames: 141/450
+Time: 00:04/00:15 - Frames: 142/450
+Time: 00:04/00:15 - Frames: 143/450
+Time: 00:04/00:15 - Frames: 144/450
+Time: 00:04/00:15 - Frames: 145/450 - captured
+Time: 00:04/00:15 - Frames: 146/450
+Time: 00:04/00:15 - Frames: 147/450
+Time: 00:04/00:15 - Frames: 148/450
+Time: 00:04/00:15 - Frames: 149/450
+Time: 00:05/00:15 - Frames: 150/450 - captured
+Time: 00:05/00:15 - Frames: 151/450
+Time: 00:05/00:15 - Frames: 152/450
+Time: 00:05/00:15 - Frames: 153/450
+Time: 00:05/00:15 - Frames: 154/450
+Time: 00:05/00:15 - Frames: 155/450 - captured
+Time: 00:05/00:15 - Frames: 156/450
+Time: 00:05/00:15 - Frames: 157/450
+Time: 00:05/00:15 - Frames: 158/450
+Time: 00:05/00:15 - Frames: 159/450
+Time: 00:05/00:15 - Frames: 160/450 - captured
+Time: 00:05/00:15 - Frames: 161/450
+Time: 00:05/00:15 - Frames: 162/450
+Time: 00:05/00:15 - Frames: 163/450
+Time: 00:05/00:15 - Frames: 164/450
+Time: 00:05/00:15 - Frames: 165/450 - captured
+Time: 00:05/00:15 - Frames: 166/450
+Time: 00:05/00:15 - Frames: 167/450
+Time: 00:05/00:15 - Frames: 168/450
+Time: 00:05/00:15 - Frames: 169/450
+Time: 00:05/00:15 - Frames: 170/450 - captured
+Time: 00:05/00:15 - Frames: 171/450
+Time: 00:05/00:15 - Frames: 172/450
+Time: 00:05/00:15 - Frames: 173/450
+Time: 00:05/00:15 - Frames: 174/450
+Time: 00:05/00:15 - Frames: 175/450 - captured
+Time: 00:05/00:15 - Frames: 176/450
+Time: 00:05/00:15 - Frames: 177/450
+Time: 00:05/00:15 - Frames: 178/450
+Time: 00:05/00:15 - Frames: 179/450
+Time: 00:06/00:15 - Frames: 180/450 - captured
+Time: 00:06/00:15 - Frames: 181/450
+Time: 00:06/00:15 - Frames: 182/450
+Time: 00:06/00:15 - Frames: 183/450
+Time: 00:06/00:15 - Frames: 184/450
+Time: 00:06/00:15 - Frames: 185/450 - captured
+Time: 00:06/00:15 - Frames: 186/450
+Time: 00:06/00:15 - Frames: 187/450
+Time: 00:06/00:15 - Frames: 188/450
+Time: 00:06/00:15 - Frames: 189/450
+Time: 00:06/00:15 - Frames: 190/450 - captured
+Time: 00:06/00:15 - Frames: 191/450
+Time: 00:06/00:15 - Frames: 192/450
+Time: 00:06/00:15 - Frames: 193/450
+Time: 00:06/00:15 - Frames: 194/450
+Time: 00:06/00:15 - Frames: 195/450 - captured
+Time: 00:06/00:15 - Frames: 196/450
+Time: 00:06/00:15 - Frames: 197/450
+Time: 00:06/00:15 - Frames: 198/450
+Time: 00:06/00:15 - Frames: 199/450
+Time: 00:06/00:15 - Frames: 200/450 - captured
+Time: 00:06/00:15 - Frames: 201/450
+Time: 00:06/00:15 - Frames: 202/450
+Time: 00:06/00:15 - Frames: 203/450
+Time: 00:06/00:15 - Frames: 204/450
+Time: 00:06/00:15 - Frames: 205/450 - captured
+Time: 00:06/00:15 - Frames: 206/450
+Time: 00:06/00:15 - Frames: 207/450
+Time: 00:06/00:15 - Frames: 208/450
+Time: 00:06/00:15 - Frames: 209/450
+Time: 00:07/00:15 - Frames: 210/450 - captured
+Time: 00:07/00:15 - Frames: 211/450
+Time: 00:07/00:15 - Frames: 212/450
+Time: 00:07/00:15 - Frames: 213/450
+Time: 00:07/00:15 - Frames: 214/450
+Time: 00:07/00:15 - Frames: 215/450 - captured
+Time: 00:07/00:15 - Frames: 216/450
+Time: 00:07/00:15 - Frames: 217/450
+Time: 00:07/00:15 - Frames: 218/450
+Time: 00:07/00:15 - Frames: 219/450
+Time: 00:07/00:15 - Frames: 220/450 - captured
+Time: 00:07/00:15 - Frames: 221/450
+Time: 00:07/00:15 - Frames: 222/450
+Time: 00:07/00:15 - Frames: 223/450
+Time: 00:07/00:15 - Frames: 224/450
+Time: 00:07/00:15 - Frames: 225/450 - captured
+Time: 00:07/00:15 - Frames: 226/450
+Time: 00:07/00:15 - Frames: 227/450
+Time: 00:07/00:15 - Frames: 228/450
+Time: 00:07/00:15 - Frames: 229/450
+Time: 00:07/00:15 - Frames: 230/450 - captured
+Time: 00:07/00:15 - Frames: 231/450
+Time: 00:07/00:15 - Frames: 232/450
+Time: 00:07/00:15 - Frames: 233/450
+Time: 00:07/00:15 - Frames: 234/450
+Time: 00:07/00:15 - Frames: 235/450 - captured
+Time: 00:07/00:15 - Frames: 236/450
+Time: 00:07/00:15 - Frames: 237/450
+Time: 00:07/00:15 - Frames: 238/450
+Time: 00:07/00:15 - Frames: 239/450
+Time: 00:08/00:15 - Frames: 240/450 - captured
+Time: 00:08/00:15 - Frames: 241/450
+Time: 00:08/00:15 - Frames: 242/450
+Time: 00:08/00:15 - Frames: 243/450
+Time: 00:08/00:15 - Frames: 244/450
+Time: 00:08/00:15 - Frames: 245/450 - captured
+Time: 00:08/00:15 - Frames: 246/450
+Time: 00:08/00:15 - Frames: 247/450
+Time: 00:08/00:15 - Frames: 248/450
+Time: 00:08/00:15 - Frames: 249/450
+Time: 00:08/00:15 - Frames: 250/450 - captured
+Time: 00:08/00:15 - Frames: 251/450
+Time: 00:08/00:15 - Frames: 252/450
+Time: 00:08/00:15 - Frames: 253/450
+Time: 00:08/00:15 - Frames: 254/450
+Time: 00:08/00:15 - Frames: 255/450 - captured
+Time: 00:08/00:15 - Frames: 256/450
+Time: 00:08/00:15 - Frames: 257/450
+Time: 00:08/00:15 - Frames: 258/450
+Time: 00:08/00:15 - Frames: 259/450
+Time: 00:08/00:15 - Frames: 260/450 - captured
+Time: 00:08/00:15 - Frames: 261/450
+Time: 00:08/00:15 - Frames: 262/450
+Time: 00:08/00:15 - Frames: 263/450
+Time: 00:08/00:15 - Frames: 264/450
+Time: 00:08/00:15 - Frames: 265/450 - captured
+Time: 00:08/00:15 - Frames: 266/450
+Time: 00:08/00:15 - Frames: 267/450
+Time: 00:08/00:15 - Frames: 268/450
+Time: 00:08/00:15 - Frames: 269/450
+Time: 00:09/00:15 - Frames: 270/450 - captured
+Time: 00:09/00:15 - Frames: 271/450
+Time: 00:09/00:15 - Frames: 272/450
+Time: 00:09/00:15 - Frames: 273/450
+Time: 00:09/00:15 - Frames: 274/450
+Time: 00:09/00:15 - Frames: 275/450 - captured
+Time: 00:09/00:15 - Frames: 276/450
+Time: 00:09/00:15 - Frames: 277/450
+Time: 00:09/00:15 - Frames: 278/450
+Time: 00:09/00:15 - Frames: 279/450
+Time: 00:09/00:15 - Frames: 280/450 - captured
+Time: 00:09/00:15 - Frames: 281/450
+Time: 00:09/00:15 - Frames: 282/450
+Time: 00:09/00:15 - Frames: 283/450
+Time: 00:09/00:15 - Frames: 284/450
+Time: 00:09/00:15 - Frames: 285/450 - captured
+Time: 00:09/00:15 - Frames: 286/450
+Time: 00:09/00:15 - Frames: 287/450
+Time: 00:09/00:15 - Frames: 288/450
+Time: 00:09/00:15 - Frames: 289/450
+Time: 00:09/00:15 - Frames: 290/450 - captured
+Time: 00:09/00:15 - Frames: 291/450
+Time: 00:09/00:15 - Frames: 292/450
+Time: 00:09/00:15 - Frames: 293/450
+Time: 00:09/00:15 - Frames: 294/450
+Time: 00:09/00:15 - Frames: 295/450 - captured
+Time: 00:09/00:15 - Frames: 296/450
+Time: 00:09/00:15 - Frames: 297/450
+Time: 00:09/00:15 - Frames: 298/450
+Time: 00:09/00:15 - Frames: 299/450
+Time: 00:10/00:15 - Frames: 300/450 - captured
+Time: 00:10/00:15 - Frames: 301/450
+Time: 00:10/00:15 - Frames: 302/450
+Time: 00:10/00:15 - Frames: 303/450
+Time: 00:10/00:15 - Frames: 304/450
+Time: 00:10/00:15 - Frames: 305/450 - captured
+Time: 00:10/00:15 - Frames: 306/450
+Time: 00:10/00:15 - Frames: 307/450
+Time: 00:10/00:15 - Frames: 308/450
+Time: 00:10/00:15 - Frames: 309/450
+Time: 00:10/00:15 - Frames: 310/450 - captured
+Time: 00:10/00:15 - Frames: 311/450
+Time: 00:10/00:15 - Frames: 312/450
+Time: 00:10/00:15 - Frames: 313/450
+Time: 00:10/00:15 - Frames: 314/450
+Time: 00:10/00:15 - Frames: 315/450 - captured
+Time: 00:10/00:15 - Frames: 316/450
+Time: 00:10/00:15 - Frames: 317/450
+Time: 00:10/00:15 - Frames: 318/450
+Time: 00:10/00:15 - Frames: 319/450
+Time: 00:10/00:15 - Frames: 320/450 - captured
+Time: 00:10/00:15 - Frames: 321/450
+Time: 00:10/00:15 - Frames: 322/450
+Time: 00:10/00:15 - Frames: 323/450
+Time: 00:10/00:15 - Frames: 324/450
+Time: 00:10/00:15 - Frames: 325/450 - captured
+Time: 00:10/00:15 - Frames: 326/450
+Time: 00:10/00:15 - Frames: 327/450
+Time: 00:10/00:15 - Frames: 328/450
+Time: 00:10/00:15 - Frames: 329/450
+Time: 00:11/00:15 - Frames: 330/450 - captured
+Time: 00:11/00:15 - Frames: 331/450
+Time: 00:11/00:15 - Frames: 332/450
+Time: 00:11/00:15 - Frames: 333/450
+Time: 00:11/00:15 - Frames: 334/450
+Time: 00:11/00:15 - Frames: 335/450 - captured
+Time: 00:11/00:15 - Frames: 336/450
+Time: 00:11/00:15 - Frames: 337/450
+Time: 00:11/00:15 - Frames: 338/450
+Time: 00:11/00:15 - Frames: 339/450
+Time: 00:11/00:15 - Frames: 340/450 - captured
+Time: 00:11/00:15 - Frames: 341/450
+Time: 00:11/00:15 - Frames: 342/450
+Time: 00:11/00:15 - Frames: 343/450
+Time: 00:11/00:15 - Frames: 344/450
+Time: 00:11/00:15 - Frames: 345/450 - captured
+Time: 00:11/00:15 - Frames: 346/450
+Time: 00:11/00:15 - Frames: 347/450
+Time: 00:11/00:15 - Frames: 348/450
+Time: 00:11/00:15 - Frames: 349/450
+Time: 00:11/00:15 - Frames: 350/450 - captured
+Time: 00:11/00:15 - Frames: 351/450
+Time: 00:11/00:15 - Frames: 352/450
+Time: 00:11/00:15 - Frames: 353/450
+Time: 00:11/00:15 - Frames: 354/450
+Time: 00:11/00:15 - Frames: 355/450 - captured
+Time: 00:11/00:15 - Frames: 356/450
+Time: 00:11/00:15 - Frames: 357/450
+Time: 00:11/00:15 - Frames: 358/450
+Time: 00:11/00:15 - Frames: 359/450
+Time: 00:12/00:15 - Frames: 360/450 - captured
+Time: 00:12/00:15 - Frames: 361/450
+Time: 00:12/00:15 - Frames: 362/450
+Time: 00:12/00:15 - Frames: 363/450
+Time: 00:12/00:15 - Frames: 364/450
+Time: 00:12/00:15 - Frames: 365/450 - captured
+Time: 00:12/00:15 - Frames: 366/450
+Time: 00:12/00:15 - Frames: 367/450
+Time: 00:12/00:15 - Frames: 368/450
+Time: 00:12/00:15 - Frames: 369/450
+Time: 00:12/00:15 - Frames: 370/450 - captured
+Time: 00:12/00:15 - Frames: 371/450
+Time: 00:12/00:15 - Frames: 372/450
+Time: 00:12/00:15 - Frames: 373/450
+Time: 00:12/00:15 - Frames: 374/450
+Time: 00:12/00:15 - Frames: 375/450 - captured
+Time: 00:12/00:15 - Frames: 376/450
+Time: 00:12/00:15 - Frames: 377/450
+Time: 00:12/00:15 - Frames: 378/450
+Time: 00:12/00:15 - Frames: 379/450
+Time: 00:12/00:15 - Frames: 380/450 - captured
+Time: 00:12/00:15 - Frames: 381/450
+Time: 00:12/00:15 - Frames: 382/450
+Time: 00:12/00:15 - Frames: 383/450
+Time: 00:12/00:15 - Frames: 384/450
+Time: 00:12/00:15 - Frames: 385/450 - captured
+Time: 00:12/00:15 - Frames: 386/450
+Time: 00:12/00:15 - Frames: 387/450
+Time: 00:12/00:15 - Frames: 388/450
+Time: 00:12/00:15 - Frames: 389/450
+Time: 00:13/00:15 - Frames: 390/450 - captured
+Time: 00:13/00:15 - Frames: 391/450
+Time: 00:13/00:15 - Frames: 392/450
+Time: 00:13/00:15 - Frames: 393/450
+Time: 00:13/00:15 - Frames: 394/450
+Time: 00:13/00:15 - Frames: 395/450 - captured
+Time: 00:13/00:15 - Frames: 396/450
+Time: 00:13/00:15 - Frames: 397/450
+Time: 00:13/00:15 - Frames: 398/450
+Time: 00:13/00:15 - Frames: 399/450
+Time: 00:13/00:15 - Frames: 400/450 - captured
+Time: 00:13/00:15 - Frames: 401/450
+Time: 00:13/00:15 - Frames: 402/450
+Time: 00:13/00:15 - Frames: 403/450
+Time: 00:13/00:15 - Frames: 404/450
+Time: 00:13/00:15 - Frames: 405/450 - captured
+Time: 00:13/00:15 - Frames: 406/450
+Time: 00:13/00:15 - Frames: 407/450
+Time: 00:13/00:15 - Frames: 408/450
+Time: 00:13/00:15 - Frames: 409/450
+Time: 00:13/00:15 - Frames: 410/450 - captured
+Time: 00:13/00:15 - Frames: 411/450
+Time: 00:13/00:15 - Frames: 412/450
+Time: 00:13/00:15 - Frames: 413/450
+Time: 00:13/00:15 - Frames: 414/450
+Time: 00:13/00:15 - Frames: 415/450 - captured
+Time: 00:13/00:15 - Frames: 416/450
+Time: 00:13/00:15 - Frames: 417/450
+Time: 00:13/00:15 - Frames: 418/450
+Time: 00:13/00:15 - Frames: 419/450
+Time: 00:14/00:15 - Frames: 420/450 - captured
+Time: 00:14/00:15 - Frames: 421/450
+Time: 00:14/00:15 - Frames: 422/450
+Time: 00:14/00:15 - Frames: 423/450
+Time: 00:14/00:15 - Frames: 424/450
+Time: 00:14/00:15 - Frames: 425/450 - captured
+Time: 00:14/00:15 - Frames: 426/450
+Time: 00:14/00:15 - Frames: 427/450
+Time: 00:14/00:15 - Frames: 428/450
+Time: 00:14/00:15 - Frames: 429/450
+Time: 00:14/00:15 - Frames: 430/450 - captured
+Time: 00:14/00:15 - Frames: 431/450
+Time: 00:14/00:15 - Frames: 432/450
+Time: 00:14/00:15 - Frames: 433/450
+Time: 00:14/00:15 - Frames: 434/450
+Time: 00:14/00:15 - Frames: 435/450 - captured
+Time: 00:14/00:15 - Frames: 436/450
+Time: 00:14/00:15 - Frames: 437/450
+Time: 00:14/00:15 - Frames: 438/450
+Time: 00:14/00:15 - Frames: 439/450
+Time: 00:14/00:15 - Frames: 440/450 - captured
+Time: 00:14/00:15 - Frames: 441/450
+Time: 00:14/00:15 - Frames: 442/450
+Time: 00:14/00:15 - Frames: 443/450
+Time: 00:14/00:15 - Frames: 444/450
+Time: 00:14/00:15 - Frames: 445/450 - captured
+Time: 00:14/00:15 - Frames: 446/450
+Time: 00:14/00:15 - Frames: 447/450
+Time: 00:14/00:15 - Frames: 448/450
+</pre></div></div>
+</div>
+</section>
+<section id="Tracking-methods">
+<h2>Tracking-methods<a class="headerlink" href="#Tracking-methods" title="Link to this heading">#</a></h2>
+<p>So far, the motion tracker has just performed foreground-background subtraction without recording coordinates of objects - the <code class="docutils literal notranslate"><span class="pre">coordinates</span></code> DataFrame is empty. To record something we have to specify a <code class="docutils literal notranslate"><span class="pre">tracking_method</span></code>. This can be as simple as:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create fish method</span>
+<span class="n">mov</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">tracking_method</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;movement&quot;</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we just pass the method to the tracking settings (<code class="docutils literal notranslate"><span class="pre">detection_settings</span></code>). Using that method will also call all default settings. Afterwards we can run the tracking procedure again:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mt</span><span class="o">.</span><span class="n">detection_settings</span><span class="p">(</span><span class="n">methods</span><span class="o">=</span><span class="n">mov</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-----------------------------
+Detection method &#34;movement&#34;:
+
+{&#39;blur_kernel&#39;: 5,
+ &#39;label&#39;: &#39;movement&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: inf,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 5,
+ &#39;mode&#39;: &#39;multiple&#39;,
+ &#39;overlay_colour&#39;: (0, 0,
+                    255),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 127}
+-----------------------------
+
+
+
+
+--------------------------------------------------------------
+Motion detection settings - &#34;isopods_fish.mp4&#34;:
+
+Background-subtractor: MOG
+History: 60 seconds
+Sensitivity: 10
+Read every nth frame: 5
+Detect shadows: True
+Start after n seconds: 0
+Finish after n seconds:  -
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">run_tracking</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time: 00:00/00:15 - Frames: 1/450
+Time: 00:00/00:15 - Frames: 2/450
+Time: 00:00/00:15 - Frames: 3/450
+Time: 00:00/00:15 - Frames: 4/450
+Time: 00:00/00:15 - Frames: 5/450 - captured
+Time: 00:00/00:15 - Frames: 6/450
+Time: 00:00/00:15 - Frames: 7/450
+Time: 00:00/00:15 - Frames: 8/450
+Time: 00:00/00:15 - Frames: 9/450
+Time: 00:00/00:15 - Frames: 10/450 - captured
+Time: 00:00/00:15 - Frames: 11/450
+Time: 00:00/00:15 - Frames: 12/450
+Time: 00:00/00:15 - Frames: 13/450
+Time: 00:00/00:15 - Frames: 14/450
+Time: 00:00/00:15 - Frames: 15/450 - captured
+Time: 00:00/00:15 - Frames: 16/450
+Time: 00:00/00:15 - Frames: 17/450
+Time: 00:00/00:15 - Frames: 18/450
+Time: 00:00/00:15 - Frames: 19/450
+Time: 00:00/00:15 - Frames: 20/450 - captured
+Time: 00:00/00:15 - Frames: 21/450
+Time: 00:00/00:15 - Frames: 22/450
+Time: 00:00/00:15 - Frames: 23/450
+Time: 00:00/00:15 - Frames: 24/450
+Time: 00:00/00:15 - Frames: 25/450 - captured
+Time: 00:00/00:15 - Frames: 26/450
+Time: 00:00/00:15 - Frames: 27/450
+Time: 00:00/00:15 - Frames: 28/450
+Time: 00:00/00:15 - Frames: 29/450
+Time: 00:01/00:15 - Frames: 30/450 - captured
+Time: 00:01/00:15 - Frames: 31/450
+Time: 00:01/00:15 - Frames: 32/450
+Time: 00:01/00:15 - Frames: 33/450
+Time: 00:01/00:15 - Frames: 34/450
+Time: 00:01/00:15 - Frames: 35/450 - captured
+Time: 00:01/00:15 - Frames: 36/450
+Time: 00:01/00:15 - Frames: 37/450
+Time: 00:01/00:15 - Frames: 38/450
+Time: 00:01/00:15 - Frames: 39/450
+Time: 00:01/00:15 - Frames: 40/450 - captured
+Time: 00:01/00:15 - Frames: 41/450
+Time: 00:01/00:15 - Frames: 42/450
+Time: 00:01/00:15 - Frames: 43/450
+Time: 00:01/00:15 - Frames: 44/450
+Time: 00:01/00:15 - Frames: 45/450 - captured
+Time: 00:01/00:15 - Frames: 46/450
+Time: 00:01/00:15 - Frames: 47/450
+Time: 00:01/00:15 - Frames: 48/450
+Time: 00:01/00:15 - Frames: 49/450
+Time: 00:01/00:15 - Frames: 50/450 - captured
+Time: 00:01/00:15 - Frames: 51/450
+Time: 00:01/00:15 - Frames: 52/450
+Time: 00:01/00:15 - Frames: 53/450
+Time: 00:01/00:15 - Frames: 54/450
+Time: 00:01/00:15 - Frames: 55/450 - captured
+Time: 00:01/00:15 - Frames: 56/450
+Time: 00:01/00:15 - Frames: 57/450
+Time: 00:01/00:15 - Frames: 58/450
+Time: 00:01/00:15 - Frames: 59/450
+Time: 00:02/00:15 - Frames: 60/450 - captured
+Time: 00:02/00:15 - Frames: 61/450
+Time: 00:02/00:15 - Frames: 62/450
+Time: 00:02/00:15 - Frames: 63/450
+Time: 00:02/00:15 - Frames: 64/450
+Time: 00:02/00:15 - Frames: 65/450 - captured
+Time: 00:02/00:15 - Frames: 66/450
+Time: 00:02/00:15 - Frames: 67/450
+Time: 00:02/00:15 - Frames: 68/450
+Time: 00:02/00:15 - Frames: 69/450
+Time: 00:02/00:15 - Frames: 70/450 - captured
+Time: 00:02/00:15 - Frames: 71/450
+Time: 00:02/00:15 - Frames: 72/450
+Time: 00:02/00:15 - Frames: 73/450
+Time: 00:02/00:15 - Frames: 74/450
+Time: 00:02/00:15 - Frames: 75/450 - captured
+Time: 00:02/00:15 - Frames: 76/450
+Time: 00:02/00:15 - Frames: 77/450
+Time: 00:02/00:15 - Frames: 78/450
+Time: 00:02/00:15 - Frames: 79/450
+Time: 00:02/00:15 - Frames: 80/450 - captured
+Time: 00:02/00:15 - Frames: 81/450
+Time: 00:02/00:15 - Frames: 82/450
+Time: 00:02/00:15 - Frames: 83/450
+Time: 00:02/00:15 - Frames: 84/450
+Time: 00:02/00:15 - Frames: 85/450 - captured
+Time: 00:02/00:15 - Frames: 86/450
+Time: 00:02/00:15 - Frames: 87/450
+Time: 00:02/00:15 - Frames: 88/450
+Time: 00:02/00:15 - Frames: 89/450
+Time: 00:03/00:15 - Frames: 90/450 - captured
+Time: 00:03/00:15 - Frames: 91/450
+Time: 00:03/00:15 - Frames: 92/450
+Time: 00:03/00:15 - Frames: 93/450
+Time: 00:03/00:15 - Frames: 94/450
+Time: 00:03/00:15 - Frames: 95/450 - captured
+Time: 00:03/00:15 - Frames: 96/450
+Time: 00:03/00:15 - Frames: 97/450
+Time: 00:03/00:15 - Frames: 98/450
+Time: 00:03/00:15 - Frames: 99/450
+Time: 00:03/00:15 - Frames: 100/450 - captured
+Time: 00:03/00:15 - Frames: 101/450
+Time: 00:03/00:15 - Frames: 102/450
+Time: 00:03/00:15 - Frames: 103/450
+Time: 00:03/00:15 - Frames: 104/450
+Time: 00:03/00:15 - Frames: 105/450 - captured
+Time: 00:03/00:15 - Frames: 106/450
+Time: 00:03/00:15 - Frames: 107/450
+Time: 00:03/00:15 - Frames: 108/450
+Time: 00:03/00:15 - Frames: 109/450
+Time: 00:03/00:15 - Frames: 110/450 - captured
+Time: 00:03/00:15 - Frames: 111/450
+Time: 00:03/00:15 - Frames: 112/450
+Time: 00:03/00:15 - Frames: 113/450
+Time: 00:03/00:15 - Frames: 114/450
+Time: 00:03/00:15 - Frames: 115/450 - captured
+Time: 00:03/00:15 - Frames: 116/450
+Time: 00:03/00:15 - Frames: 117/450
+Time: 00:03/00:15 - Frames: 118/450
+Time: 00:03/00:15 - Frames: 119/450
+Time: 00:04/00:15 - Frames: 120/450 - captured
+Time: 00:04/00:15 - Frames: 121/450
+Time: 00:04/00:15 - Frames: 122/450
+Time: 00:04/00:15 - Frames: 123/450
+Time: 00:04/00:15 - Frames: 124/450
+Time: 00:04/00:15 - Frames: 125/450 - captured
+Time: 00:04/00:15 - Frames: 126/450
+Time: 00:04/00:15 - Frames: 127/450
+Time: 00:04/00:15 - Frames: 128/450
+Time: 00:04/00:15 - Frames: 129/450
+Time: 00:04/00:15 - Frames: 130/450 - captured
+Time: 00:04/00:15 - Frames: 131/450
+Time: 00:04/00:15 - Frames: 132/450
+Time: 00:04/00:15 - Frames: 133/450
+Time: 00:04/00:15 - Frames: 134/450
+Time: 00:04/00:15 - Frames: 135/450 - captured
+Time: 00:04/00:15 - Frames: 136/450
+Time: 00:04/00:15 - Frames: 137/450
+Time: 00:04/00:15 - Frames: 138/450
+Time: 00:04/00:15 - Frames: 139/450
+Time: 00:04/00:15 - Frames: 140/450 - captured
+Time: 00:04/00:15 - Frames: 141/450
+Time: 00:04/00:15 - Frames: 142/450
+Time: 00:04/00:15 - Frames: 143/450
+Time: 00:04/00:15 - Frames: 144/450
+Time: 00:04/00:15 - Frames: 145/450 - captured
+Time: 00:04/00:15 - Frames: 146/450
+Time: 00:04/00:15 - Frames: 147/450
+Time: 00:04/00:15 - Frames: 148/450
+Time: 00:04/00:15 - Frames: 149/450
+Time: 00:05/00:15 - Frames: 150/450 - captured
+Time: 00:05/00:15 - Frames: 151/450
+Time: 00:05/00:15 - Frames: 152/450
+Time: 00:05/00:15 - Frames: 153/450
+Time: 00:05/00:15 - Frames: 154/450
+Time: 00:05/00:15 - Frames: 155/450 - captured
+Time: 00:05/00:15 - Frames: 156/450
+Time: 00:05/00:15 - Frames: 157/450
+Time: 00:05/00:15 - Frames: 158/450
+Time: 00:05/00:15 - Frames: 159/450
+Time: 00:05/00:15 - Frames: 160/450 - captured
+Time: 00:05/00:15 - Frames: 161/450
+Time: 00:05/00:15 - Frames: 162/450
+Time: 00:05/00:15 - Frames: 163/450
+Time: 00:05/00:15 - Frames: 164/450
+Time: 00:05/00:15 - Frames: 165/450 - captured
+Time: 00:05/00:15 - Frames: 166/450
+Time: 00:05/00:15 - Frames: 167/450
+Time: 00:05/00:15 - Frames: 168/450
+Time: 00:05/00:15 - Frames: 169/450
+Time: 00:05/00:15 - Frames: 170/450 - captured
+Time: 00:05/00:15 - Frames: 171/450
+Time: 00:05/00:15 - Frames: 172/450
+Time: 00:05/00:15 - Frames: 173/450
+Time: 00:05/00:15 - Frames: 174/450
+Time: 00:05/00:15 - Frames: 175/450 - captured
+Time: 00:05/00:15 - Frames: 176/450
+Time: 00:05/00:15 - Frames: 177/450
+Time: 00:05/00:15 - Frames: 178/450
+Time: 00:05/00:15 - Frames: 179/450
+Time: 00:06/00:15 - Frames: 180/450 - captured
+Time: 00:06/00:15 - Frames: 181/450
+Time: 00:06/00:15 - Frames: 182/450
+Time: 00:06/00:15 - Frames: 183/450
+Time: 00:06/00:15 - Frames: 184/450
+Time: 00:06/00:15 - Frames: 185/450 - captured
+Time: 00:06/00:15 - Frames: 186/450
+Time: 00:06/00:15 - Frames: 187/450
+Time: 00:06/00:15 - Frames: 188/450
+Time: 00:06/00:15 - Frames: 189/450
+Time: 00:06/00:15 - Frames: 190/450 - captured
+Time: 00:06/00:15 - Frames: 191/450
+Time: 00:06/00:15 - Frames: 192/450
+Time: 00:06/00:15 - Frames: 193/450
+Time: 00:06/00:15 - Frames: 194/450
+Time: 00:06/00:15 - Frames: 195/450 - captured
+Time: 00:06/00:15 - Frames: 196/450
+Time: 00:06/00:15 - Frames: 197/450
+Time: 00:06/00:15 - Frames: 198/450
+Time: 00:06/00:15 - Frames: 199/450
+Time: 00:06/00:15 - Frames: 200/450 - captured
+Time: 00:06/00:15 - Frames: 201/450
+Time: 00:06/00:15 - Frames: 202/450
+Time: 00:06/00:15 - Frames: 203/450
+Time: 00:06/00:15 - Frames: 204/450
+Time: 00:06/00:15 - Frames: 205/450 - captured
+Time: 00:06/00:15 - Frames: 206/450
+Time: 00:06/00:15 - Frames: 207/450
+Time: 00:06/00:15 - Frames: 208/450
+Time: 00:06/00:15 - Frames: 209/450
+Time: 00:07/00:15 - Frames: 210/450 - captured
+Time: 00:07/00:15 - Frames: 211/450
+Time: 00:07/00:15 - Frames: 212/450
+Time: 00:07/00:15 - Frames: 213/450
+Time: 00:07/00:15 - Frames: 214/450
+Time: 00:07/00:15 - Frames: 215/450 - captured
+Time: 00:07/00:15 - Frames: 216/450
+Time: 00:07/00:15 - Frames: 217/450
+Time: 00:07/00:15 - Frames: 218/450
+Time: 00:07/00:15 - Frames: 219/450
+Time: 00:07/00:15 - Frames: 220/450 - captured
+Time: 00:07/00:15 - Frames: 221/450
+Time: 00:07/00:15 - Frames: 222/450
+Time: 00:07/00:15 - Frames: 223/450
+Time: 00:07/00:15 - Frames: 224/450
+Time: 00:07/00:15 - Frames: 225/450 - captured
+Time: 00:07/00:15 - Frames: 226/450
+Time: 00:07/00:15 - Frames: 227/450
+Time: 00:07/00:15 - Frames: 228/450
+Time: 00:07/00:15 - Frames: 229/450
+Time: 00:07/00:15 - Frames: 230/450 - captured
+Time: 00:07/00:15 - Frames: 231/450
+Time: 00:07/00:15 - Frames: 232/450
+Time: 00:07/00:15 - Frames: 233/450
+Time: 00:07/00:15 - Frames: 234/450
+Time: 00:07/00:15 - Frames: 235/450 - captured
+Time: 00:07/00:15 - Frames: 236/450
+Time: 00:07/00:15 - Frames: 237/450
+Time: 00:07/00:15 - Frames: 238/450
+Time: 00:07/00:15 - Frames: 239/450
+Time: 00:08/00:15 - Frames: 240/450 - captured
+Time: 00:08/00:15 - Frames: 241/450
+Time: 00:08/00:15 - Frames: 242/450
+Time: 00:08/00:15 - Frames: 243/450
+Time: 00:08/00:15 - Frames: 244/450
+Time: 00:08/00:15 - Frames: 245/450 - captured
+Time: 00:08/00:15 - Frames: 246/450
+Time: 00:08/00:15 - Frames: 247/450
+Time: 00:08/00:15 - Frames: 248/450
+Time: 00:08/00:15 - Frames: 249/450
+Time: 00:08/00:15 - Frames: 250/450 - captured
+Time: 00:08/00:15 - Frames: 251/450
+Time: 00:08/00:15 - Frames: 252/450
+Time: 00:08/00:15 - Frames: 253/450
+Time: 00:08/00:15 - Frames: 254/450
+Time: 00:08/00:15 - Frames: 255/450 - captured
+Time: 00:08/00:15 - Frames: 256/450
+Time: 00:08/00:15 - Frames: 257/450
+Time: 00:08/00:15 - Frames: 258/450
+Time: 00:08/00:15 - Frames: 259/450
+Time: 00:08/00:15 - Frames: 260/450 - captured
+Time: 00:08/00:15 - Frames: 261/450
+Time: 00:08/00:15 - Frames: 262/450
+Time: 00:08/00:15 - Frames: 263/450
+Time: 00:08/00:15 - Frames: 264/450
+Time: 00:08/00:15 - Frames: 265/450 - captured
+Time: 00:08/00:15 - Frames: 266/450
+Time: 00:08/00:15 - Frames: 267/450
+Time: 00:08/00:15 - Frames: 268/450
+Time: 00:08/00:15 - Frames: 269/450
+Time: 00:09/00:15 - Frames: 270/450 - captured
+Time: 00:09/00:15 - Frames: 271/450
+Time: 00:09/00:15 - Frames: 272/450
+Time: 00:09/00:15 - Frames: 273/450
+Time: 00:09/00:15 - Frames: 274/450
+Time: 00:09/00:15 - Frames: 275/450 - captured
+Time: 00:09/00:15 - Frames: 276/450
+Time: 00:09/00:15 - Frames: 277/450
+Time: 00:09/00:15 - Frames: 278/450
+Time: 00:09/00:15 - Frames: 279/450
+Time: 00:09/00:15 - Frames: 280/450 - captured
+Time: 00:09/00:15 - Frames: 281/450
+Time: 00:09/00:15 - Frames: 282/450
+Time: 00:09/00:15 - Frames: 283/450
+Time: 00:09/00:15 - Frames: 284/450
+Time: 00:09/00:15 - Frames: 285/450 - captured
+Time: 00:09/00:15 - Frames: 286/450
+Time: 00:09/00:15 - Frames: 287/450
+Time: 00:09/00:15 - Frames: 288/450
+Time: 00:09/00:15 - Frames: 289/450
+Time: 00:09/00:15 - Frames: 290/450 - captured
+Time: 00:09/00:15 - Frames: 291/450
+Time: 00:09/00:15 - Frames: 292/450
+Time: 00:09/00:15 - Frames: 293/450
+Time: 00:09/00:15 - Frames: 294/450
+Time: 00:09/00:15 - Frames: 295/450 - captured
+Time: 00:09/00:15 - Frames: 296/450
+Time: 00:09/00:15 - Frames: 297/450
+Time: 00:09/00:15 - Frames: 298/450
+Time: 00:09/00:15 - Frames: 299/450
+Time: 00:10/00:15 - Frames: 300/450 - captured
+Time: 00:10/00:15 - Frames: 301/450
+Time: 00:10/00:15 - Frames: 302/450
+Time: 00:10/00:15 - Frames: 303/450
+Time: 00:10/00:15 - Frames: 304/450
+Time: 00:10/00:15 - Frames: 305/450 - captured
+Time: 00:10/00:15 - Frames: 306/450
+Time: 00:10/00:15 - Frames: 307/450
+Time: 00:10/00:15 - Frames: 308/450
+Time: 00:10/00:15 - Frames: 309/450
+Time: 00:10/00:15 - Frames: 310/450 - captured
+Time: 00:10/00:15 - Frames: 311/450
+Time: 00:10/00:15 - Frames: 312/450
+Time: 00:10/00:15 - Frames: 313/450
+Time: 00:10/00:15 - Frames: 314/450
+Time: 00:10/00:15 - Frames: 315/450 - captured
+Time: 00:10/00:15 - Frames: 316/450
+Time: 00:10/00:15 - Frames: 317/450
+Time: 00:10/00:15 - Frames: 318/450
+Time: 00:10/00:15 - Frames: 319/450
+Time: 00:10/00:15 - Frames: 320/450 - captured
+Time: 00:10/00:15 - Frames: 321/450
+Time: 00:10/00:15 - Frames: 322/450
+Time: 00:10/00:15 - Frames: 323/450
+Time: 00:10/00:15 - Frames: 324/450
+Time: 00:10/00:15 - Frames: 325/450 - captured
+Time: 00:10/00:15 - Frames: 326/450
+Time: 00:10/00:15 - Frames: 327/450
+Time: 00:10/00:15 - Frames: 328/450
+Time: 00:10/00:15 - Frames: 329/450
+Time: 00:11/00:15 - Frames: 330/450 - captured
+Time: 00:11/00:15 - Frames: 331/450
+Time: 00:11/00:15 - Frames: 332/450
+Time: 00:11/00:15 - Frames: 333/450
+Time: 00:11/00:15 - Frames: 334/450
+Time: 00:11/00:15 - Frames: 335/450 - captured
+Time: 00:11/00:15 - Frames: 336/450
+Time: 00:11/00:15 - Frames: 337/450
+Time: 00:11/00:15 - Frames: 338/450
+Time: 00:11/00:15 - Frames: 339/450
+Time: 00:11/00:15 - Frames: 340/450 - captured
+Time: 00:11/00:15 - Frames: 341/450
+Time: 00:11/00:15 - Frames: 342/450
+Time: 00:11/00:15 - Frames: 343/450
+Time: 00:11/00:15 - Frames: 344/450
+Time: 00:11/00:15 - Frames: 345/450 - captured
+Time: 00:11/00:15 - Frames: 346/450
+Time: 00:11/00:15 - Frames: 347/450
+Time: 00:11/00:15 - Frames: 348/450
+Time: 00:11/00:15 - Frames: 349/450
+Time: 00:11/00:15 - Frames: 350/450 - captured
+Time: 00:11/00:15 - Frames: 351/450
+Time: 00:11/00:15 - Frames: 352/450
+Time: 00:11/00:15 - Frames: 353/450
+Time: 00:11/00:15 - Frames: 354/450
+Time: 00:11/00:15 - Frames: 355/450 - captured
+Time: 00:11/00:15 - Frames: 356/450
+Time: 00:11/00:15 - Frames: 357/450
+Time: 00:11/00:15 - Frames: 358/450
+Time: 00:11/00:15 - Frames: 359/450
+Time: 00:12/00:15 - Frames: 360/450 - captured
+Time: 00:12/00:15 - Frames: 361/450
+Time: 00:12/00:15 - Frames: 362/450
+Time: 00:12/00:15 - Frames: 363/450
+Time: 00:12/00:15 - Frames: 364/450
+Time: 00:12/00:15 - Frames: 365/450 - captured
+Time: 00:12/00:15 - Frames: 366/450
+Time: 00:12/00:15 - Frames: 367/450
+Time: 00:12/00:15 - Frames: 368/450
+Time: 00:12/00:15 - Frames: 369/450
+Time: 00:12/00:15 - Frames: 370/450 - captured
+Time: 00:12/00:15 - Frames: 371/450
+Time: 00:12/00:15 - Frames: 372/450
+Time: 00:12/00:15 - Frames: 373/450
+Time: 00:12/00:15 - Frames: 374/450
+Time: 00:12/00:15 - Frames: 375/450 - captured
+Time: 00:12/00:15 - Frames: 376/450
+Time: 00:12/00:15 - Frames: 377/450
+Time: 00:12/00:15 - Frames: 378/450
+Time: 00:12/00:15 - Frames: 379/450
+Time: 00:12/00:15 - Frames: 380/450 - captured
+Time: 00:12/00:15 - Frames: 381/450
+Time: 00:12/00:15 - Frames: 382/450
+Time: 00:12/00:15 - Frames: 383/450
+Time: 00:12/00:15 - Frames: 384/450
+Time: 00:12/00:15 - Frames: 385/450 - captured
+Time: 00:12/00:15 - Frames: 386/450
+Time: 00:12/00:15 - Frames: 387/450
+Time: 00:12/00:15 - Frames: 388/450
+Time: 00:12/00:15 - Frames: 389/450
+Time: 00:13/00:15 - Frames: 390/450 - captured
+Time: 00:13/00:15 - Frames: 391/450
+Time: 00:13/00:15 - Frames: 392/450
+Time: 00:13/00:15 - Frames: 393/450
+Time: 00:13/00:15 - Frames: 394/450
+Time: 00:13/00:15 - Frames: 395/450 - captured
+Time: 00:13/00:15 - Frames: 396/450
+Time: 00:13/00:15 - Frames: 397/450
+Time: 00:13/00:15 - Frames: 398/450
+Time: 00:13/00:15 - Frames: 399/450
+Time: 00:13/00:15 - Frames: 400/450 - captured
+Time: 00:13/00:15 - Frames: 401/450
+Time: 00:13/00:15 - Frames: 402/450
+Time: 00:13/00:15 - Frames: 403/450
+Time: 00:13/00:15 - Frames: 404/450
+Time: 00:13/00:15 - Frames: 405/450 - captured
+Time: 00:13/00:15 - Frames: 406/450
+Time: 00:13/00:15 - Frames: 407/450
+Time: 00:13/00:15 - Frames: 408/450
+Time: 00:13/00:15 - Frames: 409/450
+Time: 00:13/00:15 - Frames: 410/450 - captured
+Time: 00:13/00:15 - Frames: 411/450
+Time: 00:13/00:15 - Frames: 412/450
+Time: 00:13/00:15 - Frames: 413/450
+Time: 00:13/00:15 - Frames: 414/450
+Time: 00:13/00:15 - Frames: 415/450 - captured
+Time: 00:13/00:15 - Frames: 416/450
+Time: 00:13/00:15 - Frames: 417/450
+Time: 00:13/00:15 - Frames: 418/450
+Time: 00:13/00:15 - Frames: 419/450
+Time: 00:14/00:15 - Frames: 420/450 - captured
+Time: 00:14/00:15 - Frames: 421/450
+Time: 00:14/00:15 - Frames: 422/450
+Time: 00:14/00:15 - Frames: 423/450
+Time: 00:14/00:15 - Frames: 424/450
+Time: 00:14/00:15 - Frames: 425/450 - captured
+Time: 00:14/00:15 - Frames: 426/450
+Time: 00:14/00:15 - Frames: 427/450
+Time: 00:14/00:15 - Frames: 428/450
+Time: 00:14/00:15 - Frames: 429/450
+Time: 00:14/00:15 - Frames: 430/450 - captured
+Time: 00:14/00:15 - Frames: 431/450
+Time: 00:14/00:15 - Frames: 432/450
+Time: 00:14/00:15 - Frames: 433/450
+Time: 00:14/00:15 - Frames: 434/450
+Time: 00:14/00:15 - Frames: 435/450 - captured
+Time: 00:14/00:15 - Frames: 436/450
+Time: 00:14/00:15 - Frames: 437/450
+Time: 00:14/00:15 - Frames: 438/450
+Time: 00:14/00:15 - Frames: 439/450
+Time: 00:14/00:15 - Frames: 440/450 - captured
+Time: 00:14/00:15 - Frames: 441/450
+Time: 00:14/00:15 - Frames: 442/450
+Time: 00:14/00:15 - Frames: 443/450
+Time: 00:14/00:15 - Frames: 444/450
+Time: 00:14/00:15 - Frames: 445/450 - captured
+Time: 00:14/00:15 - Frames: 446/450
+Time: 00:14/00:15 - Frames: 447/450
+Time: 00:14/00:15 - Frames: 448/450
+</pre></div></div>
+</div>
+<p>Now all the movement in the video is being tracked, which is not what we want. Instead, we will construct two tracking methods that will distinguish both animals in the video. <code class="docutils literal notranslate"><span class="pre">mode</span></code> will determine which objects are retrieved: <code class="docutils literal notranslate"><span class="pre">&quot;single&quot;</span></code> tracks the single largest objects, <code class="docutils literal notranslate"><span class="pre">&quot;multiple&quot;</span></code> tracks all objects.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fish</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">tracking_method</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fish&quot;</span><span class="p">,</span>
+                          <span class="n">remove_shadows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">min_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                          <span class="n">overlay_colour</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+                          <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">)</span>
+<span class="n">isopod</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">tracking_method</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;isopod&quot;</span><span class="p">,</span>
+                          <span class="n">remove_shadows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                          <span class="n">overlay_colour</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
+                          <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;multiple&quot;</span><span class="p">)</span>
+<span class="n">mt</span><span class="o">.</span><span class="n">detection_settings</span><span class="p">(</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="n">fish</span><span class="p">,</span> <span class="n">isopod</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-----------------------------
+Detection method &#34;fish&#34;:
+
+{&#39;blur_kernel&#39;: 5,
+ &#39;label&#39;: &#39;fish&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: inf,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 30,
+ &#39;mode&#39;: &#39;single&#39;,
+ &#39;overlay_colour&#39;: (0, 0,
+                    255),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 127}
+-----------------------------
+
+
+-----------------------------
+Detection method &#34;isopod&#34;:
+
+{&#39;blur_kernel&#39;: 5,
+ &#39;label&#39;: &#39;isopod&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: 30,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 0,
+ &#39;mode&#39;: &#39;multiple&#39;,
+ &#39;overlay_colour&#39;: (0, 128,
+                    0),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 127}
+-----------------------------
+
+
+
+
+--------------------------------------------------------------
+Motion detection settings - &#34;isopods_fish.mp4&#34;:
+
+Background-subtractor: MOG
+History: 60 seconds
+Sensitivity: 10
+Read every nth frame: 5
+Detect shadows: True
+Start after n seconds: 0
+Finish after n seconds:  -
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">run_tracking</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time: 00:00/00:15 - Frames: 1/450
+Time: 00:00/00:15 - Frames: 2/450
+Time: 00:00/00:15 - Frames: 3/450
+Time: 00:00/00:15 - Frames: 4/450
+Time: 00:00/00:15 - Frames: 5/450 - captured
+Time: 00:00/00:15 - Frames: 6/450
+Time: 00:00/00:15 - Frames: 7/450
+Time: 00:00/00:15 - Frames: 8/450
+Time: 00:00/00:15 - Frames: 9/450
+Time: 00:00/00:15 - Frames: 10/450 - captured
+Time: 00:00/00:15 - Frames: 11/450
+Time: 00:00/00:15 - Frames: 12/450
+Time: 00:00/00:15 - Frames: 13/450
+Time: 00:00/00:15 - Frames: 14/450
+Time: 00:00/00:15 - Frames: 15/450 - captured
+Time: 00:00/00:15 - Frames: 16/450
+Time: 00:00/00:15 - Frames: 17/450
+Time: 00:00/00:15 - Frames: 18/450
+Time: 00:00/00:15 - Frames: 19/450
+Time: 00:00/00:15 - Frames: 20/450 - captured
+Time: 00:00/00:15 - Frames: 21/450
+Time: 00:00/00:15 - Frames: 22/450
+Time: 00:00/00:15 - Frames: 23/450
+Time: 00:00/00:15 - Frames: 24/450
+Time: 00:00/00:15 - Frames: 25/450 - captured
+Time: 00:00/00:15 - Frames: 26/450
+Time: 00:00/00:15 - Frames: 27/450
+Time: 00:00/00:15 - Frames: 28/450
+Time: 00:00/00:15 - Frames: 29/450
+Time: 00:01/00:15 - Frames: 30/450 - captured
+Time: 00:01/00:15 - Frames: 31/450
+Time: 00:01/00:15 - Frames: 32/450
+Time: 00:01/00:15 - Frames: 33/450
+Time: 00:01/00:15 - Frames: 34/450
+Time: 00:01/00:15 - Frames: 35/450 - captured
+Time: 00:01/00:15 - Frames: 36/450
+Time: 00:01/00:15 - Frames: 37/450
+Time: 00:01/00:15 - Frames: 38/450
+Time: 00:01/00:15 - Frames: 39/450
+Time: 00:01/00:15 - Frames: 40/450 - captured
+Time: 00:01/00:15 - Frames: 41/450
+Time: 00:01/00:15 - Frames: 42/450
+Time: 00:01/00:15 - Frames: 43/450
+Time: 00:01/00:15 - Frames: 44/450
+Time: 00:01/00:15 - Frames: 45/450 - captured
+Time: 00:01/00:15 - Frames: 46/450
+Time: 00:01/00:15 - Frames: 47/450
+Time: 00:01/00:15 - Frames: 48/450
+Time: 00:01/00:15 - Frames: 49/450
+Time: 00:01/00:15 - Frames: 50/450 - captured
+Time: 00:01/00:15 - Frames: 51/450
+Time: 00:01/00:15 - Frames: 52/450
+Time: 00:01/00:15 - Frames: 53/450
+Time: 00:01/00:15 - Frames: 54/450
+Time: 00:01/00:15 - Frames: 55/450 - captured
+Time: 00:01/00:15 - Frames: 56/450
+Time: 00:01/00:15 - Frames: 57/450
+Time: 00:01/00:15 - Frames: 58/450
+Time: 00:01/00:15 - Frames: 59/450
+Time: 00:02/00:15 - Frames: 60/450 - captured
+Time: 00:02/00:15 - Frames: 61/450
+Time: 00:02/00:15 - Frames: 62/450
+Time: 00:02/00:15 - Frames: 63/450
+Time: 00:02/00:15 - Frames: 64/450
+Time: 00:02/00:15 - Frames: 65/450 - captured
+Time: 00:02/00:15 - Frames: 66/450
+Time: 00:02/00:15 - Frames: 67/450
+Time: 00:02/00:15 - Frames: 68/450
+Time: 00:02/00:15 - Frames: 69/450
+Time: 00:02/00:15 - Frames: 70/450 - captured
+Time: 00:02/00:15 - Frames: 71/450
+Time: 00:02/00:15 - Frames: 72/450
+Time: 00:02/00:15 - Frames: 73/450
+Time: 00:02/00:15 - Frames: 74/450
+Time: 00:02/00:15 - Frames: 75/450 - captured
+Time: 00:02/00:15 - Frames: 76/450
+Time: 00:02/00:15 - Frames: 77/450
+Time: 00:02/00:15 - Frames: 78/450
+Time: 00:02/00:15 - Frames: 79/450
+Time: 00:02/00:15 - Frames: 80/450 - captured
+Time: 00:02/00:15 - Frames: 81/450
+Time: 00:02/00:15 - Frames: 82/450
+Time: 00:02/00:15 - Frames: 83/450
+Time: 00:02/00:15 - Frames: 84/450
+Time: 00:02/00:15 - Frames: 85/450 - captured
+Time: 00:02/00:15 - Frames: 86/450
+Time: 00:02/00:15 - Frames: 87/450
+Time: 00:02/00:15 - Frames: 88/450
+Time: 00:02/00:15 - Frames: 89/450
+Time: 00:03/00:15 - Frames: 90/450 - captured
+Time: 00:03/00:15 - Frames: 91/450
+Time: 00:03/00:15 - Frames: 92/450
+Time: 00:03/00:15 - Frames: 93/450
+Time: 00:03/00:15 - Frames: 94/450
+Time: 00:03/00:15 - Frames: 95/450 - captured
+Time: 00:03/00:15 - Frames: 96/450
+Time: 00:03/00:15 - Frames: 97/450
+Time: 00:03/00:15 - Frames: 98/450
+Time: 00:03/00:15 - Frames: 99/450
+Time: 00:03/00:15 - Frames: 100/450 - captured
+Time: 00:03/00:15 - Frames: 101/450
+Time: 00:03/00:15 - Frames: 102/450
+Time: 00:03/00:15 - Frames: 103/450
+Time: 00:03/00:15 - Frames: 104/450
+Time: 00:03/00:15 - Frames: 105/450 - captured
+Time: 00:03/00:15 - Frames: 106/450
+Time: 00:03/00:15 - Frames: 107/450
+Time: 00:03/00:15 - Frames: 108/450
+Time: 00:03/00:15 - Frames: 109/450
+Time: 00:03/00:15 - Frames: 110/450 - captured
+Time: 00:03/00:15 - Frames: 111/450
+Time: 00:03/00:15 - Frames: 112/450
+Time: 00:03/00:15 - Frames: 113/450
+Time: 00:03/00:15 - Frames: 114/450
+Time: 00:03/00:15 - Frames: 115/450 - captured
+Time: 00:03/00:15 - Frames: 116/450
+Time: 00:03/00:15 - Frames: 117/450
+Time: 00:03/00:15 - Frames: 118/450
+Time: 00:03/00:15 - Frames: 119/450
+Time: 00:04/00:15 - Frames: 120/450 - captured
+Time: 00:04/00:15 - Frames: 121/450
+Time: 00:04/00:15 - Frames: 122/450
+Time: 00:04/00:15 - Frames: 123/450
+Time: 00:04/00:15 - Frames: 124/450
+Time: 00:04/00:15 - Frames: 125/450 - captured
+Time: 00:04/00:15 - Frames: 126/450
+Time: 00:04/00:15 - Frames: 127/450
+Time: 00:04/00:15 - Frames: 128/450
+Time: 00:04/00:15 - Frames: 129/450
+Time: 00:04/00:15 - Frames: 130/450 - captured
+Time: 00:04/00:15 - Frames: 131/450
+Time: 00:04/00:15 - Frames: 132/450
+Time: 00:04/00:15 - Frames: 133/450
+Time: 00:04/00:15 - Frames: 134/450
+Time: 00:04/00:15 - Frames: 135/450 - captured
+Time: 00:04/00:15 - Frames: 136/450
+Time: 00:04/00:15 - Frames: 137/450
+Time: 00:04/00:15 - Frames: 138/450
+Time: 00:04/00:15 - Frames: 139/450
+Time: 00:04/00:15 - Frames: 140/450 - captured
+Time: 00:04/00:15 - Frames: 141/450
+Time: 00:04/00:15 - Frames: 142/450
+Time: 00:04/00:15 - Frames: 143/450
+Time: 00:04/00:15 - Frames: 144/450
+Time: 00:04/00:15 - Frames: 145/450 - captured
+Time: 00:04/00:15 - Frames: 146/450
+Time: 00:04/00:15 - Frames: 147/450
+Time: 00:04/00:15 - Frames: 148/450
+Time: 00:04/00:15 - Frames: 149/450
+Time: 00:05/00:15 - Frames: 150/450 - captured
+Time: 00:05/00:15 - Frames: 151/450
+Time: 00:05/00:15 - Frames: 152/450
+Time: 00:05/00:15 - Frames: 153/450
+Time: 00:05/00:15 - Frames: 154/450
+Time: 00:05/00:15 - Frames: 155/450 - captured
+Time: 00:05/00:15 - Frames: 156/450
+Time: 00:05/00:15 - Frames: 157/450
+Time: 00:05/00:15 - Frames: 158/450
+Time: 00:05/00:15 - Frames: 159/450
+Time: 00:05/00:15 - Frames: 160/450 - captured
+Time: 00:05/00:15 - Frames: 161/450
+Time: 00:05/00:15 - Frames: 162/450
+Time: 00:05/00:15 - Frames: 163/450
+Time: 00:05/00:15 - Frames: 164/450
+Time: 00:05/00:15 - Frames: 165/450 - captured
+Time: 00:05/00:15 - Frames: 166/450
+Time: 00:05/00:15 - Frames: 167/450
+Time: 00:05/00:15 - Frames: 168/450
+Time: 00:05/00:15 - Frames: 169/450
+Time: 00:05/00:15 - Frames: 170/450 - captured
+Time: 00:05/00:15 - Frames: 171/450
+Time: 00:05/00:15 - Frames: 172/450
+Time: 00:05/00:15 - Frames: 173/450
+Time: 00:05/00:15 - Frames: 174/450
+Time: 00:05/00:15 - Frames: 175/450 - captured
+Time: 00:05/00:15 - Frames: 176/450
+Time: 00:05/00:15 - Frames: 177/450
+Time: 00:05/00:15 - Frames: 178/450
+Time: 00:05/00:15 - Frames: 179/450
+Time: 00:06/00:15 - Frames: 180/450 - captured
+Time: 00:06/00:15 - Frames: 181/450
+Time: 00:06/00:15 - Frames: 182/450
+Time: 00:06/00:15 - Frames: 183/450
+Time: 00:06/00:15 - Frames: 184/450
+Time: 00:06/00:15 - Frames: 185/450 - captured
+Time: 00:06/00:15 - Frames: 186/450
+Time: 00:06/00:15 - Frames: 187/450
+Time: 00:06/00:15 - Frames: 188/450
+Time: 00:06/00:15 - Frames: 189/450
+Time: 00:06/00:15 - Frames: 190/450 - captured
+Time: 00:06/00:15 - Frames: 191/450
+Time: 00:06/00:15 - Frames: 192/450
+Time: 00:06/00:15 - Frames: 193/450
+Time: 00:06/00:15 - Frames: 194/450
+Time: 00:06/00:15 - Frames: 195/450 - captured
+Time: 00:06/00:15 - Frames: 196/450
+Time: 00:06/00:15 - Frames: 197/450
+Time: 00:06/00:15 - Frames: 198/450
+Time: 00:06/00:15 - Frames: 199/450
+Time: 00:06/00:15 - Frames: 200/450 - captured
+Time: 00:06/00:15 - Frames: 201/450
+Time: 00:06/00:15 - Frames: 202/450
+Time: 00:06/00:15 - Frames: 203/450
+Time: 00:06/00:15 - Frames: 204/450
+Time: 00:06/00:15 - Frames: 205/450 - captured
+Time: 00:06/00:15 - Frames: 206/450
+Time: 00:06/00:15 - Frames: 207/450
+Time: 00:06/00:15 - Frames: 208/450
+Time: 00:06/00:15 - Frames: 209/450
+Time: 00:07/00:15 - Frames: 210/450 - captured
+Time: 00:07/00:15 - Frames: 211/450
+Time: 00:07/00:15 - Frames: 212/450
+Time: 00:07/00:15 - Frames: 213/450
+Time: 00:07/00:15 - Frames: 214/450
+Time: 00:07/00:15 - Frames: 215/450 - captured
+Time: 00:07/00:15 - Frames: 216/450
+Time: 00:07/00:15 - Frames: 217/450
+Time: 00:07/00:15 - Frames: 218/450
+Time: 00:07/00:15 - Frames: 219/450
+Time: 00:07/00:15 - Frames: 220/450 - captured
+Time: 00:07/00:15 - Frames: 221/450
+Time: 00:07/00:15 - Frames: 222/450
+Time: 00:07/00:15 - Frames: 223/450
+Time: 00:07/00:15 - Frames: 224/450
+Time: 00:07/00:15 - Frames: 225/450 - captured
+Time: 00:07/00:15 - Frames: 226/450
+Time: 00:07/00:15 - Frames: 227/450
+Time: 00:07/00:15 - Frames: 228/450
+Time: 00:07/00:15 - Frames: 229/450
+Time: 00:07/00:15 - Frames: 230/450 - captured
+Time: 00:07/00:15 - Frames: 231/450
+Time: 00:07/00:15 - Frames: 232/450
+Time: 00:07/00:15 - Frames: 233/450
+Time: 00:07/00:15 - Frames: 234/450
+Time: 00:07/00:15 - Frames: 235/450 - captured
+Time: 00:07/00:15 - Frames: 236/450
+Time: 00:07/00:15 - Frames: 237/450
+Time: 00:07/00:15 - Frames: 238/450
+Time: 00:07/00:15 - Frames: 239/450
+Time: 00:08/00:15 - Frames: 240/450 - captured
+Time: 00:08/00:15 - Frames: 241/450
+Time: 00:08/00:15 - Frames: 242/450
+Time: 00:08/00:15 - Frames: 243/450
+Time: 00:08/00:15 - Frames: 244/450
+Time: 00:08/00:15 - Frames: 245/450 - captured
+Time: 00:08/00:15 - Frames: 246/450
+Time: 00:08/00:15 - Frames: 247/450
+Time: 00:08/00:15 - Frames: 248/450
+Time: 00:08/00:15 - Frames: 249/450
+Time: 00:08/00:15 - Frames: 250/450 - captured
+Time: 00:08/00:15 - Frames: 251/450
+Time: 00:08/00:15 - Frames: 252/450
+Time: 00:08/00:15 - Frames: 253/450
+Time: 00:08/00:15 - Frames: 254/450
+Time: 00:08/00:15 - Frames: 255/450 - captured
+Time: 00:08/00:15 - Frames: 256/450
+Time: 00:08/00:15 - Frames: 257/450
+Time: 00:08/00:15 - Frames: 258/450
+Time: 00:08/00:15 - Frames: 259/450
+Time: 00:08/00:15 - Frames: 260/450 - captured
+Time: 00:08/00:15 - Frames: 261/450
+Time: 00:08/00:15 - Frames: 262/450
+Time: 00:08/00:15 - Frames: 263/450
+Time: 00:08/00:15 - Frames: 264/450
+Time: 00:08/00:15 - Frames: 265/450 - captured
+Time: 00:08/00:15 - Frames: 266/450
+Time: 00:08/00:15 - Frames: 267/450
+Time: 00:08/00:15 - Frames: 268/450
+Time: 00:08/00:15 - Frames: 269/450
+Time: 00:09/00:15 - Frames: 270/450 - captured
+Time: 00:09/00:15 - Frames: 271/450
+Time: 00:09/00:15 - Frames: 272/450
+Time: 00:09/00:15 - Frames: 273/450
+Time: 00:09/00:15 - Frames: 274/450
+Time: 00:09/00:15 - Frames: 275/450 - captured
+Time: 00:09/00:15 - Frames: 276/450
+Time: 00:09/00:15 - Frames: 277/450
+Time: 00:09/00:15 - Frames: 278/450
+Time: 00:09/00:15 - Frames: 279/450
+Time: 00:09/00:15 - Frames: 280/450 - captured
+Time: 00:09/00:15 - Frames: 281/450
+Time: 00:09/00:15 - Frames: 282/450
+Time: 00:09/00:15 - Frames: 283/450
+Time: 00:09/00:15 - Frames: 284/450
+Time: 00:09/00:15 - Frames: 285/450 - captured
+Time: 00:09/00:15 - Frames: 286/450
+Time: 00:09/00:15 - Frames: 287/450
+Time: 00:09/00:15 - Frames: 288/450
+Time: 00:09/00:15 - Frames: 289/450
+Time: 00:09/00:15 - Frames: 290/450 - captured
+Time: 00:09/00:15 - Frames: 291/450
+Time: 00:09/00:15 - Frames: 292/450
+Time: 00:09/00:15 - Frames: 293/450
+Time: 00:09/00:15 - Frames: 294/450
+Time: 00:09/00:15 - Frames: 295/450 - captured
+Time: 00:09/00:15 - Frames: 296/450
+Time: 00:09/00:15 - Frames: 297/450
+Time: 00:09/00:15 - Frames: 298/450
+Time: 00:09/00:15 - Frames: 299/450
+Time: 00:10/00:15 - Frames: 300/450 - captured
+Time: 00:10/00:15 - Frames: 301/450
+Time: 00:10/00:15 - Frames: 302/450
+Time: 00:10/00:15 - Frames: 303/450
+Time: 00:10/00:15 - Frames: 304/450
+Time: 00:10/00:15 - Frames: 305/450 - captured
+Time: 00:10/00:15 - Frames: 306/450
+Time: 00:10/00:15 - Frames: 307/450
+Time: 00:10/00:15 - Frames: 308/450
+Time: 00:10/00:15 - Frames: 309/450
+Time: 00:10/00:15 - Frames: 310/450 - captured
+Time: 00:10/00:15 - Frames: 311/450
+Time: 00:10/00:15 - Frames: 312/450
+Time: 00:10/00:15 - Frames: 313/450
+Time: 00:10/00:15 - Frames: 314/450
+Time: 00:10/00:15 - Frames: 315/450 - captured
+Time: 00:10/00:15 - Frames: 316/450
+Time: 00:10/00:15 - Frames: 317/450
+Time: 00:10/00:15 - Frames: 318/450
+Time: 00:10/00:15 - Frames: 319/450
+Time: 00:10/00:15 - Frames: 320/450 - captured
+Time: 00:10/00:15 - Frames: 321/450
+Time: 00:10/00:15 - Frames: 322/450
+Time: 00:10/00:15 - Frames: 323/450
+Time: 00:10/00:15 - Frames: 324/450
+Time: 00:10/00:15 - Frames: 325/450 - captured
+Time: 00:10/00:15 - Frames: 326/450
+Time: 00:10/00:15 - Frames: 327/450
+Time: 00:10/00:15 - Frames: 328/450
+Time: 00:10/00:15 - Frames: 329/450
+Time: 00:11/00:15 - Frames: 330/450 - captured
+Time: 00:11/00:15 - Frames: 331/450
+Time: 00:11/00:15 - Frames: 332/450
+Time: 00:11/00:15 - Frames: 333/450
+Time: 00:11/00:15 - Frames: 334/450
+Time: 00:11/00:15 - Frames: 335/450 - captured
+Time: 00:11/00:15 - Frames: 336/450
+Time: 00:11/00:15 - Frames: 337/450
+Time: 00:11/00:15 - Frames: 338/450
+Time: 00:11/00:15 - Frames: 339/450
+Time: 00:11/00:15 - Frames: 340/450 - captured
+Time: 00:11/00:15 - Frames: 341/450
+Time: 00:11/00:15 - Frames: 342/450
+Time: 00:11/00:15 - Frames: 343/450
+Time: 00:11/00:15 - Frames: 344/450
+Time: 00:11/00:15 - Frames: 345/450 - captured
+Time: 00:11/00:15 - Frames: 346/450
+Time: 00:11/00:15 - Frames: 347/450
+Time: 00:11/00:15 - Frames: 348/450
+Time: 00:11/00:15 - Frames: 349/450
+Time: 00:11/00:15 - Frames: 350/450 - captured
+Time: 00:11/00:15 - Frames: 351/450
+Time: 00:11/00:15 - Frames: 352/450
+Time: 00:11/00:15 - Frames: 353/450
+Time: 00:11/00:15 - Frames: 354/450
+Time: 00:11/00:15 - Frames: 355/450 - captured
+Time: 00:11/00:15 - Frames: 356/450
+Time: 00:11/00:15 - Frames: 357/450
+Time: 00:11/00:15 - Frames: 358/450
+Time: 00:11/00:15 - Frames: 359/450
+Time: 00:12/00:15 - Frames: 360/450 - captured
+Time: 00:12/00:15 - Frames: 361/450
+Time: 00:12/00:15 - Frames: 362/450
+Time: 00:12/00:15 - Frames: 363/450
+Time: 00:12/00:15 - Frames: 364/450
+Time: 00:12/00:15 - Frames: 365/450 - captured
+Time: 00:12/00:15 - Frames: 366/450
+Time: 00:12/00:15 - Frames: 367/450
+Time: 00:12/00:15 - Frames: 368/450
+Time: 00:12/00:15 - Frames: 369/450
+Time: 00:12/00:15 - Frames: 370/450 - captured
+Time: 00:12/00:15 - Frames: 371/450
+Time: 00:12/00:15 - Frames: 372/450
+Time: 00:12/00:15 - Frames: 373/450
+Time: 00:12/00:15 - Frames: 374/450
+Time: 00:12/00:15 - Frames: 375/450 - captured
+Time: 00:12/00:15 - Frames: 376/450
+Time: 00:12/00:15 - Frames: 377/450
+Time: 00:12/00:15 - Frames: 378/450
+Time: 00:12/00:15 - Frames: 379/450
+Time: 00:12/00:15 - Frames: 380/450 - captured
+Time: 00:12/00:15 - Frames: 381/450
+Time: 00:12/00:15 - Frames: 382/450
+Time: 00:12/00:15 - Frames: 383/450
+Time: 00:12/00:15 - Frames: 384/450
+Time: 00:12/00:15 - Frames: 385/450 - captured
+Time: 00:12/00:15 - Frames: 386/450
+Time: 00:12/00:15 - Frames: 387/450
+Time: 00:12/00:15 - Frames: 388/450
+Time: 00:12/00:15 - Frames: 389/450
+Time: 00:13/00:15 - Frames: 390/450 - captured
+Time: 00:13/00:15 - Frames: 391/450
+Time: 00:13/00:15 - Frames: 392/450
+Time: 00:13/00:15 - Frames: 393/450
+Time: 00:13/00:15 - Frames: 394/450
+Time: 00:13/00:15 - Frames: 395/450 - captured
+Time: 00:13/00:15 - Frames: 396/450
+Time: 00:13/00:15 - Frames: 397/450
+Time: 00:13/00:15 - Frames: 398/450
+Time: 00:13/00:15 - Frames: 399/450
+Time: 00:13/00:15 - Frames: 400/450 - captured
+Time: 00:13/00:15 - Frames: 401/450
+Time: 00:13/00:15 - Frames: 402/450
+Time: 00:13/00:15 - Frames: 403/450
+Time: 00:13/00:15 - Frames: 404/450
+Time: 00:13/00:15 - Frames: 405/450 - captured
+Time: 00:13/00:15 - Frames: 406/450
+Time: 00:13/00:15 - Frames: 407/450
+Time: 00:13/00:15 - Frames: 408/450
+Time: 00:13/00:15 - Frames: 409/450
+Time: 00:13/00:15 - Frames: 410/450 - captured
+Time: 00:13/00:15 - Frames: 411/450
+Time: 00:13/00:15 - Frames: 412/450
+Time: 00:13/00:15 - Frames: 413/450
+Time: 00:13/00:15 - Frames: 414/450
+Time: 00:13/00:15 - Frames: 415/450 - captured
+Time: 00:13/00:15 - Frames: 416/450
+Time: 00:13/00:15 - Frames: 417/450
+Time: 00:13/00:15 - Frames: 418/450
+Time: 00:13/00:15 - Frames: 419/450
+Time: 00:14/00:15 - Frames: 420/450 - captured
+Time: 00:14/00:15 - Frames: 421/450
+Time: 00:14/00:15 - Frames: 422/450
+Time: 00:14/00:15 - Frames: 423/450
+Time: 00:14/00:15 - Frames: 424/450
+Time: 00:14/00:15 - Frames: 425/450 - captured
+Time: 00:14/00:15 - Frames: 426/450
+Time: 00:14/00:15 - Frames: 427/450
+Time: 00:14/00:15 - Frames: 428/450
+Time: 00:14/00:15 - Frames: 429/450
+Time: 00:14/00:15 - Frames: 430/450 - captured
+Time: 00:14/00:15 - Frames: 431/450
+Time: 00:14/00:15 - Frames: 432/450
+Time: 00:14/00:15 - Frames: 433/450
+Time: 00:14/00:15 - Frames: 434/450
+Time: 00:14/00:15 - Frames: 435/450 - captured
+Time: 00:14/00:15 - Frames: 436/450
+Time: 00:14/00:15 - Frames: 437/450
+Time: 00:14/00:15 - Frames: 438/450
+Time: 00:14/00:15 - Frames: 439/450
+Time: 00:14/00:15 - Frames: 440/450 - captured
+Time: 00:14/00:15 - Frames: 441/450
+Time: 00:14/00:15 - Frames: 442/450
+Time: 00:14/00:15 - Frames: 443/450
+Time: 00:14/00:15 - Frames: 444/450
+Time: 00:14/00:15 - Frames: 445/450 - captured
+Time: 00:14/00:15 - Frames: 446/450
+Time: 00:14/00:15 - Frames: 447/450
+Time: 00:14/00:15 - Frames: 448/450
+</pre></div></div>
+</div>
+<p>The methods work, and clearly separate out the two species. However, we can still improve a few things:</p>
+<p>First, for each method, we can separately increase the sensitivity by using a combination of larger blur-kernels and higher threshold values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fish</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">tracking_method</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fish&quot;</span><span class="p">,</span> <span class="n">remove_shadows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                          <span class="n">overlay_colour</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">,</span>
+                          <span class="n">blur</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">isopod</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">tracking_method</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;isopod&quot;</span><span class="p">,</span> <span class="n">remove_shadows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                          <span class="n">overlay_colour</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;multiple&quot;</span><span class="p">,</span>
+                         <span class="n">blur</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+<span class="n">mt</span><span class="o">.</span><span class="n">detection_settings</span><span class="p">(</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="n">fish</span><span class="p">,</span> <span class="n">isopod</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-----------------------------
+Detection method &#34;fish&#34;:
+
+{&#39;blur_kernel&#39;: 15,
+ &#39;label&#39;: &#39;fish&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: inf,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 30,
+ &#39;mode&#39;: &#39;single&#39;,
+ &#39;overlay_colour&#39;: (0, 0,
+                    255),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 200}
+-----------------------------
+
+
+-----------------------------
+Detection method &#34;isopod&#34;:
+
+{&#39;blur_kernel&#39;: 9,
+ &#39;label&#39;: &#39;isopod&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: 30,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 0,
+ &#39;mode&#39;: &#39;multiple&#39;,
+ &#39;overlay_colour&#39;: (0, 128,
+                    0),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 180}
+-----------------------------
+
+
+
+
+--------------------------------------------------------------
+Motion detection settings - &#34;isopods_fish.mp4&#34;:
+
+Background-subtractor: MOG
+History: 60 seconds
+Sensitivity: 10
+Read every nth frame: 5
+Detect shadows: True
+Start after n seconds: 0
+Finish after n seconds:  -
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+</section>
+<section id="Canvas-masking-and-consecutive-masking">
+<h2>Canvas masking and consecutive masking<a class="headerlink" href="#Canvas-masking-and-consecutive-masking" title="Link to this heading">#</a></h2>
+<p>Second, we also need to exclude some of the particles that are floating around outside the actual arena. We can do this with phenopype’s core <code class="docutils literal notranslate"><span class="pre">create_mask</span></code> method, which also accepts <code class="docutils literal notranslate"><span class="pre">motion_tracker</span></code> objects. The masks are automatically applied when running the tracking routine.</p>
+<center><div style="width:600px; text-align: left"><img alt="Canvas masking" src="../../_images/tracking4.jpg" />
+<p><strong>Fig. 3:</strong> We can also specify multiple masks, one the one hand, to exclude unwanted areas, on the other hand, to see when which particle or animal stays in which area.</p>
+</div></center><div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">masks</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">create_mask</span><span class="p">(</span><span class="n">mt</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;full&quot;</span><span class="p">,</span> <span class="n">annotation_id</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">masks</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">create_mask</span><span class="p">(</span><span class="n">mt</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">masks</span><span class="p">,</span> <span class="n">annotation_id</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Consecutive masking needs to be activated in the detection settings (<code class="docutils literal notranslate"><span class="pre">c_mask=True</span></code>). This option will prohibit repeated detection of objects when several tracking methods are applied. For example, inside the detected fish-area sometimes isopod objects are detected, due to artifacts or incomplete subtraction results. Consecutive masking will “block” an area after the first method has been applied - the order by which methods are applied matters. The following settings will create a mask around
+the fish (which is detected first) in the shape of a rectangle + pixels around the detected contour.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mt</span><span class="o">.</span><span class="n">detection_settings</span><span class="p">(</span><span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="n">fish</span><span class="p">,</span> <span class="n">isopod</span><span class="p">],</span>
+                     <span class="n">c_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">c_mask_shape</span><span class="o">=</span><span class="s2">&quot;rect&quot;</span><span class="p">,</span>
+                     <span class="n">c_mask_size</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                     <span class="n">masks</span><span class="o">=</span><span class="n">masks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-----------------------------
+Detection method &#34;fish&#34;:
+
+{&#39;blur_kernel&#39;: 15,
+ &#39;label&#39;: &#39;fish&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: inf,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 30,
+ &#39;mode&#39;: &#39;single&#39;,
+ &#39;overlay_colour&#39;: (0, 0,
+                    255),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 200}
+-----------------------------
+
+
+-----------------------------
+Detection method &#34;isopod&#34;:
+
+{&#39;blur_kernel&#39;: 9,
+ &#39;label&#39;: &#39;isopod&#39;,
+ &#39;max_area&#39;: inf,
+ &#39;max_length&#39;: 30,
+ &#39;min_area&#39;: 0,
+ &#39;min_length&#39;: 0,
+ &#39;mode&#39;: &#39;multiple&#39;,
+ &#39;overlay_colour&#39;: (0, 128,
+                    0),
+ &#39;remove_shadows&#39;: True,
+ &#39;threshold_value&#39;: 180}
+-----------------------------
+
+
+
+
+--------------------------------------------------------------
+Motion detection settings - &#34;isopods_fish.mp4&#34;:
+
+Background-subtractor: MOG
+History: 60 seconds
+Sensitivity: 10
+Read every nth frame: 5
+Detect shadows: True
+Start after n seconds: 0
+Finish after n seconds:  -
+--------------------------------------------------------------
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">run_tracking</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time: 00:00/00:15 - Frames: 1/450
+Time: 00:00/00:15 - Frames: 2/450
+Time: 00:00/00:15 - Frames: 3/450
+Time: 00:00/00:15 - Frames: 4/450
+Time: 00:00/00:15 - Frames: 5/450 - captured
+Time: 00:00/00:15 - Frames: 6/450
+Time: 00:00/00:15 - Frames: 7/450
+Time: 00:00/00:15 - Frames: 8/450
+Time: 00:00/00:15 - Frames: 9/450
+Time: 00:00/00:15 - Frames: 10/450 - captured
+Time: 00:00/00:15 - Frames: 11/450
+Time: 00:00/00:15 - Frames: 12/450
+Time: 00:00/00:15 - Frames: 13/450
+Time: 00:00/00:15 - Frames: 14/450
+Time: 00:00/00:15 - Frames: 15/450 - captured
+Time: 00:00/00:15 - Frames: 16/450
+Time: 00:00/00:15 - Frames: 17/450
+Time: 00:00/00:15 - Frames: 18/450
+Time: 00:00/00:15 - Frames: 19/450
+Time: 00:00/00:15 - Frames: 20/450 - captured
+Time: 00:00/00:15 - Frames: 21/450
+Time: 00:00/00:15 - Frames: 22/450
+Time: 00:00/00:15 - Frames: 23/450
+Time: 00:00/00:15 - Frames: 24/450
+Time: 00:00/00:15 - Frames: 25/450 - captured
+Time: 00:00/00:15 - Frames: 26/450
+Time: 00:00/00:15 - Frames: 27/450
+Time: 00:00/00:15 - Frames: 28/450
+Time: 00:00/00:15 - Frames: 29/450
+Time: 00:01/00:15 - Frames: 30/450 - captured
+Time: 00:01/00:15 - Frames: 31/450
+Time: 00:01/00:15 - Frames: 32/450
+Time: 00:01/00:15 - Frames: 33/450
+Time: 00:01/00:15 - Frames: 34/450
+Time: 00:01/00:15 - Frames: 35/450 - captured
+Time: 00:01/00:15 - Frames: 36/450
+Time: 00:01/00:15 - Frames: 37/450
+Time: 00:01/00:15 - Frames: 38/450
+Time: 00:01/00:15 - Frames: 39/450
+Time: 00:01/00:15 - Frames: 40/450 - captured
+Time: 00:01/00:15 - Frames: 41/450
+Time: 00:01/00:15 - Frames: 42/450
+Time: 00:01/00:15 - Frames: 43/450
+Time: 00:01/00:15 - Frames: 44/450
+Time: 00:01/00:15 - Frames: 45/450 - captured
+Time: 00:01/00:15 - Frames: 46/450
+Time: 00:01/00:15 - Frames: 47/450
+Time: 00:01/00:15 - Frames: 48/450
+Time: 00:01/00:15 - Frames: 49/450
+Time: 00:01/00:15 - Frames: 50/450 - captured
+Time: 00:01/00:15 - Frames: 51/450
+Time: 00:01/00:15 - Frames: 52/450
+Time: 00:01/00:15 - Frames: 53/450
+Time: 00:01/00:15 - Frames: 54/450
+Time: 00:01/00:15 - Frames: 55/450 - captured
+Time: 00:01/00:15 - Frames: 56/450
+Time: 00:01/00:15 - Frames: 57/450
+Time: 00:01/00:15 - Frames: 58/450
+Time: 00:01/00:15 - Frames: 59/450
+Time: 00:02/00:15 - Frames: 60/450 - captured
+Time: 00:02/00:15 - Frames: 61/450
+Time: 00:02/00:15 - Frames: 62/450
+Time: 00:02/00:15 - Frames: 63/450
+Time: 00:02/00:15 - Frames: 64/450
+Time: 00:02/00:15 - Frames: 65/450 - captured
+Time: 00:02/00:15 - Frames: 66/450
+Time: 00:02/00:15 - Frames: 67/450
+Time: 00:02/00:15 - Frames: 68/450
+Time: 00:02/00:15 - Frames: 69/450
+Time: 00:02/00:15 - Frames: 70/450 - captured
+Time: 00:02/00:15 - Frames: 71/450
+Time: 00:02/00:15 - Frames: 72/450
+Time: 00:02/00:15 - Frames: 73/450
+Time: 00:02/00:15 - Frames: 74/450
+Time: 00:02/00:15 - Frames: 75/450 - captured
+Time: 00:02/00:15 - Frames: 76/450
+Time: 00:02/00:15 - Frames: 77/450
+Time: 00:02/00:15 - Frames: 78/450
+Time: 00:02/00:15 - Frames: 79/450
+Time: 00:02/00:15 - Frames: 80/450 - captured
+Time: 00:02/00:15 - Frames: 81/450
+Time: 00:02/00:15 - Frames: 82/450
+Time: 00:02/00:15 - Frames: 83/450
+Time: 00:02/00:15 - Frames: 84/450
+Time: 00:02/00:15 - Frames: 85/450 - captured
+Time: 00:02/00:15 - Frames: 86/450
+Time: 00:02/00:15 - Frames: 87/450
+Time: 00:02/00:15 - Frames: 88/450
+Time: 00:02/00:15 - Frames: 89/450
+Time: 00:03/00:15 - Frames: 90/450 - captured
+Time: 00:03/00:15 - Frames: 91/450
+Time: 00:03/00:15 - Frames: 92/450
+Time: 00:03/00:15 - Frames: 93/450
+Time: 00:03/00:15 - Frames: 94/450
+Time: 00:03/00:15 - Frames: 95/450 - captured
+Time: 00:03/00:15 - Frames: 96/450
+Time: 00:03/00:15 - Frames: 97/450
+Time: 00:03/00:15 - Frames: 98/450
+Time: 00:03/00:15 - Frames: 99/450
+Time: 00:03/00:15 - Frames: 100/450 - captured
+Time: 00:03/00:15 - Frames: 101/450
+Time: 00:03/00:15 - Frames: 102/450
+Time: 00:03/00:15 - Frames: 103/450
+Time: 00:03/00:15 - Frames: 104/450
+Time: 00:03/00:15 - Frames: 105/450 - captured
+Time: 00:03/00:15 - Frames: 106/450
+Time: 00:03/00:15 - Frames: 107/450
+Time: 00:03/00:15 - Frames: 108/450
+Time: 00:03/00:15 - Frames: 109/450
+Time: 00:03/00:15 - Frames: 110/450 - captured
+Time: 00:03/00:15 - Frames: 111/450
+Time: 00:03/00:15 - Frames: 112/450
+Time: 00:03/00:15 - Frames: 113/450
+Time: 00:03/00:15 - Frames: 114/450
+Time: 00:03/00:15 - Frames: 115/450 - captured
+Time: 00:03/00:15 - Frames: 116/450
+Time: 00:03/00:15 - Frames: 117/450
+Time: 00:03/00:15 - Frames: 118/450
+Time: 00:03/00:15 - Frames: 119/450
+Time: 00:04/00:15 - Frames: 120/450 - captured
+Time: 00:04/00:15 - Frames: 121/450
+Time: 00:04/00:15 - Frames: 122/450
+Time: 00:04/00:15 - Frames: 123/450
+Time: 00:04/00:15 - Frames: 124/450
+Time: 00:04/00:15 - Frames: 125/450 - captured
+Time: 00:04/00:15 - Frames: 126/450
+Time: 00:04/00:15 - Frames: 127/450
+Time: 00:04/00:15 - Frames: 128/450
+Time: 00:04/00:15 - Frames: 129/450
+Time: 00:04/00:15 - Frames: 130/450 - captured
+Time: 00:04/00:15 - Frames: 131/450
+Time: 00:04/00:15 - Frames: 132/450
+Time: 00:04/00:15 - Frames: 133/450
+Time: 00:04/00:15 - Frames: 134/450
+Time: 00:04/00:15 - Frames: 135/450 - captured
+Time: 00:04/00:15 - Frames: 136/450
+Time: 00:04/00:15 - Frames: 137/450
+Time: 00:04/00:15 - Frames: 138/450
+Time: 00:04/00:15 - Frames: 139/450
+Time: 00:04/00:15 - Frames: 140/450 - captured
+Time: 00:04/00:15 - Frames: 141/450
+Time: 00:04/00:15 - Frames: 142/450
+Time: 00:04/00:15 - Frames: 143/450
+Time: 00:04/00:15 - Frames: 144/450
+Time: 00:04/00:15 - Frames: 145/450 - captured
+Time: 00:04/00:15 - Frames: 146/450
+Time: 00:04/00:15 - Frames: 147/450
+Time: 00:04/00:15 - Frames: 148/450
+Time: 00:04/00:15 - Frames: 149/450
+Time: 00:05/00:15 - Frames: 150/450 - captured
+Time: 00:05/00:15 - Frames: 151/450
+Time: 00:05/00:15 - Frames: 152/450
+Time: 00:05/00:15 - Frames: 153/450
+Time: 00:05/00:15 - Frames: 154/450
+Time: 00:05/00:15 - Frames: 155/450 - captured
+Time: 00:05/00:15 - Frames: 156/450
+Time: 00:05/00:15 - Frames: 157/450
+Time: 00:05/00:15 - Frames: 158/450
+Time: 00:05/00:15 - Frames: 159/450
+Time: 00:05/00:15 - Frames: 160/450 - captured
+Time: 00:05/00:15 - Frames: 161/450
+Time: 00:05/00:15 - Frames: 162/450
+Time: 00:05/00:15 - Frames: 163/450
+Time: 00:05/00:15 - Frames: 164/450
+Time: 00:05/00:15 - Frames: 165/450 - captured
+Time: 00:05/00:15 - Frames: 166/450
+Time: 00:05/00:15 - Frames: 167/450
+Time: 00:05/00:15 - Frames: 168/450
+Time: 00:05/00:15 - Frames: 169/450
+Time: 00:05/00:15 - Frames: 170/450 - captured
+Time: 00:05/00:15 - Frames: 171/450
+Time: 00:05/00:15 - Frames: 172/450
+Time: 00:05/00:15 - Frames: 173/450
+Time: 00:05/00:15 - Frames: 174/450
+Time: 00:05/00:15 - Frames: 175/450 - captured
+Time: 00:05/00:15 - Frames: 176/450
+Time: 00:05/00:15 - Frames: 177/450
+Time: 00:05/00:15 - Frames: 178/450
+Time: 00:05/00:15 - Frames: 179/450
+Time: 00:06/00:15 - Frames: 180/450 - captured
+Time: 00:06/00:15 - Frames: 181/450
+Time: 00:06/00:15 - Frames: 182/450
+Time: 00:06/00:15 - Frames: 183/450
+Time: 00:06/00:15 - Frames: 184/450
+Time: 00:06/00:15 - Frames: 185/450 - captured
+Time: 00:06/00:15 - Frames: 186/450
+Time: 00:06/00:15 - Frames: 187/450
+Time: 00:06/00:15 - Frames: 188/450
+Time: 00:06/00:15 - Frames: 189/450
+Time: 00:06/00:15 - Frames: 190/450 - captured
+Time: 00:06/00:15 - Frames: 191/450
+Time: 00:06/00:15 - Frames: 192/450
+Time: 00:06/00:15 - Frames: 193/450
+Time: 00:06/00:15 - Frames: 194/450
+Time: 00:06/00:15 - Frames: 195/450 - captured
+Time: 00:06/00:15 - Frames: 196/450
+Time: 00:06/00:15 - Frames: 197/450
+Time: 00:06/00:15 - Frames: 198/450
+Time: 00:06/00:15 - Frames: 199/450
+Time: 00:06/00:15 - Frames: 200/450 - captured
+Time: 00:06/00:15 - Frames: 201/450
+Time: 00:06/00:15 - Frames: 202/450
+Time: 00:06/00:15 - Frames: 203/450
+Time: 00:06/00:15 - Frames: 204/450
+Time: 00:06/00:15 - Frames: 205/450 - captured
+Time: 00:06/00:15 - Frames: 206/450
+Time: 00:06/00:15 - Frames: 207/450
+Time: 00:06/00:15 - Frames: 208/450
+Time: 00:06/00:15 - Frames: 209/450
+Time: 00:07/00:15 - Frames: 210/450 - captured
+Time: 00:07/00:15 - Frames: 211/450
+Time: 00:07/00:15 - Frames: 212/450
+Time: 00:07/00:15 - Frames: 213/450
+Time: 00:07/00:15 - Frames: 214/450
+Time: 00:07/00:15 - Frames: 215/450 - captured
+Time: 00:07/00:15 - Frames: 216/450
+Time: 00:07/00:15 - Frames: 217/450
+Time: 00:07/00:15 - Frames: 218/450
+Time: 00:07/00:15 - Frames: 219/450
+Time: 00:07/00:15 - Frames: 220/450 - captured
+Time: 00:07/00:15 - Frames: 221/450
+Time: 00:07/00:15 - Frames: 222/450
+Time: 00:07/00:15 - Frames: 223/450
+Time: 00:07/00:15 - Frames: 224/450
+Time: 00:07/00:15 - Frames: 225/450 - captured
+Time: 00:07/00:15 - Frames: 226/450
+Time: 00:07/00:15 - Frames: 227/450
+Time: 00:07/00:15 - Frames: 228/450
+Time: 00:07/00:15 - Frames: 229/450
+Time: 00:07/00:15 - Frames: 230/450 - captured
+Time: 00:07/00:15 - Frames: 231/450
+Time: 00:07/00:15 - Frames: 232/450
+Time: 00:07/00:15 - Frames: 233/450
+Time: 00:07/00:15 - Frames: 234/450
+Time: 00:07/00:15 - Frames: 235/450 - captured
+Time: 00:07/00:15 - Frames: 236/450
+Time: 00:07/00:15 - Frames: 237/450
+Time: 00:07/00:15 - Frames: 238/450
+Time: 00:07/00:15 - Frames: 239/450
+Time: 00:08/00:15 - Frames: 240/450 - captured
+Time: 00:08/00:15 - Frames: 241/450
+Time: 00:08/00:15 - Frames: 242/450
+Time: 00:08/00:15 - Frames: 243/450
+Time: 00:08/00:15 - Frames: 244/450
+Time: 00:08/00:15 - Frames: 245/450 - captured
+Time: 00:08/00:15 - Frames: 246/450
+Time: 00:08/00:15 - Frames: 247/450
+Time: 00:08/00:15 - Frames: 248/450
+Time: 00:08/00:15 - Frames: 249/450
+Time: 00:08/00:15 - Frames: 250/450 - captured
+Time: 00:08/00:15 - Frames: 251/450
+Time: 00:08/00:15 - Frames: 252/450
+Time: 00:08/00:15 - Frames: 253/450
+Time: 00:08/00:15 - Frames: 254/450
+Time: 00:08/00:15 - Frames: 255/450 - captured
+Time: 00:08/00:15 - Frames: 256/450
+Time: 00:08/00:15 - Frames: 257/450
+Time: 00:08/00:15 - Frames: 258/450
+Time: 00:08/00:15 - Frames: 259/450
+Time: 00:08/00:15 - Frames: 260/450 - captured
+Time: 00:08/00:15 - Frames: 261/450
+Time: 00:08/00:15 - Frames: 262/450
+Time: 00:08/00:15 - Frames: 263/450
+Time: 00:08/00:15 - Frames: 264/450
+Time: 00:08/00:15 - Frames: 265/450 - captured
+Time: 00:08/00:15 - Frames: 266/450
+Time: 00:08/00:15 - Frames: 267/450
+Time: 00:08/00:15 - Frames: 268/450
+Time: 00:08/00:15 - Frames: 269/450
+Time: 00:09/00:15 - Frames: 270/450 - captured
+Time: 00:09/00:15 - Frames: 271/450
+Time: 00:09/00:15 - Frames: 272/450
+Time: 00:09/00:15 - Frames: 273/450
+Time: 00:09/00:15 - Frames: 274/450
+Time: 00:09/00:15 - Frames: 275/450 - captured
+Time: 00:09/00:15 - Frames: 276/450
+Time: 00:09/00:15 - Frames: 277/450
+Time: 00:09/00:15 - Frames: 278/450
+Time: 00:09/00:15 - Frames: 279/450
+Time: 00:09/00:15 - Frames: 280/450 - captured
+Time: 00:09/00:15 - Frames: 281/450
+Time: 00:09/00:15 - Frames: 282/450
+Time: 00:09/00:15 - Frames: 283/450
+Time: 00:09/00:15 - Frames: 284/450
+Time: 00:09/00:15 - Frames: 285/450 - captured
+Time: 00:09/00:15 - Frames: 286/450
+Time: 00:09/00:15 - Frames: 287/450
+Time: 00:09/00:15 - Frames: 288/450
+Time: 00:09/00:15 - Frames: 289/450
+Time: 00:09/00:15 - Frames: 290/450 - captured
+Time: 00:09/00:15 - Frames: 291/450
+Time: 00:09/00:15 - Frames: 292/450
+Time: 00:09/00:15 - Frames: 293/450
+Time: 00:09/00:15 - Frames: 294/450
+Time: 00:09/00:15 - Frames: 295/450 - captured
+Time: 00:09/00:15 - Frames: 296/450
+Time: 00:09/00:15 - Frames: 297/450
+Time: 00:09/00:15 - Frames: 298/450
+Time: 00:09/00:15 - Frames: 299/450
+Time: 00:10/00:15 - Frames: 300/450 - captured
+Time: 00:10/00:15 - Frames: 301/450
+Time: 00:10/00:15 - Frames: 302/450
+Time: 00:10/00:15 - Frames: 303/450
+Time: 00:10/00:15 - Frames: 304/450
+Time: 00:10/00:15 - Frames: 305/450 - captured
+Time: 00:10/00:15 - Frames: 306/450
+Time: 00:10/00:15 - Frames: 307/450
+Time: 00:10/00:15 - Frames: 308/450
+Time: 00:10/00:15 - Frames: 309/450
+Time: 00:10/00:15 - Frames: 310/450 - captured
+Time: 00:10/00:15 - Frames: 311/450
+Time: 00:10/00:15 - Frames: 312/450
+Time: 00:10/00:15 - Frames: 313/450
+Time: 00:10/00:15 - Frames: 314/450
+Time: 00:10/00:15 - Frames: 315/450 - captured
+Time: 00:10/00:15 - Frames: 316/450
+Time: 00:10/00:15 - Frames: 317/450
+Time: 00:10/00:15 - Frames: 318/450
+Time: 00:10/00:15 - Frames: 319/450
+Time: 00:10/00:15 - Frames: 320/450 - captured
+Time: 00:10/00:15 - Frames: 321/450
+Time: 00:10/00:15 - Frames: 322/450
+Time: 00:10/00:15 - Frames: 323/450
+Time: 00:10/00:15 - Frames: 324/450
+Time: 00:10/00:15 - Frames: 325/450 - captured
+Time: 00:10/00:15 - Frames: 326/450
+Time: 00:10/00:15 - Frames: 327/450
+Time: 00:10/00:15 - Frames: 328/450
+Time: 00:10/00:15 - Frames: 329/450
+Time: 00:11/00:15 - Frames: 330/450 - captured
+Time: 00:11/00:15 - Frames: 331/450
+Time: 00:11/00:15 - Frames: 332/450
+Time: 00:11/00:15 - Frames: 333/450
+Time: 00:11/00:15 - Frames: 334/450
+Time: 00:11/00:15 - Frames: 335/450 - captured
+Time: 00:11/00:15 - Frames: 336/450
+Time: 00:11/00:15 - Frames: 337/450
+Time: 00:11/00:15 - Frames: 338/450
+Time: 00:11/00:15 - Frames: 339/450
+Time: 00:11/00:15 - Frames: 340/450 - captured
+Time: 00:11/00:15 - Frames: 341/450
+Time: 00:11/00:15 - Frames: 342/450
+Time: 00:11/00:15 - Frames: 343/450
+Time: 00:11/00:15 - Frames: 344/450
+Time: 00:11/00:15 - Frames: 345/450 - captured
+Time: 00:11/00:15 - Frames: 346/450
+Time: 00:11/00:15 - Frames: 347/450
+Time: 00:11/00:15 - Frames: 348/450
+Time: 00:11/00:15 - Frames: 349/450
+Time: 00:11/00:15 - Frames: 350/450 - captured
+Time: 00:11/00:15 - Frames: 351/450
+Time: 00:11/00:15 - Frames: 352/450
+Time: 00:11/00:15 - Frames: 353/450
+Time: 00:11/00:15 - Frames: 354/450
+Time: 00:11/00:15 - Frames: 355/450 - captured
+Time: 00:11/00:15 - Frames: 356/450
+Time: 00:11/00:15 - Frames: 357/450
+Time: 00:11/00:15 - Frames: 358/450
+Time: 00:11/00:15 - Frames: 359/450
+Time: 00:12/00:15 - Frames: 360/450 - captured
+Time: 00:12/00:15 - Frames: 361/450
+Time: 00:12/00:15 - Frames: 362/450
+Time: 00:12/00:15 - Frames: 363/450
+Time: 00:12/00:15 - Frames: 364/450
+Time: 00:12/00:15 - Frames: 365/450 - captured
+Time: 00:12/00:15 - Frames: 366/450
+Time: 00:12/00:15 - Frames: 367/450
+Time: 00:12/00:15 - Frames: 368/450
+Time: 00:12/00:15 - Frames: 369/450
+Time: 00:12/00:15 - Frames: 370/450 - captured
+Time: 00:12/00:15 - Frames: 371/450
+Time: 00:12/00:15 - Frames: 372/450
+Time: 00:12/00:15 - Frames: 373/450
+Time: 00:12/00:15 - Frames: 374/450
+Time: 00:12/00:15 - Frames: 375/450 - captured
+Time: 00:12/00:15 - Frames: 376/450
+Time: 00:12/00:15 - Frames: 377/450
+Time: 00:12/00:15 - Frames: 378/450
+Time: 00:12/00:15 - Frames: 379/450
+Time: 00:12/00:15 - Frames: 380/450 - captured
+Time: 00:12/00:15 - Frames: 381/450
+Time: 00:12/00:15 - Frames: 382/450
+Time: 00:12/00:15 - Frames: 383/450
+Time: 00:12/00:15 - Frames: 384/450
+Time: 00:12/00:15 - Frames: 385/450 - captured
+Time: 00:12/00:15 - Frames: 386/450
+Time: 00:12/00:15 - Frames: 387/450
+Time: 00:12/00:15 - Frames: 388/450
+Time: 00:12/00:15 - Frames: 389/450
+Time: 00:13/00:15 - Frames: 390/450 - captured
+Time: 00:13/00:15 - Frames: 391/450
+Time: 00:13/00:15 - Frames: 392/450
+Time: 00:13/00:15 - Frames: 393/450
+Time: 00:13/00:15 - Frames: 394/450
+Time: 00:13/00:15 - Frames: 395/450 - captured
+Time: 00:13/00:15 - Frames: 396/450
+Time: 00:13/00:15 - Frames: 397/450
+Time: 00:13/00:15 - Frames: 398/450
+Time: 00:13/00:15 - Frames: 399/450
+Time: 00:13/00:15 - Frames: 400/450 - captured
+Time: 00:13/00:15 - Frames: 401/450
+Time: 00:13/00:15 - Frames: 402/450
+Time: 00:13/00:15 - Frames: 403/450
+Time: 00:13/00:15 - Frames: 404/450
+Time: 00:13/00:15 - Frames: 405/450 - captured
+Time: 00:13/00:15 - Frames: 406/450
+Time: 00:13/00:15 - Frames: 407/450
+Time: 00:13/00:15 - Frames: 408/450
+Time: 00:13/00:15 - Frames: 409/450
+Time: 00:13/00:15 - Frames: 410/450 - captured
+Time: 00:13/00:15 - Frames: 411/450
+Time: 00:13/00:15 - Frames: 412/450
+Time: 00:13/00:15 - Frames: 413/450
+Time: 00:13/00:15 - Frames: 414/450
+Time: 00:13/00:15 - Frames: 415/450 - captured
+Time: 00:13/00:15 - Frames: 416/450
+Time: 00:13/00:15 - Frames: 417/450
+Time: 00:13/00:15 - Frames: 418/450
+Time: 00:13/00:15 - Frames: 419/450
+Time: 00:14/00:15 - Frames: 420/450 - captured
+Time: 00:14/00:15 - Frames: 421/450
+Time: 00:14/00:15 - Frames: 422/450
+Time: 00:14/00:15 - Frames: 423/450
+Time: 00:14/00:15 - Frames: 424/450
+Time: 00:14/00:15 - Frames: 425/450 - captured
+Time: 00:14/00:15 - Frames: 426/450
+Time: 00:14/00:15 - Frames: 427/450
+Time: 00:14/00:15 - Frames: 428/450
+Time: 00:14/00:15 - Frames: 429/450
+Time: 00:14/00:15 - Frames: 430/450 - captured
+Time: 00:14/00:15 - Frames: 431/450
+Time: 00:14/00:15 - Frames: 432/450
+Time: 00:14/00:15 - Frames: 433/450
+Time: 00:14/00:15 - Frames: 434/450
+Time: 00:14/00:15 - Frames: 435/450 - captured
+Time: 00:14/00:15 - Frames: 436/450
+Time: 00:14/00:15 - Frames: 437/450
+Time: 00:14/00:15 - Frames: 438/450
+Time: 00:14/00:15 - Frames: 439/450
+Time: 00:14/00:15 - Frames: 440/450 - captured
+Time: 00:14/00:15 - Frames: 441/450
+Time: 00:14/00:15 - Frames: 442/450
+Time: 00:14/00:15 - Frames: 443/450
+Time: 00:14/00:15 - Frames: 444/450
+Time: 00:14/00:15 - Frames: 445/450 - captured
+Time: 00:14/00:15 - Frames: 446/450
+Time: 00:14/00:15 - Frames: 447/450
+Time: 00:14/00:15 - Frames: 448/450
+</pre></div></div>
+</div>
+<p>You probably noticed that the objects outside the masks were still detected and drawn onto the overlay - that is BY DESIGN: if you check the coordinates files you will see that every object will now have a boolean variable that will indicate whether its center of mass wass inside the mask. For example, <code class="docutils literal notranslate"><span class="pre">center</span> <span class="pre">=</span> <span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">full</span> <span class="pre">=</span> <span class="pre">True</span></code> indicates that an object was in the center of the arena, which means that it also <em>has</em> to be in the full arena. On the other hand, <code class="docutils literal notranslate"><span class="pre">center</span> <span class="pre">=</span> <span class="pre">False</span></code> and
+<code class="docutils literal notranslate"><span class="pre">full</span> <span class="pre">=</span> <span class="pre">False</span></code> indicates that the object isn’t inside any of the specified masks, and you may chose to filter this row out during data analysis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame_abs</th>
+      <th>frame</th>
+      <th>mins</th>
+      <th>secs</th>
+      <th>x</th>
+      <th>y</th>
+      <th>label</th>
+      <th>full</th>
+      <th>center</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>50</th>
+      <td>110</td>
+      <td>22</td>
+      <td>00</td>
+      <td>03</td>
+      <td>263.0</td>
+      <td>65.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>115</td>
+      <td>23</td>
+      <td>00</td>
+      <td>03</td>
+      <td>540.0</td>
+      <td>309.0</td>
+      <td>fish</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>115</td>
+      <td>23</td>
+      <td>00</td>
+      <td>03</td>
+      <td>309.0</td>
+      <td>310.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>115</td>
+      <td>23</td>
+      <td>00</td>
+      <td>03</td>
+      <td>193.0</td>
+      <td>225.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>115</td>
+      <td>23</td>
+      <td>00</td>
+      <td>03</td>
+      <td>192.0</td>
+      <td>156.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>115</td>
+      <td>23</td>
+      <td>00</td>
+      <td>03</td>
+      <td>783.0</td>
+      <td>0.0</td>
+      <td>isopod</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>120</td>
+      <td>24</td>
+      <td>00</td>
+      <td>04</td>
+      <td>535.0</td>
+      <td>314.0</td>
+      <td>fish</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>120</td>
+      <td>24</td>
+      <td>00</td>
+      <td>04</td>
+      <td>194.0</td>
+      <td>227.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>120</td>
+      <td>24</td>
+      <td>00</td>
+      <td>04</td>
+      <td>191.0</td>
+      <td>156.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>125</td>
+      <td>25</td>
+      <td>00</td>
+      <td>04</td>
+      <td>512.0</td>
+      <td>314.0</td>
+      <td>fish</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>If we are happy with the tracking results, we can save and analyze them in Python, R, or elsewhere. Then next step would be to assign particles to a trajectory, so we can investigate the behavior of isopods in the presence of fish. An efficient option in Python is the <code class="docutils literal notranslate"><span class="pre">trackpy</span></code> library, which is good at filtering and calculating trajectories (for an applied example check the phenopype gallery: <a class="reference external" href="https://www.phenopype.org/gallery/example_4">https://www.phenopype.org/gallery/example_4</a>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">mt</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;coordinates.csv&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">coordinates</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame_abs</th>
+      <th>frame</th>
+      <th>mins</th>
+      <th>secs</th>
+      <th>x</th>
+      <th>y</th>
+      <th>label</th>
+      <th>full</th>
+      <th>center</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>30</td>
+      <td>6</td>
+      <td>00</td>
+      <td>01</td>
+      <td>608.0</td>
+      <td>345.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30</td>
+      <td>6</td>
+      <td>00</td>
+      <td>01</td>
+      <td>546.0</td>
+      <td>249.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35</td>
+      <td>7</td>
+      <td>00</td>
+      <td>01</td>
+      <td>575.0</td>
+      <td>306.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>45</td>
+      <td>9</td>
+      <td>00</td>
+      <td>01</td>
+      <td>843.0</td>
+      <td>315.0</td>
+      <td>isopod</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>45</td>
+      <td>9</td>
+      <td>00</td>
+      <td>01</td>
+      <td>193.0</td>
+      <td>305.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>558</th>
+      <td>445</td>
+      <td>89</td>
+      <td>00</td>
+      <td>14</td>
+      <td>544.0</td>
+      <td>191.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>559</th>
+      <td>445</td>
+      <td>89</td>
+      <td>00</td>
+      <td>14</td>
+      <td>189.0</td>
+      <td>127.0</td>
+      <td>isopod</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>560</th>
+      <td>445</td>
+      <td>89</td>
+      <td>00</td>
+      <td>14</td>
+      <td>208.0</td>
+      <td>129.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>561</th>
+      <td>445</td>
+      <td>89</td>
+      <td>00</td>
+      <td>14</td>
+      <td>748.0</td>
+      <td>111.0</td>
+      <td>isopod</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>562</th>
+      <td>445</td>
+      <td>89</td>
+      <td>00</td>
+      <td>14</td>
+      <td>106.0</td>
+      <td>88.0</td>
+      <td>isopod</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+<p>563 rows × 9 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../../templates/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Templates</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../tutorial_6/">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tutorial 6: Size and colour reference</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; Moritz Lürig
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on 2024-02-21 15:59:43</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial 7: Video analysis</a><ul>
+<li><a class="reference internal" href="#The-motion-tracker-class">The motion tracker class</a></li>
+<li><a class="reference internal" href="#Tracking-settings">Tracking settings</a></li>
+<li><a class="reference internal" href="#Tracking-methods">Tracking-methods</a></li>
+<li><a class="reference internal" href="#Canvas-masking-and-consecutive-masking">Canvas masking and consecutive masking</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=9a30b7d9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/custom.js?v=07e4e0e4"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mluerig/website-assets/assets/js/enforce_trailing_slash.min.js"></script>
+    </body>
+</html>

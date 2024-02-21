@@ -1,0 +1,1370 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="Tutorial 6: Size and colour reference" href="../tutorial_6/" /><link rel="prev" title="Tutorial 4: The Pype class" href="../tutorial_4/" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Tutorial 5: Projects - phenopype docs</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=dafe9a71" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../"><div class="brand">phenopype docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/phenopype_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">phenopype docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Internal links</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Installation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/python/">1. Installing Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/phenopype/">2. Installing phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/text/">3. Choosing a text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/spyder/">4. Installing Spyder (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/project/">Project class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/pype/">Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utility/">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/core/">Core modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/video/">Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_1/">Tutorial 1: A (very) brief python introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_2/">Tutorial 2: Interacting with images in phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_3/">Tutorial 3: The phenopype workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_4/">Tutorial 4: The Pype class</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Tutorial 5: Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_6/">Tutorial 6: Size and colour reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_7/">Tutorial 7: Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../templates/">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Templates</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/detection/">Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/landmarks/">Landmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/gallery/">Gallery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/various/">Various</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../resources/">Resources</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/python/">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/opencv/">OpenCV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/cv/">Computer vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/yaml/">YAML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation/">Citation</a></li>
+</ul>
+
+    <ul class="current">
+		<p class="caption"><span class="caption-text">External links</span></p>		
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org">Homepage</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://github.com/phenopype/phenopype">Github</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org/gallery/">Gallery</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.luerig.net/">Author (luerig.net)</a></li>
+	</ul>
+</div>
+
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Tutorial-5:-Projects">
+<h1>Tutorial 5: Projects<a class="headerlink" href="#Tutorial-5:-Projects" title="Link to this heading">#</a></h1>
+<p>A central aspect of phenopype is the use of the <code class="docutils literal notranslate"><span class="pre">Project</span></code> class to efficiently process larger amounts of images. Creating a <code class="docutils literal notranslate"><span class="pre">project</span></code> object will set up a directory tree in which each folder contains the copy or a link to the original raw image files. Alongside the images to be processed, users can store configuration file, as covered in <a class="reference internal" href="../tutorial_3/"><span class="doc">Tutorial 3</span></a> and <a class="reference internal" href="../tutorial_4/"><span class="doc">Tutorial 4</span></a>.</p>
+<p>Once raw images have been added and configuration files are in place, the <code class="docutils literal notranslate"><span class="pre">Pype</span></code> class can be used within a simple <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. After all images are processed, the results are stored alongside the raw images and the <code class="docutils literal notranslate"><span class="pre">Pype</span></code>-configuration files.</p>
+<div class="alert alert-block alert-info"><div class="admonition seealso"><p class="admonition-title"><p>See also:</p>
+</p><p><ul class="simple">
+<li><p><a class="reference external" href="https://www.phenopype.org/docs/api/project/">phenopype docs: Project-API</a></p></li>
+</ul>
+</p></div></div><div class="alert alert-block alert-success"><div class="admonition tip"><p class="admonition-title"><p>Hint:</p>
+</p><p><p>Anyone with access to the raw images and the configuration files is able to reproduce the results with a few lines of code, making phenopype project directories the perfect format for code sharing and data sharing after publication through online repositories (such as Dryad, Zenodo or OSF).</p>
+</p></div><p>&lt;/div</p>
+<section id="Task:-delineate-armour-plates-(in-batch)">
+<h2>Task: delineate armour plates (in batch)<a class="headerlink" href="#Task:-delineate-armour-plates-(in-batch)" title="Link to this heading">#</a></h2>
+<p>Again we will quantify lateral armor plating in threespine stickleback (<em>Gasterosteus aculeatus</em>), as shown in Tutorial 3, but this time in more than one image. First a project has to be initialized, which will create a root directory to which images can be added. Second, we need to add a <code class="docutils literal notranslate"><span class="pre">Pype</span></code> configuration file containing the processing instructions. Then we can run image analysis in batch using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<section id="A)-Start-project-and-add-images">
+<h3>A) Start project and add images<a class="headerlink" href="#A)-Start-project-and-add-images" title="Link to this heading">#</a></h3>
+<p>A Phenopype project directory can be initialized with the <code class="docutils literal notranslate"><span class="pre">Project</span></code> class. The phenoype project root folder should be separate from the raw data, e.g. as a folder inside of your main project folder.</p>
+<center><div style="text-align: center; width: 450px;"><p><img alt="e9163d2eb36b4fc1b420ec0df9aebfbe" src="../../_images/luerig_2021_figure_3A.jpg" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig 1</strong> Create a phenopype project and organize raw images into separate folders where all relevant data, attributes and results are stored. (Figure from <a class="reference external" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771">Lürig 2021 [Fig. 3A]</a>).</p>
+</div></center><p>We will use the images from the tutorials folder (<a class="reference external" href="https://github.com/phenopype/phenopype-tutorials/archive/refs/heads/main.zip">download the tutorials</a> if you have not done so already).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phenopype</span> <span class="k">as</span> <span class="nn">pp</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\mluerig\Downloads\phenopype-tutorials-main&quot;</span><span class="p">)</span>
+
+<span class="n">myproj</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">Project</span><span class="p">(</span>
+    <span class="n">root_dir</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;tutorial_project&quot;</span><span class="p">,</span> <span class="c1">## pick your project directory</span>
+    <span class="c1">## overwrite=True,               ## overwrite=True will overwrite the project (after another prompt)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------------------------------------------
+Found existing project root directory - loading from:
+C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project
+
+Project &#34;tutorial_project&#34; successfully loaded with 3 images
+--------------------------------------------
+</pre></div></div>
+</div>
+<p>Next step is to add images to the project. You can do so with the <code class="docutils literal notranslate"><span class="pre">add_files</span></code> method of the created project (a <em>method</em> is an executable function that belongs to an existing <em>object</em>, in this case “myproj). The function offers some flexibility in terms of which files to import. Most important arguments here are <code class="docutils literal notranslate"><span class="pre">include</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude</span></code> and <code class="docutils literal notranslate"><span class="pre">filetypes</span></code>. For example, given the following list of images:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;tutorials/data&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;isopods_fish.mp4&#39;,
+ &#39;stickle1.jpg&#39;,
+ &#39;stickle2.jpg&#39;,
+ &#39;stickle3.jpg&#39;,
+ &#39;stickleback_side.jpg&#39;,
+ &#39;stickleback_top.jpg&#39;]
+</pre></div></div>
+</div>
+<p>If we want to import “stickle1”, “stickle2”, and “stickle3”, we can do a combination <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">exclude</span></code> (also prints all other default settings):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_dir</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;tutorials/data&quot;</span>
+
+<span class="n">myproj</span><span class="o">.</span><span class="n">add_files</span><span class="p">(</span>
+    <span class="n">image_dir</span><span class="o">=</span><span class="n">image_dir</span><span class="p">,</span>
+    <span class="n">include</span><span class="o">=</span><span class="s2">&quot;stickle&quot;</span><span class="p">,</span>       <span class="c1">## can be type &quot;str&quot; or type &quot;list&quot;</span>
+    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;side&quot;</span><span class="p">,</span><span class="s2">&quot;top&quot;</span><span class="p">]</span>   <span class="c1">## can be type &quot;str&quot; or type &quot;list&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------------------------------------------
+phenopype will search for image files at
+
+C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorials\data
+
+using the following settings:
+
+filetypes: [&#39;jpg&#39;, &#39;JPG&#39;, &#39;jpeg&#39;, &#39;JPEG&#39;, &#39;tif&#39;, &#39;png&#39;, &#39;bmp&#39;], include: stickle, exclude: [&#39;side&#39;, &#39;top&#39;], mode: copy, recursive: False, resize: False, unique: path
+
+Found image stickle1.jpg - 0__stickle1 already exists (overwrite=False)
+Found image stickle2.jpg - 0__stickle2 already exists (overwrite=False)
+Found image stickle3.jpg - 0__stickle3 already exists (overwrite=False)
+
+Found 3 files
+--------------------------------------------
+</pre></div></div>
+</div>
+<p>Thre are more settings to <code class="docutils literal notranslate"><span class="pre">add_files</span></code>: - <code class="docutils literal notranslate"><span class="pre">mode</span></code> determines whether raw files should be copied to each folder in the Phenopype directory tree (using <code class="docutils literal notranslate"><span class="pre">copy</span></code> [default]), or just their filepath (using <code class="docutils literal notranslate"><span class="pre">link</span></code>), which can be useful if data sets contain many or very large images. A third option is <code class="docutils literal notranslate"><span class="pre">mod</span></code>, which will open the iages and save them again in TIF format. This mode also allows to resize images. - <code class="docutils literal notranslate"><span class="pre">recursive</span></code> indicates whether only the top directory (<code class="docutils literal notranslate"><span class="pre">False</span></code>; default), or also all
+subdirectories (<code class="docutils literal notranslate"><span class="pre">True</span></code>) should be included in the search. - <code class="docutils literal notranslate"><span class="pre">unique</span></code> indicates whether files should be unique by their path (<code class="docutils literal notranslate"><span class="pre">filepath</span></code> [default]) or only by their name (<code class="docutils literal notranslate"><span class="pre">filename</span></code>) - duplicate files will be skipped.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">pp</span><span class="o">.</span><span class="n">Project</span><span class="o">.</span><span class="n">add_files</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on function add_files in module phenopype.main:
+
+add_files(self, image_dir, filetypes=[&#39;jpg&#39;, &#39;JPG&#39;, &#39;jpeg&#39;, &#39;JPEG&#39;, &#39;tif&#39;, &#39;png&#39;, &#39;bmp&#39;], include=[], include_all=True, exclude=[], mode=&#39;copy&#39;, ext=&#39;tif&#39;, recursive=False, overwrite=False, resize_factor=1, unique=&#39;path&#39;, **kwargs)
+    Add files to your project from a directory, can look recursively.
+    Specify in- or exclude arguments, filetypes, duplicate-action and copy
+    or link raw files to save memory on the harddrive. For each found image,
+    a folder will be created in the &#34;data&#34; folder within the projects root
+    directory. If found images are in subfolders and &#34;recursive==True&#34;,
+    the respective phenopype directories will be created with
+    flattened path as prefix.
+
+    E.g., with &#34;raw_files&#34; as folder with the original image files
+    and &#34;phenopype_proj&#34; as rootfolder:
+
+    - raw_files/file.jpg ==&gt; phenopype_proj/data/file.jpg
+    - raw_files/subdir1/file.jpg ==&gt; phenopype_proj/data/1__subdir1__file.jpg
+    - raw_files/subdir1/subdir2/file.jpg ==&gt; phenopype_proj/data/2__subdir1__subdir2__file.jpg
+
+    Parameters
+    ----------
+    image_dir: str
+        path to directory with images
+    filetypes: list or str, optional
+        single or multiple string patterns to target files with certain endings.
+        &#34;settings.default_filetypes&#34; are configured in settings.py:
+        [&#39;jpg&#39;, &#39;JPG&#39;, &#39;jpeg&#39;, &#39;JPEG&#39;, &#39;tif&#39;, &#39;png&#39;, &#39;bmp&#39;]
+    include: list or str, optional
+        single or multiple string patterns to target certain files to include
+    include_all (optional): bool,
+        either all (True) or any (False) of the provided keywords have to match
+    exclude: list or str, optional
+        single or multiple string patterns to target certain files to exclude -
+        can overrule &#34;include&#34;
+    recursive: (optional): bool,
+        &#34;False&#34; searches only current directory for valid files; &#34;True&#34; walks
+        through all subdirectories
+    unique: {&#34;file_path&#34;, &#34;filename&#34;}, str, optional:
+        how to deal with image duplicates - &#34;file_path&#34; is useful if identically
+        named files exist in different subfolders (folder structure will be
+        collapsed and goes into the filename), whereas filename will ignore
+        all similar named files after their first occurrence.
+    mode: {&#34;copy&#34;, &#34;mod&#34;, &#34;link&#34;} str, optional
+        how should the raw files be passed on to the phenopype directory tree:
+        &#34;copy&#34; will make a copy of the original file, &#34;mod&#34; will store a
+        .tif version of the orginal image that can be resized, and &#34;link&#34;
+        will only store the link to the original file location to attributes,
+        but not copy the actual file (useful for big files, but the orginal
+        location needs always to be available)
+    overwrite: {&#34;file&#34;, &#34;dir&#34;, False} str/bool (optional)
+        &#34;file&#34; will overwrite the image file and modify the attributes accordingly,
+        &#34;dir&#34; will  overwrite the entire image directory (including all meta-data
+        and results!), False will not overwrite anything
+    ext: {&#34;.tif&#34;, &#34;.bmp&#34;, &#34;.jpg&#34;, &#34;.png&#34;}, str, optional
+        file extension for &#34;mod&#34; mode
+    resize_factor: float, optional
+
+    kwargs:
+        developer options
+
+</pre></div></div>
+</div>
+</section>
+<section id="B)-Adding-Pype-configuration-files">
+<h3>B) Adding <code class="docutils literal notranslate"><span class="pre">Pype</span></code> configuration files<a class="headerlink" href="#B)-Adding-Pype-configuration-files" title="Link to this heading">#</a></h3>
+<p>In the next step we prepare the files we added for use with the <code class="docutils literal notranslate"><span class="pre">Pype</span></code>class by addding a configuration file with the <code class="docutils literal notranslate"><span class="pre">add_config</span></code> method. Instead of adding the functions one by one we can load presets that are appropriate for the given computer vision analysis.</p>
+<p>A selection of templates for configuration files to be used by the <code class="docutils literal notranslate"><span class="pre">Pype</span></code> class can be found in the <a class="reference external" href="https://www.phenopype.org/docs/templates/">template section of the docs</a>. They can be freely modified, but need to adhere YAML specifications (see below). Also check the <a class="reference external" href="https://www.phenopype.org/gallery/">phenopype gallery</a> for inspiration and additional templates.</p>
+<center><div style="text-align: center; width: 450px;"><p><img alt="a031babbc7bc40f6a7d5d41dabb90522" src="../../_images/luerig_2021_figure_3B.jpg" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig 2</strong> Create configuration files and store them alongside the raw images. (Figure from <a class="reference external" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771">Lürig 2021 [Fig. 3B]</a>).</p>
+</div></center><p>We will use the same template (<code class="docutils literal notranslate"><span class="pre">quickstart-template.yaml</span></code>) as in Tutorial 3:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\mluerig\Downloads\phenopype-quickstart-main\quickstart-template.yaml&quot;</span>
+<span class="n">myproj</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span>
+    <span class="n">template_path</span><span class="o">=</span><span class="n">template</span><span class="p">,</span>
+    <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;plates-v1&quot;</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>         <span class="c1"># overwrite if present in image subdirectory</span>
+    <span class="c1"># interactive=True,       # modify the template before distributing it</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- template saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle1\pype_config_plates-v1.yaml (overwritten)
+- template saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle2\pype_config_plates-v1.yaml (overwritten)
+- template saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle3\pype_config_plates-v1.yaml (overwritten)
+</pre></div></div>
+</div>
+<p>Now all images folders contain a configuration file.</p>
+<p>Note that we could have modified the first template before distributing it to the image subdirectories - either manually, or with <code class="docutils literal notranslate"><span class="pre">add_config</span></code> by setting <code class="docutils literal notranslate"><span class="pre">interactive=True</span></code>.</p>
+</section>
+<section id="C)-Batch-processing">
+<h3>C) Batch processing<a class="headerlink" href="#C)-Batch-processing" title="Link to this heading">#</a></h3>
+<p>After adding images and configuration, all is set to process your dataset with high throughput. Using a simple <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, we then go through all directories one by one. The <code class="docutils literal notranslate"><span class="pre">skip</span></code> argument will allow to skip files with a given config name you have already analyzed. This allows you to return to the point where you left off.</p>
+<center><div style="text-align: center; width: 450px;"><p><img alt="24c15de293cd4165a389d4e3749b1dbf" src="../../_images/luerig_2021_figure_3C.jpg" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig 3</strong> Apply the Pype class to each folder using a for-loop. Once the Pype class has finished executing all functions from the configuration file, users can decide to either modify the opened configuration file (e.g. either change function parameters or add new functions), which will trigger to run the Pype class again, or to close the GUI window, which will terminate the Pype class instance and save all results to the folder (Figure from <a class="reference external" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771">Lürig 2021 [Fig.
+3C]</a>).</p>
+</div></center><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">myproj</span><span class="o">.</span><span class="n">dir_paths</span><span class="p">:</span>
+    <span class="n">pp</span><span class="o">.</span><span class="n">Pype</span><span class="p">(</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;plates-v1&quot;</span><span class="p">,</span>         <span class="c1">## loads the config file &quot;pype_config_lm.yaml&quot;. &quot;lm&quot; gets appended to all results files</span>
+            <span class="n">skip</span><span class="o">=</span><span class="kc">False</span>          <span class="c1">## skip=True will skip over any directories that already contain results files with &quot;lm&quot;</span>
+           <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;mask&#34;: [&#34;a&#34;],
+&#34;contour&#34;: [&#34;a&#34;],
+&#34;shape_features&#34;: [&#34;a&#34;],
+&#34;reference&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+Stage: add annotation control args
+Stage: add annotation control args
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 15:04:37 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+- loaded existing annotation of type &#34;mask&#34; with ID &#34;a&#34;: skipping (edit=False)
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+- excluding pixels from reference
+detect_contour
+- loaded existing annotation of type &#34;contour&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+- found 16 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+- loaded existing annotation of type &#34;shape_features&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle1\canvas_plates-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;mask&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;contour&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;shape_features&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;reference&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;mask&#34;: [&#34;a&#34;],
+&#34;contour&#34;: [&#34;a&#34;],
+&#34;shape_features&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+Stage: add annotation control args
+Stage: add annotation control args
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 15:04:46 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+- loaded existing annotation of type &#34;mask&#34; with ID &#34;a&#34;: skipping (edit=False)
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+detect_contour
+- loaded existing annotation of type &#34;contour&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+- found 9 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+- loaded existing annotation of type &#34;shape_features&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle2\canvas_plates-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;mask&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;contour&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;shape_features&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;mask&#34;: [&#34;a&#34;],
+&#34;contour&#34;: [&#34;a&#34;],
+&#34;shape_features&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+Stage: add annotation control args
+Stage: add annotation control args
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 15:04:51 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+- loaded existing annotation of type &#34;mask&#34; with ID &#34;a&#34;: skipping (edit=False)
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+detect_contour
+- loaded existing annotation of type &#34;contour&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+- found 10 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+- loaded existing annotation of type &#34;shape_features&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle3\canvas_plates-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;mask&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;contour&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;shape_features&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+</pre></div></div>
+</div>
+<center><div style="text-align: center; width: 450px;"><p><img alt="6dc1570630c34b7b8d104116342e5a59" src="../../_images/luerig_2021_figure_3D.jpg" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig 3</strong> Each folder contains all information necessary to reproduce the collected phenopytic data. Ouput from different <code class="docutils literal notranslate"><span class="pre">pype</span></code> runs can be stored side by side in the same folders (Figure from <a class="reference external" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771">Lürig 2021 [Fig. 3D]</a>).</p>
+</div></center></section>
+<section id="D)-Collecting-results">
+<h3>D) Collecting results<a class="headerlink" href="#D)-Collecting-results" title="Link to this heading">#</a></h3>
+<p>After finishing all analyses, you can use the <code class="docutils literal notranslate"><span class="pre">project</span></code>-method <code class="docutils literal notranslate"><span class="pre">collect_results</span></code> to copy all results (e.g. the annotation json files or canvas images) to a “results” folder in the root directory.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myproj</span><span class="o">.</span><span class="n">collect_results</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;plates-v1&quot;</span><span class="p">,</span>
+                       <span class="n">files</span><span class="o">=</span><span class="s2">&quot;annotations&quot;</span><span class="p">,</span> <span class="c1">#</span>
+                       <span class="n">folder</span><span class="o">=</span><span class="s2">&quot;annotations-v1&quot;</span><span class="p">,</span>
+                       <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Search string: [&#39;annotations_plates-v1&#39;]
+Collected annotations_plates-v1.json from 0__stickle1
+0__stickle1_annotations_plates-v1.json saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\results\annotations-v1\0__stickle1_annotations_plates-v1.json (overwritten).
+Collected annotations_plates-v1.json from 0__stickle2
+0__stickle2_annotations_plates-v1.json saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\results\annotations-v1\0__stickle2_annotations_plates-v1.json (overwritten).
+Collected annotations_plates-v1.json from 0__stickle3
+0__stickle3_annotations_plates-v1.json saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\results\annotations-v1\0__stickle3_annotations_plates-v1.json (overwritten).
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Saving-and-loading-a-project">
+<h2>Saving and loading a project<a class="headerlink" href="#Saving-and-loading-a-project" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Project</span></code> class does not require a specific save argument, as results, annotations, etc. are saved in the image-specific subfolders in the data-directory.</p>
+<p>To load a <code class="docutils literal notranslate"><span class="pre">Project</span></code>, simply run it on the root path of your project:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phenopype</span> <span class="k">as</span> <span class="nn">pp</span>
+
+<span class="n">myproj</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">Project</span><span class="p">(</span><span class="s2">&quot;tutorial_project&quot;</span><span class="p">)</span>
+<span class="n">myproj</span><span class="o">.</span><span class="n">dir_paths</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------------------------------------------
+Found existing project root directory - loading from:
+C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project
+
+Project &#34;tutorial_project&#34; successfully loaded with 3 images
+--------------------------------------------
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;C:\\Users\\mluerig\\Downloads\\phenopype-tutorials-main\\tutorial_project\\data\\0__stickle1&#39;,
+ &#39;C:\\Users\\mluerig\\Downloads\\phenopype-tutorials-main\\tutorial_project\\data\\0__stickle2&#39;,
+ &#39;C:\\Users\\mluerig\\Downloads\\phenopype-tutorials-main\\tutorial_project\\data\\0__stickle3&#39;]
+</pre></div></div>
+</div>
+</section>
+<section id="Adding-another-configuration">
+<h2>Adding another configuration<a class="headerlink" href="#Adding-another-configuration" title="Link to this heading">#</a></h2>
+<p>As mentioned above, it’s possible to have multiple configuration files side by side in phenopype folders. First, <a class="reference external" href="https://github.com/phenopype/phenopype-templates/archive/refs/heads/main.zip">download the template repo</a>, and unzip it. Now, for example, if we also want to set some landmarks, we can supply this template:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\mluerig\Downloads\phenopype-templates-main\templates\landmarks\landmarks_plain.yaml&quot;</span>
+
+<span class="n">myproj</span><span class="o">.</span><span class="n">add_config</span><span class="p">(</span>
+    <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;lm-v1&quot;</span><span class="p">,</span>
+    <span class="n">template_path</span><span class="o">=</span><span class="n">template</span><span class="p">,</span>
+    <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- template saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle1\pype_config_lm-v1.yaml (overwritten)
+- template saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle2\pype_config_lm-v1.yaml (overwritten)
+- template saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle3\pype_config_lm-v1.yaml (overwritten)
+</pre></div></div>
+</div>
+<p>Now simply run another loop:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">myproj</span><span class="o">.</span><span class="n">dir_paths</span><span class="p">:</span>
+    <span class="n">pp</span><span class="o">.</span><span class="n">Pype</span><span class="p">(</span>
+        <span class="n">path</span><span class="p">,</span>
+        <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;lm-v1&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;landmark&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 15:05:05 +++--------------
+
+
+
+
+MEASUREMENT
+set_landmark
+- loaded existing annotation of type &#34;landmark&#34; with ID &#34;a&#34;: skipping (edit=False)
+
+
+VISUALIZATION
+draw_landmark
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle1\canvas_lm-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;landmark&#34; with id &#34;a&#34; in &#34;annotations_lm-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;landmark&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 15:05:08 +++--------------
+
+
+
+
+MEASUREMENT
+set_landmark
+- loaded existing annotation of type &#34;landmark&#34; with ID &#34;a&#34;: skipping (edit=False)
+
+
+VISUALIZATION
+draw_landmark
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle2\canvas_lm-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;landmark&#34; with id &#34;a&#34; in &#34;annotations_lm-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;landmark&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 15:05:10 +++--------------
+
+
+
+
+MEASUREMENT
+set_landmark
+- loaded existing annotation of type &#34;landmark&#34; with ID &#34;a&#34;: skipping (edit=False)
+
+
+VISUALIZATION
+draw_landmark
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle3\canvas_lm-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;landmark&#34; with id &#34;a&#34; in &#34;annotations_lm-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+</pre></div></div>
+</div>
+<p>Note that we added a second template with landmarking steps for the purpose of demonstrating how to have multiple configurations side by side in the image folders, which might also make sense if you want to separate the two work steps. However, it is possible and potentially also more time efficient, to have both, thep plate segmentation step <em>and</em> the landmarking step in one configuration file.</p>
+</section>
+<section id="Modify-configurations-in-all-subdirectories">
+<h2>Modify configurations in all subdirectories<a class="headerlink" href="#Modify-configurations-in-all-subdirectories" title="Link to this heading">#</a></h2>
+<p>In case you would like to modify your configuration after it has already been distributed, use the <code class="docutils literal notranslate"><span class="pre">edit_config</span></code> class method. This is a simple string-replacement function that allows you do remove or add elements to all existing configuration files.</p>
+<p>For instance, if we wanted to add the landmarking steps to our <code class="docutils literal notranslate"><span class="pre">plates-v1</span></code> configuration, we can pecifiy replacement and target strings - they have to <strong>exactly</strong> match the patterns in the config files, including spaces and indentations. We will modify the template in two places: the measurement, and the visualization step.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## &quot;measurement&quot; modification to add `set_landmarks`:</span>
+
+<span class="n">target1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;    - measurement:</span>
+<span class="s2">        - compute_shape_features:</span>
+<span class="s2">            ANNOTATION: {type: morphology, id: a, edit: overwrite}&quot;&quot;&quot;</span>
+<span class="n">replacement1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;    - measurement:</span>
+<span class="s2">        - compute_shape_features:</span>
+<span class="s2">            ANNOTATION: {type: morphology, id: a, edit: overwrite}</span>
+<span class="s2">        - set_landmark:</span>
+<span class="s2">            point_size: 8</span>
+<span class="s2">            point_colour: lawngreen</span>
+<span class="s2">            label_size: 2</span>
+<span class="s2">            label_width: 2&quot;&quot;&quot;</span>
+
+<span class="n">myproj</span><span class="o">.</span><span class="n">edit_config</span><span class="p">(</span>
+    <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;plates-v1&quot;</span><span class="p">,</span>
+    <span class="n">target</span><span class="o">=</span><span class="n">target1</span><span class="p">,</span>
+    <span class="n">replacement</span><span class="o">=</span><span class="n">replacement1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+# phenopype quickstart template
+# -----------------------------
+# This template is intended to go with the phenopype quickstart materials
+# - for details see https://www.phenopype.org/docs/quickstart/ and refer to
+# Figure 2 in Luerig 2021 (https://doi.org/10.1111/2041-210X.13771) or
+# phenopype tutorial 3 (https://www.phenopype.org/docs/tutorials/tutorial_3).
+# For a better job of measuring individual plate area see the phenopype
+# gallery (https://www.phenopype.org/gallery/example_5/).
+
+config_info:
+    config_name: pype_config_plates-v1.yaml
+    date_created: &#39;2022-05-06 15:04:33&#39;
+    date_last_modified:
+    template_name: quickstart-template.yaml
+    template_path: C:\Users\mluerig\Downloads\phenopype-quickstart-main\quickstart-template.yaml
+processing_steps:
+    - preprocessing:
+        - create_mask:
+            ANNOTATION: {type: mask, id: a, edit: false}
+            tool: polygon
+            label: plates
+        - blur:
+            kernel_size: 9
+    - segmentation:
+        - threshold:
+            method: adaptive
+            blocksize: 99
+            constant: 5
+        - detect_contour:
+            ANNOTATION: {type: contour, id: a, edit: overwrite}
+            retrieval: ext
+            min_area: 150
+    - measurement:
+        - compute_shape_features:
+            ANNOTATION: {type: shape_features, id: a, edit: overwrite}
+    - visualization:
+        - select_canvas:
+            canvas: raw
+        - draw_contour
+        - draw_mask:
+            label: true
+    - export:
+        - save_canvas
+        - save_annotation:
+            overwrite: true
+
+This is what the new config may look like (can differ beteeen files) - proceed?y
+New config saved for 0__stickle1
+New config saved for 0__stickle2
+New config saved for 0__stickle3
+</pre></div></div>
+</div>
+<p>Now run the loop again - note that since we don’t have to do any new manual annotations (we already set the polygon mask), we can turn off the visual feedback (<code class="docutils literal notranslate"><span class="pre">feedback=False</span></code>) to let the whole project run from beginning to end without interrupting:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">myproj</span><span class="o">.</span><span class="n">dir_paths</span><span class="p">:</span>
+    <span class="n">pp</span><span class="o">.</span><span class="n">Pype</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;plates-v1&quot;</span><span class="p">,</span> <span class="n">feedback</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;mask&#34;: [&#34;a&#34;],
+&#34;contour&#34;: [&#34;a&#34;],
+&#34;shape_features&#34;: [&#34;a&#34;],
+&#34;reference&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+
+
+------------+++ new pype iteration 2022-05-06 15:05:19 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+- loaded existing annotation of type &#34;mask&#34; with ID &#34;a&#34;: skipping (edit=False)
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+- excluding pixels from reference
+detect_contour
+- loaded existing annotation of type &#34;contour&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+- found 16 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+- loaded existing annotation of type &#34;shape_features&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle1\canvas_plates-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;mask&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;contour&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;shape_features&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;reference&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;mask&#34;: [&#34;a&#34;],
+&#34;contour&#34;: [&#34;a&#34;],
+&#34;shape_features&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+
+
+------------+++ new pype iteration 2022-05-06 15:05:19 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+- loaded existing annotation of type &#34;mask&#34; with ID &#34;a&#34;: skipping (edit=False)
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+detect_contour
+- loaded existing annotation of type &#34;contour&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+- found 9 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+- loaded existing annotation of type &#34;shape_features&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle2\canvas_plates-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;mask&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;contour&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;shape_features&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+- no annotation_type selected - returning all annotations
+
+AUTOLOAD
+- annotations loaded:
+{
+&#34;mask&#34;: [&#34;a&#34;],
+&#34;contour&#34;: [&#34;a&#34;],
+&#34;shape_features&#34;: [&#34;a&#34;]
+}
+- reference template image loaded from root directory
+
+
+------------+++ new pype iteration 2022-05-06 15:05:20 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+- loaded existing annotation of type &#34;mask&#34; with ID &#34;a&#34;: skipping (edit=False)
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+detect_contour
+- loaded existing annotation of type &#34;contour&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+- found 10 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+- loaded existing annotation of type &#34;shape_features&#34; with ID &#34;a&#34;: overwriting (edit=overwrite)
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-tutorials-main\tutorial_project\data\0__stickle3\canvas_plates-v1.jpg (overwritten).
+save_annotation
+- loading existing annotation file
+- no annotation_type selected - exporting all annotations
+- updating annotations of type &#34;mask&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;contour&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+- updating annotations of type &#34;shape_features&#34; with id &#34;a&#34; in &#34;annotations_plates-v1.json&#34; (overwrite=&#34;entry&#34;)
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+</pre></div></div>
+</div>
+<p>Move on to <a class="reference internal" href="../tutorial_6/"><span class="doc">Tutorial 6</span></a> to learn how to set and detect a project-wide size reference.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../tutorial_6/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Tutorial 6: Size and colour reference</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../tutorial_4/">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tutorial 4: The Pype class</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; Moritz Lürig
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on 2024-02-21 15:59:43</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial 5: Projects</a><ul>
+<li><a class="reference internal" href="#Task:-delineate-armour-plates-(in-batch)">Task: delineate armour plates (in batch)</a><ul>
+<li><a class="reference internal" href="#A)-Start-project-and-add-images">A) Start project and add images</a></li>
+<li><a class="reference internal" href="#B)-Adding-Pype-configuration-files">B) Adding <code class="docutils literal notranslate"><span class="pre">Pype</span></code> configuration files</a></li>
+<li><a class="reference internal" href="#C)-Batch-processing">C) Batch processing</a></li>
+<li><a class="reference internal" href="#D)-Collecting-results">D) Collecting results</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Saving-and-loading-a-project">Saving and loading a project</a></li>
+<li><a class="reference internal" href="#Adding-another-configuration">Adding another configuration</a></li>
+<li><a class="reference internal" href="#Modify-configurations-in-all-subdirectories">Modify configurations in all subdirectories</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=9a30b7d9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/custom.js?v=07e4e0e4"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mluerig/website-assets/assets/js/enforce_trailing_slash.min.js"></script>
+    </body>
+</html>

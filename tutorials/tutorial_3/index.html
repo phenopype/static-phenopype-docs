@@ -1,0 +1,688 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="Tutorial 4: The Pype class" href="../tutorial_4/" /><link rel="prev" title="Tutorial 2: Interacting with images in phenopype" href="../tutorial_2/" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>Tutorial 3: The phenopype workflows - phenopype docs</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=dafe9a71" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../"><div class="brand">phenopype docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/phenopype_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">phenopype docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Internal links</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Installation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/python/">1. Installing Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/phenopype/">2. Installing phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/text/">3. Choosing a text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/spyder/">4. Installing Spyder (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/">API reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/project/">Project class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/pype/">Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/utility/">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/core/">Core modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/video/">Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_1/">Tutorial 1: A (very) brief python introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_2/">Tutorial 2: Interacting with images in phenopype</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Tutorial 3: The phenopype workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_4/">Tutorial 4: The Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_5/">Tutorial 5: Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_6/">Tutorial 6: Size and colour reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial_7/">Tutorial 7: Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../templates/">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Templates</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/detection/">Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/landmarks/">Landmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/gallery/">Gallery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/various/">Various</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../resources/">Resources</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/python/">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/opencv/">OpenCV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/cv/">Computer vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/yaml/">YAML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation/">Citation</a></li>
+</ul>
+
+    <ul class="current">
+		<p class="caption"><span class="caption-text">External links</span></p>		
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org">Homepage</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://github.com/phenopype/phenopype">Github</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org/gallery/">Gallery</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.luerig.net/">Author (luerig.net)</a></li>
+	</ul>
+</div>
+
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Tutorial-3:-The-phenopype-workflows">
+<h1>Tutorial 3: The phenopype workflows<a class="headerlink" href="#Tutorial-3:-The-phenopype-workflows" title="Link to this heading">#</a></h1>
+<style>
+  table {margin-left: 0 !important;}
+</style><p>Analysis of scientific images can be an iterative process that may require users to go back and forth, trying different processing steps and check how to improve results. Later, when the best functions and appropriate settings are found and efficient data collection has priority, image analysis should be efficient and with minimal user input to increase throughput and reproducibility. In phenopype, users can choose between two different workflows that are useful for different stages in the
+process of scientific image analysis:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Workflow</p></th>
+<th class="head"><p>Use case</p></th>
+<th class="head"><p>Operation principle</p></th>
+<th class="head"><p>Code explicitness</p></th>
+<th class="head"><p>Data reproducibility</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Low throughput</strong></p></td>
+<td><p>“prototyping” - self education and evaluation on single images and small datasets</p></td>
+<td><p>image analysis functions are written and stored in Python</p></td>
+<td><p>high</p></td>
+<td><p>low</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>High throughput</strong></p></td>
+<td><p>“production” - default workflow for larger image datasets</p></td>
+<td><p>images analysis functions are written and stored in YAML format</p></td>
+<td><p>low</p></td>
+<td><p>high</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In the <strong>low throughput</strong> workflow, users write a function stack in directly in Python code. This is recommended for users who wish to familiarize themselves with the basic principles of computer vision or when working with only a handful of images. In contrast, the <strong>high throughput</strong> workflow is for production stage, when image analysis should be efficient and data collection reproducible for other users and scientists. In this tutorial you will learn about the differences between the two
+workflows.</p>
+<div class="alert alert-block alert-info "><div class="admonition seealso"><p class="admonition-title"><p>See also:</p>
+</p><ul class="simple">
+<li><p><a class="reference internal" href="../tutorial_2/#GUI-control"><span class="std std-ref">Tutorial 2: GUI control section</span></a></p></li>
+<li><p><a class="reference external" href="https://www.phenopype.org/docs/api/pype/">phenopype docs: Pype-API</a></p></li>
+<li><p><a class="reference external" href="https://www.phenopype.org/docs/resources/yaml/">phenopype docs: YAML resources</a></p></li>
+</ul>
+</div></div><section id="Task:-delineate-armour-plates">
+<h2>Task: delineate armour plates<a class="headerlink" href="#Task:-delineate-armour-plates" title="Link to this heading">#</a></h2>
+<p>To demonstrate the two workflows we will attempt to quantify lateral armor plating in threespine stickleback (<em>Gasterosteus aculeatus</em>). First we need to draw a mask around posterior region that contains the plates. For that step you should select the boundaries around the area of interest, perform a thresholding operation inside the mask, and retrieve the contours inside. The procedure to extract bone-plate area is the same in all workflows, but workflows differ in the amount of explicit Python
+code, and in reproducibility.</p>
+<center><div style="text-align: center; width: max-width: 100%"><p><img alt="ed57fe7c308b478d84dc49a13e21c346" src="../../_images/luerig_2021_figure21.jpg" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig. 1:</strong> Workflow demonstration using a stained stickleback (<em>Gasterosteus aculeatus</em>) stained with alizarin red. Traits to be extracted area and shape of bone-plates, and, within the detected plates, pixel intensities that denote bone-density. Shown are visual feedback (A) from low-throughput (B) and high-throughput workflow (C), which use the same computer functions, but differ in the way these functions are called by the user: while in the low-throughput workflow all functions have to be
+explicitly coded in Python, the high-throughput routine parses the functions from human readable YAML files to facilitate rapid user interaction and increase reproducibility (Figure from <a class="reference external" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771">Lürig 2021 [Fig. 2]</a>).</p>
+</div></center><section id="Preparation">
+<h3>Preparation<a class="headerlink" href="#Preparation" title="Link to this heading">#</a></h3>
+<p>To run this tutorials, download the <a class="reference external" href="https://github.com/phenopype/phenopype-quickstart/archive/refs/heads/main.zip">quickstart materials</a>, and change the working-directory to the unzipped folder:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\mluerig\Downloads\phenopype-quickstart-main&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Low-throughput-workflow">
+<h3>Low throughput workflow<a class="headerlink" href="#Low-throughput-workflow" title="Link to this heading">#</a></h3>
+<p>In the low throughput workflow, the output of every function needs to be explicitly passed on to the next step. First we need to use <code class="docutils literal notranslate"><span class="pre">load_image</span></code>, which imports the file as a three-channel numpy array (<em>ndarray</em>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phenopype</span> <span class="k">as</span> <span class="nn">pp</span>
+
+<span class="n">filepath</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;stickle1.jpg&quot;</span>
+
+<span class="c1">## load image as array, supply image_data (DataFrame containing meta data)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next, run <code class="docutils literal notranslate"><span class="pre">create_mask</span></code> as in the tutorial before:</p>
+<center><div style="text-align: center; width: 500px;"><p><img alt="fff4a2687597478e81829d2f2f1e6419" src="../../_images/masks2.gif" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig. 2</strong> Draw a mask around the armour plates. Finish with <code class="docutils literal notranslate"><span class="pre">Enter</span></code>.</p>
+</div></center><div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## draw mask</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">create_mask</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">tool</span><span class="o">=</span><span class="s2">&quot;polygon&quot;</span><span class="p">,</span> <span class="n">window_max_dim</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>After drawing a mask around the bone plates, we pass the mask on to the <code class="docutils literal notranslate"><span class="pre">threshold</span></code> function. Thresholding will convert a three dimensional array into a one dimensional binary array of the same width and hight (white denoting foreground, black denoting background).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## thresholding converts multichannel to binary image</span>
+<span class="n">image_bin</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">segmentation</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;adaptive&quot;</span><span class="p">,</span> <span class="n">blocksize</span><span class="o">=</span><span class="mi">199</span><span class="p">,</span> <span class="n">constant</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">annotations</span><span class="o">=</span><span class="n">mask</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+</pre></div></div>
+</div>
+<p>This is what the thresholded image looks like:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pp</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">image_bin</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now we can use <code class="docutils literal notranslate"><span class="pre">detect_contours</span></code> to find boundary contours of the white area - the “foreground”, which is what we want.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contours</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">segmentation</span><span class="o">.</span><span class="n">detect_contour</span><span class="p">(</span><span class="n">image_bin</span><span class="p">,</span> <span class="n">retrieval</span><span class="o">=</span><span class="s2">&quot;ext&quot;</span><span class="p">,</span> <span class="n">min_area</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- found 10 contours that match criteria
+</pre></div></div>
+</div>
+<p>Next we can visualize the contours found by <code class="docutils literal notranslate"><span class="pre">detect_contour</span></code>. Note that we first have to draw them explicitly on a “canvas”, i.e. a background for visualization. We could draw them on the original image, but then it would be unusable for further work. So we use the function <code class="docutils literal notranslate"><span class="pre">select_canvas</span></code> from phenopype’s <code class="docutils literal notranslate"><span class="pre">visualization</span></code> module, which creates a copy of a specific image. The function can also take a specific image channel as canvas, for instance, the “red” channel on which the
+threshwolding was performed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## create a canvas</span>
+<span class="n">canvas</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">select_canvas</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="c1"># canvas = pp.visualization.select_canvas(image, canvas=&quot;red&quot;)</span>
+
+<span class="c1">## draw detected contours onto canvas</span>
+<span class="n">image_drawn</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_contour</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">contours</span><span class="p">)</span>
+
+<span class="c1">## show convas</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">show_image</span><span class="p">(</span><span class="n">image_drawn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- raw image
+</pre></div></div>
+</div>
+</section>
+<section id="High-throughput-worflow">
+<h3>High throughput worflow<a class="headerlink" href="#High-throughput-worflow" title="Link to this heading">#</a></h3>
+<p>This is the default workflow to analyse medium and large image datasets in phenopype. Here, instead of writing down our analysis as a sequence of Python code, as we did in the low throughput workflow, we supply the same functions through a configuration file in human readable <code class="docutils literal notranslate"><span class="pre">YAML</span></code> format. This file can then be loaded by phenopype’s <code class="docutils literal notranslate"><span class="pre">Pype</span></code> class, which initiates the analysis by triggering three actions:</p>
+<ol class="arabic simple">
+<li><p>open the YAML configuration file in the default OS text editor</p></li>
+<li><p>parse the contained functions and execute them in the sequence</p></li>
+<li><p>open a HighGUI window showing the processed image, updates with every step</p></li>
+</ol>
+<p>After an iteration of all steps, users can evaluate the results and decide to modify the opened configuration file (e.g. either change function parameters or add new functions), and run <code class="docutils literal notranslate"><span class="pre">Pype</span></code> again (by saving the changes), or to terminate the <code class="docutils literal notranslate"><span class="pre">Pype</span></code>-run and save all results to the root folder of the image (using <code class="docutils literal notranslate"><span class="pre">Ctrl+Enter</span></code>).</p>
+<center><div style="text-align: center; width: 450px;"><p><img alt="35e54577f3fc489eac92ca9d31085f77" src="../../_images/luerig_2021_figure_3C.jpg" /></p>
+</div><div style="text-align: left; width: 600px;"><p><strong>Fig 3</strong> The Pype class in a for loop will trigger a series of events for each image directory provided by the loop generator: i) open the contained yaml configuration with the default OS text editor, ii) parse and execute the contained functions from top to bottom, iii) open a GUI window and show the processed image. Once the Pype class has finished executing all functions from the configuration file, users can decide to either modify the opened configuration file (e.g. either change function
+parameters or add new functions), which will trigger to run the Pype class again, or to close the GUI window, which will terminate the Pype class instance and save all results to the folder (Figure from <a class="reference external" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13771">Lürig 2021 [Fig. 3C]</a>).</p>
+</div></center><div class="alert alert-block alert-danger "><div class="admonition attention"><p class="admonition-title"><p>IMPORTANT - read before continuing:</p>
+</p><p>In addition to regular window control functions documented in <a class="reference internal" href="../tutorial_2/#GUI-control"><span class="std std-ref">Tutorial 2</span></a>:</p>
+<ul class="simple">
+<li><p>Editing and saving the opened configuration file in the text editor will trigger another iteration, i.e. close the image window and run the config file again.</p></li>
+<li><p>Closing the image window manually (with the X button in the upper right), also runs triggers another run.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code> will close all windows and interrupt the pype routine (triggers <code class="docutils literal notranslate"><span class="pre">sys.exit()</span></code>, which will also end a Python session if run from the command line), as well as any loops.</p></li>
+<li><p>Each step that requires user interaction (e.g. <code class="docutils literal notranslate"><span class="pre">create_mask</span></code> or <code class="docutils literal notranslate"><span class="pre">landmarks</span></code>) needs to be confirmed with <code class="docutils literal notranslate"><span class="pre">Enter</span></code> until the next function in the sequence is executed.</p></li>
+<li><p>At the end of the analysis, when the final steps (visualization and export functions) have run, use <code class="docutils literal notranslate"><span class="pre">Ctrl+Enter</span></code> to finish and close the window.</p></li>
+</ul>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">phenopype</span> <span class="k">as</span> <span class="nn">pp</span>
+
+<span class="c1">## create config-file (will be saved as &quot;stickle1_pype_config_quickstart.yaml&quot;) - needs to be &quot;loaded&quot; to be converted</span>
+<span class="c1">## from a write protected &quot;template&quot; file to a &quot;pype_config&quot; file.</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">load_template</span><span class="p">(</span><span class="n">template_path</span><span class="o">=</span><span class="s2">&quot;quickstart-template.yaml&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;quickstart&quot;</span><span class="p">,</span> <span class="n">image_path</span><span class="o">=</span><span class="s2">&quot;stickle1.jpg&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">## run Pype class using the loaded config file - note that your previously drawn masks is loaded</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">Pype</span><span class="p">(</span><span class="n">image_path</span><span class="o">=</span><span class="s2">&quot;stickle1.jpg&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;quickstart&quot;</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;stickle1_pype_config_quickstart.yaml&quot;</span><span class="p">)</span>
+
+<span class="c1">## to redo the annotation procedure, you need to set &quot;edit: True&quot; or &quot;edit: overwrite&quot; in the &quot;create_mask&quot;</span>
+<span class="c1">## &quot;ANNOTATION&quot; sequence OR select a new tag under which the results are saved/loaded:</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">Pype</span><span class="p">(</span><span class="n">image_path</span><span class="o">=</span><span class="s2">&quot;stickle1.jpg&quot;</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s2">&quot;quickstart-v1&quot;</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;stickle1_pype_config_quickstart.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+- template saved under stickle1_pype_config_quickstart.yaml
+
+AUTOLOAD
+ - nothing to autoload
+Stage: add annotation control args
+Stage: add annotation control args
+Stage: add annotation control args
+Updating pype config: applying staged changes
+
+
+------------+++ new pype iteration 2022-05-06 14:50:53 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+detect_contour
+- found 18 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-quickstart-main\stickle1_canvas_quickstart.jpg.
+save_annotation
+- creating new annotation file
+- no annotation_type selected - exporting all annotations
+- writing annotations of type &#34;mask&#34; with id &#34;a&#34; to &#34;stickle1_annotations_quickstart.json&#34;
+- writing annotations of type &#34;contour&#34; with id &#34;a&#34; to &#34;stickle1_annotations_quickstart.json&#34;
+- writing annotations of type &#34;shape_features&#34; with id &#34;a&#34; to &#34;stickle1_annotations_quickstart.json&#34;
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+
+AUTOLOAD
+ - nothing to autoload
+
+
+------------+++ new pype iteration 2022-05-06 14:51:01 +++--------------
+
+
+
+
+PREPROCESSING
+create_mask
+blur
+
+
+SEGMENTATION
+threshold
+- multichannel image supplied, converting to grayscale
+- decompose image: using gray channel
+- including pixels from 1 drawn masks
+detect_contour
+- found 18 contours that match criteria
+
+
+MEASUREMENT
+compute_shape_features
+
+
+VISUALIZATION
+select_canvas
+- raw image
+draw_contour
+draw_mask
+
+
+EXPORT
+save_canvas
+- image saved under C:\Users\mluerig\Downloads\phenopype-quickstart-main\stickle1_canvas_quickstart-v1.jpg.
+save_annotation
+- creating new annotation file
+- no annotation_type selected - exporting all annotations
+- writing annotations of type &#34;mask&#34; with id &#34;a&#34; to &#34;stickle1_annotations_quickstart-v1.json&#34;
+- writing annotations of type &#34;contour&#34; with id &#34;a&#34; to &#34;stickle1_annotations_quickstart-v1.json&#34;
+- writing annotations of type &#34;shape_features&#34; with id &#34;a&#34; to &#34;stickle1_annotations_quickstart-v1.json&#34;
+
+
+------------+++ finished pype iteration +++--------------
+-------(End with Ctrl+Enter or re-run with Enter)--------
+
+
+AUTOSHOW
+
+
+TERMINATE
+
+AUTOSAVE
+- nothing to autosave
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;phenopype.main.Pype at 0x160dd7d2288&gt;
+</pre></div></div>
+</div>
+<p>Now all results and intermediate data results are saved in the folder of the image. Of course you can modify the configuration files to change the outcome. For instance, try to change the <code class="docutils literal notranslate"><span class="pre">blocksize</span></code> argument in <code class="docutils literal notranslate"><span class="pre">threshold</span></code> to <code class="docutils literal notranslate"><span class="pre">49</span></code>, or <code class="docutils literal notranslate"><span class="pre">499</span></code>, and see what happens. If you do so while the window is open, phenopype will update the image window and show the updated results.</p>
+<p>Learn about loading configuration-templates and YAML syntax in <a class="reference internal" href="../tutorial_4/"><span class="doc">Tutorial 4</span></a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../tutorial_4/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Tutorial 4: The Pype class</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../tutorial_2/">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tutorial 2: Interacting with images in phenopype</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; Moritz Lürig
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on 2024-02-21 15:59:43</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Tutorial 3: The phenopype workflows</a><ul>
+<li><a class="reference internal" href="#Task:-delineate-armour-plates">Task: delineate armour plates</a><ul>
+<li><a class="reference internal" href="#Preparation">Preparation</a></li>
+<li><a class="reference internal" href="#Low-throughput-workflow">Low throughput workflow</a></li>
+<li><a class="reference internal" href="#High-throughput-worflow">High throughput worflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=9a30b7d9"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/custom.js?v=07e4e0e4"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mluerig/website-assets/assets/js/enforce_trailing_slash.min.js"></script>
+    </body>
+</html>
