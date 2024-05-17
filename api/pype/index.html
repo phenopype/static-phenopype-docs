@@ -1,0 +1,479 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex/" /><link rel="search" title="Search" href="../../search/" /><link rel="next" title="Project_labelling class" href="../project_labelling/" /><link rel="prev" title="Project class" href="../project/" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Pype class - phenopype docs</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/twemoji.css?v=2199c511" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=dafe9a71" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../"><div class="brand">phenopype docs</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/phenopype_logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">phenopype docs</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search/" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Internal links</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/">Quickstart</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../installation/">Installation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Installation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/python/">1. Installing Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/phenopype/">2. Installing phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/text/">3. Choosing a text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/spyder/">4. Installing Spyder (optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../">API reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of API reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../project/">Project class</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_labelling/">Project_labelling class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utility/">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/">Core modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../video/">Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tutorials/">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_1/">Tutorial 1: A (very) brief python introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_2/">Tutorial 2: Interacting with images in phenopype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_3/">Tutorial 3: The phenopype workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_4/">Tutorial 4: The Pype class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_5/">Tutorial 5: Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_6/">Tutorial 6:  Size and colour reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials/tutorial_7/">Tutorial 7: Video analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../templates/">Templates</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Templates</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/detection/">Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/landmarks/">Landmarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/gallery/">Gallery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../templates/various/">Various</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../resources/">Resources</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/python/">Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/opencv/">OpenCV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/cv/">Computer vision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../resources/yaml/">YAML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation/">Citation</a></li>
+</ul>
+
+    <ul class="current">
+		<p class="caption"><span class="caption-text">External links</span></p>		
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org">Homepage</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://github.com/phenopype/phenopype">Github</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.phenopype.org/gallery/">Gallery</a></li>
+		<li class="toctree-l1"><a class="reference external" href="https://www.luerig.net/">Author (luerig.net)</a></li>
+	</ul>
+</div>
+
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/api/pype.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="pype-class">
+<h1>Pype class<a class="headerlink" href="#pype-class" title="Link to this heading">¶</a></h1>
+<p>phenopype’s core method to process image datasets with high throughput and reproducibility. Should be used in conjunction with images organized in a Phenopype directory structure. The <code class="docutils literal notranslate"><span class="pre">Pype</span></code> class has specific implicit behavior that aims at supporting speed and robustness when working in “production” (i.e., when performing the actual analysis of large image datasets compared to prototyping and low throughput workflow). These are the most important things to keep in mind during a <code class="docutils literal notranslate"><span class="pre">Pype</span></code> iteration:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Enhanced Window control</strong></p>
+<p>In addition to regular window control functions documented in <a class="reference external" href="tutorial_2.ipynb#Window-control">Tutorial 2</a>:</p>
+<ul class="simple">
+<li><p>Editing and saving the opened configuration file in the text editor will trigger another iteration, i.e., close the image window and run the config file again.</p></li>
+<li><p>Closing the image window manually (with the X button in the upper right) also triggers another run.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Esc</span></code> will close all windows and interrupt the pype routine (triggers <code class="docutils literal notranslate"><span class="pre">sys.exit()</span></code>, which will also end a Python session if run from the command line), as well as any loops.</p></li>
+<li><p>Each step that requires user interaction (e.g., <code class="docutils literal notranslate"><span class="pre">create_mask</span></code> or <code class="docutils literal notranslate"><span class="pre">landmarks</span></code>) needs to be confirmed with <code class="docutils literal notranslate"><span class="pre">Enter</span></code> until the next function in the sequence is executed.</p></li>
+<li><p>At the end of the analysis, when the final steps (visualization and export functions) have run, use <code class="docutils literal notranslate"><span class="pre">Ctrl+Enter</span></code> to finish and close the window.</p></li>
+</ul>
+<p><strong>Function execution</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Pype</span></code> will automatically load the image and execute all functions in sequence, but it will not overwrite data from past iterations on disk unless specified.</p></li>
+<li><p>To overwrite interactive user input, set the argument <code class="docutils literal notranslate"><span class="pre">edit:</span> <span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">edit:</span> <span class="pre">overwrite</span></code> in the function’s annotation control arguments.</p></li>
+<li><p>If you forget to remove an overwrite argument and are prompted to overwrite previous input, immediately change to <code class="docutils literal notranslate"><span class="pre">edit:</span> <span class="pre">false</span></code> argument, and save the config file.</p></li>
+<li><p>If a <code class="docutils literal notranslate"><span class="pre">Pype</span></code> is initialized on a project directory, it will attempt to load input data (e.g., masks) that contain the provided <code class="docutils literal notranslate"><span class="pre">tag</span></code> argument. For example, <code class="docutils literal notranslate"><span class="pre">pp.Pype(path,</span> <span class="pre">tag=&quot;v1&quot;)</span></code> will attempt to load any files in the directory that contain the suffix <code class="docutils literal notranslate"><span class="pre">&quot;v1&quot;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;annotations_v1.json&quot;</span></code>).</p></li>
+</ul>
+<p><strong>Visualizing the results</strong></p>
+<p>Aspects of visual feedback during a <code class="docutils literal notranslate"><span class="pre">pype</span></code> run (can be completely suppressed by setting <code class="docutils literal notranslate"><span class="pre">visualize=False</span></code>):</p>
+<ul class="simple">
+<li><p>Visual feedback (i.e., output from <code class="docutils literal notranslate"><span class="pre">landmarks</span></code>, <code class="docutils literal notranslate"><span class="pre">detect_contours</span></code> or <code class="docutils literal notranslate"><span class="pre">create_mask</span></code>) are drawn onto a “canvas” (a copy of the original image).</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">select_canvas</span></code> to draw the results either on the raw image, a binary image, or a single color channel (gray, red, green or blue).</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">select_canvas</span></code> is not explicitly specified, it is called automatically and defaults to the raw image as canvas.</p></li>
+<li><p>Output from all functions needs to be specified manually. For example, after using <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">landmarks</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">draw_landmarks</span></code> should be called in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> module.</p></li>
+<li><p>Visual parameters of interactive tools (e.g., <code class="docutils literal notranslate"><span class="pre">point_size</span></code> or <code class="docutils literal notranslate"><span class="pre">line_thickness</span></code>) are specified separately in the respective function and in the <code class="docutils literal notranslate"><span class="pre">visualization</span></code> module.</p></li>
+</ul>
+<p><strong>Exporting the results</strong></p>
+<p>Saving annotations, canvas, and other results:</p>
+<ul class="simple">
+<li><p>All results are saved automatically, even if the respective functions in <code class="docutils literal notranslate"><span class="pre">export</span></code> are not specified, with the <code class="docutils literal notranslate"><span class="pre">tag</span></code> argument in <code class="docutils literal notranslate"><span class="pre">Pype</span></code> as suffix.</p></li>
+<li><p>If a file already exists in the directory, and the respective function is <em>not</em> listed under <code class="docutils literal notranslate"><span class="pre">export</span></code>, then it <em>will not</em> be overwritten.</p></li>
+<li><p>If an export function <em>is</em> specified under <code class="docutils literal notranslate"><span class="pre">export:</span></code>, it <em>will also not overwrite</em> any existing file, unless specified using <code class="docutils literal notranslate"><span class="pre">overwrite:</span> <span class="pre">true</span></code>.</p></li>
+<li><p>The canvas is an exception: it will always be saved and always be overwritten (unless specified with <code class="docutils literal notranslate"><span class="pre">overwrite:</span> <span class="pre">False</span></code>) to show the output from the last iteration. However, users can modify the canvas name with <code class="docutils literal notranslate"><span class="pre">file_name</span></code> in the arguments to save different output side by side. For example, <code class="docutils literal notranslate"><span class="pre">file_name:</span> <span class="pre">binary</span></code> under <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">save_canvas:</span></code> saves the canvas as <code class="docutils literal notranslate"><span class="pre">canvas_binary.jpg</span></code>.</p></li>
+</ul>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="phenopype.main.Pype">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopype.main.</span></span><span class="sig-name descname"><span class="pre">Pype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autosave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoshow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_ow</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fix_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_contours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#phenopype.main.Pype" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The pype is phenopype’s core method that allows running all functions
+that are available in the program’s library in sequence. Users can execute
+the pype method on a file_path, an array, or a phenopype directory, which
+always will trigger three actions:</p>
+<ol class="arabic simple">
+<li><p>open the contained yaml configuration with the default OS text editor</p></li>
+<li><p>parse the contained functions and execute them in the sequence (exceptions
+will be passed, but returned for diagnostics)</p></li>
+<li><p>open a Python-window showing the processed image.</p></li>
+</ol>
+<p>After one iteration of these steps, users can evaluate the results and decide
+to modify the opened configuration file (e.g. either change function parameters or
+add new functions), and run the pype again, or to terminate the pype and
+save all results. The processed image, any extracted phenotypic information,
+as well as the modified config-file is stored inside the image directory, or
+a user-specified directory. By providing unique names, users can store different
+pype configurations and the associated results side by side.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> (<em>array</em><em> or </em><em>str</em>) – can be either a numpy array or a string that provides the path to
+source image file or path to a valid phenopype directory</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – name of pype-config - will be appended to all results files</p></li>
+<li><p><strong>config_template</strong> (<em>str</em><em>, </em><em>optional</em>) – chose from list of provided templates
+(e.g. ex1, ex2, …)</p></li>
+<li><p><strong>config_path</strong> (<em>str</em><em>, </em><em>optional</em>) – custom path to a pype template (needs to adhere yaml syntax and
+phenopype structure)</p></li>
+<li><p><strong>delay</strong> (<em>int</em><em>, </em><em>optional</em>) – time in ms to add between reload attemps of yaml monitor. increase this
+value if saved changes in config file are not parsed in the first attempt.</p></li>
+<li><p><strong>dir_path</strong> (<em>str</em><em>, </em><em>optional</em>) – path to an existing directory where all output should be stored</p></li>
+<li><p><strong>skip</strong> (<em>bool</em><em>, </em><em>optional</em>) – skip directories that already have “name” as a suffix in the filename</p></li>
+<li><p><strong>interactive</strong> (<em>bool</em><em>, </em><em>optional</em>) – don’t open text editor or window, just apply functions and terminate</p></li>
+<li><p><strong>max_dim</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum dimension that window can have</p></li>
+<li><p><strong>kwargs</strong> – developer options</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../project_labelling/">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Project_labelling class</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../project/">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Project class</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; Moritz Lürig
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            <div class="last-updated">
+              Last updated on 2024-05-16 23:13:31</div>
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Pype class</a><ul>
+<li><a class="reference internal" href="#phenopype.main.Pype"><code class="docutils literal notranslate"><span class="pre">Pype</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5c32f1f8"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js"></script>
+    <script src="../../_static/twemoji.js?v=a4381b3f"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script src="../../_static/js/custom.js?v=07e4e0e4"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mluerig/website-assets/assets/js/enforce_trailing_slash.min.js"></script>
+    </body>
+</html>
